@@ -4,6 +4,9 @@ const Company = require("../models/Company");
 router.get("/", async (req, res) => {
   try {
     const companies = await Company.find({});
+    if (!companies) {
+      res.status(401).send("No companies in database.");
+    }
     res.status(200);
     res.send(companies);
   } catch (err) {
@@ -22,7 +25,6 @@ router.post("/", async (req, res) => {
     postalCode: req.body.postalCode,
     logo: req.body.logo,
     industry: req.body.industry,
-    createdDate: req.body.createdDate, //if date not given it defaults to the date the form was filled out
   });
 
   try {
@@ -30,6 +32,20 @@ router.post("/", async (req, res) => {
     //for testing puposes get back company._id
     //does frontend need anything back when saving company?
     res.status(200).send({ newCompany: newCompany._id });
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
+router.get("/:companyID", async (req, res) => {
+  try {
+    const company = await Company.findById({ _id: req.params.companyID });
+
+    if (!company) {
+      res.status(401).send("Company not found.");
+    }
+
+    res.status(200).send({ company });
   } catch (err) {
     res.status(400).send(err);
   }
