@@ -1,8 +1,14 @@
 const router = require("express").Router();
 const Company = require("../models/Company");
 
-router.get("/", (req, res) => {
-  res.status(200).send("hello from the companies");
+router.get("/", async (req, res) => {
+  try {
+    const companies = await Company.find({});
+    res.status(200);
+    res.send(companies);
+  } catch (err) {
+    res.status(400).send(err);
+  }
 });
 
 router.post("/", async (req, res) => {
