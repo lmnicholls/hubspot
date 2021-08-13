@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
+    "start": "nodemon backend/server/index.js",
     "build": "cd client && npm install && npm run build"
   },
   "repository": {
@@ -18,10 +18,14 @@
   },
   "homepage": "https://github.com/lmnicholls/hubspot#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "nodemon": "^2.0.12"
+    "mongoose": "^5.13.7"
   },
   "engines": {
     "node": "14.15.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
