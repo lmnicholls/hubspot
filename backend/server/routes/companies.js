@@ -4,8 +4,8 @@ const Company = require("../models/Company");
 router.get("/", async (req, res) => {
   try {
     const companies = await Company.find({});
-    if (!companies) {
-      res.status(401).send("No companies in database.");
+    if (companies.length === 0) {
+      return res.status(404).send("No companies in database.");
     }
     res.status(200);
     res.send(companies);
