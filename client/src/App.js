@@ -1,23 +1,23 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { Switch, Route, Redirect } from "react-router-dom";
+import CompaniesContainer from "./components/companies/CompaniesContainer";
+import CompanyPage from "./components/companies/CompanyPage";
+import DealsContainer from "./components/deals/DealsContainer";
+import DealPage from "./components/deals/DealPage";
+import DashboardContainer from "./components/dashboard/DashboardContainer";
 
 function App() {
-  const [data, setData] = React.useState(null);
-
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
-    </div>
+    <>
+      <Switch>
+        <Route path="/companies" component={CompaniesContainer} />
+        <Route path="/companies/:id" component={CompanyPage} />
+        <Route path="/deals" component={DealsContainer} />
+        <Route path="/deals/:id" component={DealPage} />
+        <Route path="/dashboard" component={DashboardContainer} />
+        <Redirect to="/companies" />
+      </Switch>
+    </>
   );
 }
 
