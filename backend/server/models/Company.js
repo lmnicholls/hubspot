@@ -9,7 +9,7 @@ const CompanySchema = new mongoose.Schema({
   state: { type: String, required: true },
   postalCode: { type: String, required: true },
   logo: { type: String },
-  deals: { type: Schema.Types.ObjectId, ref: "Deal" },
+  deals: [{ type: Schema.Types.ObjectId, ref: "Deal" }],
 });
 
 module.exports = mongoose.model("Company", CompanySchema);
