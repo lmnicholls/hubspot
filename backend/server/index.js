@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const PORT = process.env.PORT || 8000;
 const app = express();
-const routes = require("../routes/index");
+const routes = require("./routes/index");
 
 //local connection to start for dev and testing
 //plan for deployment to heroku
