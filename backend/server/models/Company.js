@@ -9,6 +9,9 @@ const CompanySchema = new mongoose.Schema({
   state: { type: String, required: true },
   postalCode: { type: String, required: true },
   logo: { type: String },
+  industry: { type: String },
+  createdDate: { type: Date, default: Date.now, required: true },
+  lastActivityDate: { type: Date, default: Date.now, required: true },
   deals: [{ type: Schema.Types.ObjectId, ref: "Deal" }],
 });
 
