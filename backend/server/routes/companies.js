@@ -40,12 +40,7 @@ router.post("/", async (req, res) => {
 router.get("/:companyID", async (req, res) => {
   try {
     const company = await Company.findById({ _id: req.params.companyID });
-
-    if (!company) {
-      res.status(401).send("Company not found.");
-    }
-
-    res.status(200).send({ company });
+    res.status(200).send(company);
   } catch (err) {
     res.status(400).send(err);
   }
