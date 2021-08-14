@@ -21,6 +21,8 @@ router.post("/", async (req, res) => {
     state: req.body.state,
     postalCode: req.body.postalCode,
     logo: req.body.logo,
+    industry: req.body.industry,
+    createdDate: req.body.createdDate, //if date not given it defaults to the date the form was filled out
   });
 
   try {
