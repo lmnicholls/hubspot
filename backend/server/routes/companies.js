@@ -15,16 +15,27 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  //needs validation
+  if (!req.body.name) {
+    return res.status(400).send("Name field is required.");
+  }
+
+  if (!req.body.companyOwner) {
+    return res.status(400).send("Company owner field is required.");
+  }
+
+  if (!req.body.phoneNumber) {
+    return res.status(400).send("Phone number field is required.");
+  }
+
   const newCompany = new Company({
     name: req.body.name,
     companyOwner: req.body.companyOwner,
     phoneNumber: req.body.phoneNumber,
-    city: req.body.city,
-    state: req.body.state,
-    postalCode: req.body.postalCode,
-    logo: req.body.logo,
-    industry: req.body.industry,
+    city: req.body.city || "",
+    state: req.body.state || "",
+    postalCode: req.body.postalCode || "",
+    logo: req.body.logo || "",
+    industry: req.body.industry || "",
   });
 
   try {
