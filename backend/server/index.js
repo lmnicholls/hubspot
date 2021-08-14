@@ -2,14 +2,17 @@ const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const PORT = process.env.PORT || 8000;
-const app = express();
+const keys = require("./config/keys");
 const routes = require("./routes/index");
+const app = express();
+require("dotenv/config");
+
+const PORT = process.env.PORT || 8000;
 
 //local connection to start for dev and testing
 //plan for deployment to heroku
 mongoose.connect(
-  "mongodb://localhost/closing-time",
+  keys.MONGODB_URI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
