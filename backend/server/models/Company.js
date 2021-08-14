@@ -10,8 +10,13 @@ const CompanySchema = new mongoose.Schema({
   postalCode: { type: String, required: true },
   logo: { type: String },
   industry: { type: String },
-  createdDate: { type: Date, default: Date.now, required: true },
-  lastActivityDate: { type: Date, default: Date.now, required: true },
+  createdDate: {
+    type: Date,
+    default: new Date(),
+    required: true,
+    immutable: true,
+  },
+  lastActivityDate: { type: Date, default: new Date(), required: true },
   deals: [{ type: Schema.Types.ObjectId, ref: "Deal" }],
 });
 
