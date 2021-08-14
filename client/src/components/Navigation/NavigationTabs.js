@@ -1,11 +1,15 @@
 import { Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { StyleSheet, css } from "aphrodite";
 import "./NavigationTabs.css";
 
 export default function NavigationTabs(props) {
   return (
     <>
-      <Nav defaultActiveKey={props.defaultActiveKey}>
+      <Nav
+        className={css(styles.navTabs)}
+        defaultActiveKey={props.defaultActiveKey}
+      >
         <LinkContainer
           className="tab-link"
           activeClassName="tab-link-active"
@@ -42,3 +46,10 @@ export default function NavigationTabs(props) {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  navTabs: {
+    fontFamily: "Quicksand",
+    fontWeight: "bold",
+  },
+});
