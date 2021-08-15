@@ -1,12 +1,12 @@
 import React from "react";
 import { Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { StyleSheet, css } from "aphrodite";
 import { useHistory } from "react-router-dom";
 import "./companies.css";
-import { getCompanies } from "../../actions";
 
 export default function CompaniesListView() {
-  const companies = getCompanies().payload;
+  const companies = useSelector((state) => state.companies);
   const history = useHistory();
 
   const handleCompanyClick = (company) => {

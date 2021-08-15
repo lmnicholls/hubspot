@@ -1,7 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { StyleSheet, css } from "aphrodite";
+import { Button } from "react-bootstrap";
+import CompanyHeader from "./CompanyHeader";
 
 export default function CompanyPage() {
   const { id } = useParams();
@@ -15,53 +17,17 @@ export default function CompanyPage() {
     return <div>Company Not Found</div>;
   }
 
-  console.log(currentCompany);
-
   return (
     <>
-      <div>
-        <div className={css(styles.companyTitle)}>
-          <img
-            src={currentCompany.logo}
-            className={css(styles.img)}
-            alt="companyLogo"
-          />
-          {currentCompany.companyName}
-        </div>
-        <div className={css(styles.companyDetails)}>
-          <h6 className={css(styles.heading)}>About this company</h6>
-          <div className={css(styles.detail)}>
-            <h6 className={css(styles.title)}>Industry</h6>
-            <h6 className={css(styles.info)}>{currentCompany.industry}</h6>
+      <CompanyHeader />
+      <div className={css(styles.container)}>
+        <div>
+          <div className={css(styles.backButtonDiv)}>
+            <Link to={`/companies`} className={css(styles.backButton)}>
+              &lt;&lt; Back to Companies
+            </Link>
           </div>
-          <div className={css(styles.detail)}>
-            <h6 className={css(styles.title)}>Company Owner</h6>
-            <h6 className={css(styles.info)}>{currentCompany.owner}</h6>
-          </div>
-          <div className={css(styles.detail)}>
-            <h6 className={css(styles.title)}>Phone</h6>
-            <h6 className={css(styles.info)}>{currentCompany.phone}</h6>
-          </div>
-          <div className={css(styles.detail)}>
-            <h6 className={css(styles.title)}>City</h6>
-            <h6 className={css(styles.info)}>{currentCompany.city}</h6>
-          </div>
-          <div className={css(styles.detail)}>
-            <h6 className={css(styles.title)}>State/Region</h6>
-            <h6 className={css(styles.info)}>{currentCompany.state_region}</h6>
-          </div>
-          <div className={css(styles.detail)}>
-            <h6 className={css(styles.title)}>Postal Code</h6>
-            <h6 className={css(styles.info)}>{currentCompany.postalCode}</h6>
-          </div>
-          <hr />
-          <h6 className={css(styles.heading)}>Deals</h6>
-        </div>
-      </div>
-
-      {/* <Modal show={props.show} onHide={props.handleClose} keyboard={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>
+          <div className={css(styles.companyDiv)}>
             <div className={css(styles.companyTitle)}>
               <img
                 src={currentCompany.logo}
@@ -70,56 +36,74 @@ export default function CompanyPage() {
               />
               {currentCompany.companyName}
             </div>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className={css(styles.companyDetails)}>
-            <h6 className={css(styles.heading)}>About this company</h6>
-            <div className={css(styles.detail)}>
-              <h6 className={css(styles.title)}>Industry</h6>
-              <h6 className={css(styles.info)}>{currentCompany.industry}</h6>
-            </div>
-            <div className={css(styles.detail)}>
-              <h6 className={css(styles.title)}>Company Owner</h6>
-              <h6 className={css(styles.info)}>{currentCompany.owner}</h6>
-            </div>
-            <div className={css(styles.detail)}>
-              <h6 className={css(styles.title)}>Phone</h6>
-              <h6 className={css(styles.info)}>{currentCompany.phone}</h6>
-            </div>
-            <div className={css(styles.detail)}>
-              <h6 className={css(styles.title)}>City</h6>
-              <h6 className={css(styles.info)}>{currentCompany.city}</h6>
-            </div>
-            <div className={css(styles.detail)}>
-              <h6 className={css(styles.title)}>State/Region</h6>
-              <h6 className={css(styles.info)}>
-                {currentCompany.state_region}
-              </h6>
-            </div>
-            <div className={css(styles.detail)}>
-              <h6 className={css(styles.title)}>Postal Code</h6>
-              <h6 className={css(styles.info)}>{currentCompany.postalCode}</h6>
-            </div>
             <hr />
-            <h6 className={css(styles.heading)}>Deals</h6>
+            <div className={css(styles.companyDetails)}>
+              <h6 className={css(styles.heading)}>About this company</h6>
+              <div className={css(styles.detail)}>
+                <h6 className={css(styles.title)}>Industry</h6>
+                <h6 className={css(styles.info)}>{currentCompany.industry}</h6>
+              </div>
+              <div className={css(styles.detail)}>
+                <h6 className={css(styles.title)}>Company Owner</h6>
+                <h6 className={css(styles.info)}>{currentCompany.owner}</h6>
+              </div>
+              <div className={css(styles.detail)}>
+                <h6 className={css(styles.title)}>Phone</h6>
+                <h6 className={css(styles.info)}>{currentCompany.phone}</h6>
+              </div>
+              <div className={css(styles.detail)}>
+                <h6 className={css(styles.title)}>City</h6>
+                <h6 className={css(styles.info)}>{currentCompany.city}</h6>
+              </div>
+              <div className={css(styles.detail)}>
+                <h6 className={css(styles.title)}>State/Region</h6>
+                <h6 className={css(styles.info)}>
+                  {currentCompany.state_region}
+                </h6>
+              </div>
+              <div className={css(styles.detail)}>
+                <h6 className={css(styles.title)}>Postal Code</h6>
+                <h6 className={css(styles.info)}>
+                  {currentCompany.postalCode}
+                </h6>
+              </div>
+              <hr />
+              <h6 className={css(styles.heading)}>Deals</h6>
+            </div>
+            <div className={css(styles.editButtonDiv)}>
+              <Button className={css(styles.editCompanyButton)}>
+                Edit Company
+              </Button>
+            </div>
           </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary">Edit</Button>
-          <Button variant="secondary" onClick={props.handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
+        </div>
+      </div>
     </>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    margin: "0 auto",
+    width: "30%",
+  },
+  backButtonDiv: {
+    fontFamily: "Quicksand",
+    fontSize: "18px",
+    fontWeight: "bold",
+    paddingTop: "15px",
+  },
+  backButton: {
+    color: "#25537d !important",
+  },
+  companyDiv: {
+    backgroundColor: "rgb(220, 220, 224)",
+    padding: "20px",
+    borderRadius: "15px",
+  },
   heading: {
     fontWeight: "bold",
-    fontSize: "18px",
+    fontSize: "22px",
     color: "#193753",
   },
   companyDetails: {
@@ -127,21 +111,37 @@ const styles = StyleSheet.create({
   },
   companyTitle: {
     fontFamily: "Quicksand",
+    fontSize: "36px",
     fontWeight: "bold",
+    textAlign: "center",
   },
   detail: {
     paddingTop: "15px",
   },
   title: {
-    color: "rgb(202, 203, 207)",
-    fontWeight: "bold",
-    fontSize: "14px",
-  },
-  info: {
+    color: "white",
+    fontWeight: "900",
     fontSize: "18px",
   },
+  info: {
+    fontSize: "22px",
+  },
   img: {
-    width: "30px",
+    width: "40px",
     paddingRight: "5px",
+  },
+  editButtonDiv: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  editCompanyButton: {
+    backgroundColor: "#25537d !important",
+    fontFamily: "Quicksand ",
+    borderColor: "#25537d",
+    fontWeight: "bold",
+    color: "white",
+    ":hover": {
+      backgroundColor: "#193753",
+    },
   },
 });

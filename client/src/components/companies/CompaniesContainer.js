@@ -3,16 +3,12 @@ import CompaniesListView from "./CompaniesListView";
 import "./companies.css";
 import { Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
+import CompanyHeader from "./CompanyHeader";
 
 export default function CompaniesContainer() {
   return (
     <>
-      <div className={css(styles.header)}>
-        <FontAwesomeIcon icon={faStopwatch} className="icon fa-2x" />
-        <h1 className={css(styles.title)}>Closing Time</h1>
-      </div>
+      <CompanyHeader />
       <div className={css(styles.nav_buttons)}>
         <NavigationTabs defaultActiveKey="/companies" />
         <Button className={css(styles.createCompanyButton)}>
