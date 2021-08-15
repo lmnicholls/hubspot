@@ -40,7 +40,11 @@ export default function CompaniesListView() {
         <tbody>
           {companies.map((company) => {
             return (
-              <tr key={company._id} onClick={() => handleCompanyClick(company)}>
+              <tr
+                key={company._id}
+                className={css(styles.companyRow)}
+                onClick={() => handleCompanyClick(company)}
+              >
                 <td>
                   <span>
                     <input type="checkbox" name="something" value="" />
@@ -73,6 +77,11 @@ export default function CompaniesListView() {
 const styles = StyleSheet.create({
   companyTable: {
     fontFamily: "Quicksand !important",
+  },
+  companyRow: {
+    ":hover": {
+      cursor: "pointer",
+    },
   },
   companyListImg: {
     width: 20,

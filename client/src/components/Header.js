@@ -1,9 +1,8 @@
-import "./companies.css";
 import { StyleSheet, css } from "aphrodite";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
 
-export default function CompanyHeader() {
+export default function Header() {
   return (
     <>
       <div className={css(styles.header)}>

@@ -3,12 +3,12 @@ import CompaniesListView from "./CompaniesListView";
 import "./companies.css";
 import { Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
-import CompanyHeader from "./CompanyHeader";
+import Header from "../Header";
 
 export default function CompaniesContainer() {
   return (
     <>
-      <CompanyHeader />
+      <Header />
       <div className={css(styles.nav_buttons)}>
         <NavigationTabs defaultActiveKey="/companies" />
         <Button className={css(styles.createCompanyButton)}>
