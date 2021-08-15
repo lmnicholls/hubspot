@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <Switch>
-        <Route path="/companies" component={CompaniesContainer} />
+        <Route exact path="/companies" component={CompaniesContainer} />
         <Route path="/companies/:id" component={CompanyPage} />
         <Route path="/deals" component={DealsContainer} />
         <Route path="/deals/:id" component={DealPage} />
