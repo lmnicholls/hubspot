@@ -1,11 +1,17 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
+import { useHistory } from "react-router-dom";
 import "./companies.css";
 import { getCompanies } from "../../actions";
 
 export default function CompaniesListView() {
   const companies = getCompanies().payload;
+  const history = useHistory();
+
+  const handleCompanyClick = (company) => {
+    history.push(`/companies/${company._id}`);
+  };
 
   if (!companies) {
     return <div>No companies to show.</div>;
@@ -34,7 +40,7 @@ export default function CompaniesListView() {
         <tbody>
           {companies.map((company) => {
             return (
-              <tr key={company._id}>
+              <tr key={company._id} onClick={() => handleCompanyClick(company)}>
                 <td>
                   <span>
                     <input type="checkbox" name="something" value="" />
@@ -43,7 +49,7 @@ export default function CompaniesListView() {
                 <td>
                   <img
                     src={company.logo}
-                    className={css(styles.img)}
+                    className={css(styles.companyListImg)}
                     alt="logo"
                   ></img>
                   {company.companyName}
@@ -68,11 +74,16 @@ const styles = StyleSheet.create({
   companyTable: {
     fontFamily: "Quicksand !important",
   },
-  img: {
+  companyListImg: {
     width: 20,
     paddingRight: 5,
   },
   thead: {
     backgroundColor: "rgb(220, 220, 224)",
+  },
+  heading: {
+    fontWeight: "bold",
+    fontSize: "18px",
+    color: "#193753",
   },
 });
