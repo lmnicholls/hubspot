@@ -1,9 +1,4 @@
 const router = require("express").Router();
-const {
-  findByIdAndUpdate,
-  findOne,
-  findOneAndReplace,
-} = require("../models/Company");
 const Company = require("../models/Company");
 
 router.get("/", async (req, res) => {
