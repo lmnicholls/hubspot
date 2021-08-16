@@ -1,4 +1,9 @@
 const router = require("express").Router();
+const {
+  findByIdAndUpdate,
+  findOne,
+  findOneAndReplace,
+} = require("../models/Company");
 const Company = require("../models/Company");
 
 router.get("/", async (req, res) => {
@@ -52,6 +57,26 @@ router.get("/:companyID", async (req, res) => {
   try {
     const company = await Company.findById({ _id: req.params.companyID });
     res.status(200).send(company);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
+router.put("/:companyID", async (req, res) => {
+  try {
+    const update = { ...req.body };
+    await Company.findOneAndReplace(
+      { _id: req.params.companyID },
+      update,
+      { new: true },
+      (err, doc) => {
+        if (err) {
+          return err;
+        } else {
+          res.send(doc);
+        }
+      }
+    );
   } catch (err) {
     res.status(400).send(err);
   }
