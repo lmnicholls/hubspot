@@ -23,21 +23,21 @@ export const getOneCompany = async (id) => {
 };
 
 export const addCompany = async (
-  name,
-  companyOwner,
-  phoneNumber,
+  companyName,
+  owner,
+  phone,
   city,
-  state,
+  state_region,
   postalCode,
   logo,
   industry
 ) => {
   const request = await axios.post(`http://localhost:8000/companies`, {
-    name,
-    companyOwner,
-    phoneNumber,
+    companyName,
+    owner,
+    phone,
     city,
-    state,
+    state_region,
     postalCode,
     logo,
     industry,
