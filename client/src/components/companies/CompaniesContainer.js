@@ -3,17 +3,33 @@ import CompaniesListView from "./CompaniesListView";
 import "./companies.css";
 import { Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
+import { useState } from "react";
+import CreateCompany from "./CreateCompany";
 
 export default function CompaniesContainer() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <>
       <div className={css(styles.nav_buttons)}>
         <NavigationTabs defaultActiveKey="/companies" />
-        <Button className={css(styles.createCompanyButton)}>
+        <Button
+          className={css(styles.createCompanyButton)}
+          onClick={handleShow}
+        >
           Create company
         </Button>
       </div>
       <CompaniesListView />
+      <CreateCompany
+        setShow={setShow}
+        show={show}
+        handleClose={handleClose}
+        handleShow={handleShow}
+      />
     </>
   );
 }

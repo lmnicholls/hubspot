@@ -6,6 +6,7 @@ const cors = require("cors");
 const keys = require("./config/keys");
 const routes = require("./routes/index");
 const app = express();
+
 require("dotenv/config");
 
 const PORT = process.env.PORT || 8000;
