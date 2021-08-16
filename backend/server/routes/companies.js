@@ -40,9 +40,8 @@ router.post("/", async (req, res) => {
 
   try {
     await newCompany.save();
-    //for testing puposes get back company._id
-    //does frontend need anything back when saving company?
-    res.status(200).send({ newCompany: newCompany._id });
+
+    res.status(200).send(newCompany);
   } catch (err) {
     res.status(400).send(err);
   }
