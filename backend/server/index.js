@@ -1,5 +1,6 @@
 const path = require("path");
 const express = require("express");
+const { urlencoded } = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const keys = require("./config/keys");
@@ -21,7 +22,8 @@ mongoose.connect(
 );
 
 //middlewares
-app.use(express.json()); //body parser
+app.use(express.json());
+app.use(urlencoded({ extended: false }));
 app.use(cors());
 
 //routes
