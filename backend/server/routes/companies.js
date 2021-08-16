@@ -57,4 +57,25 @@ router.get("/:companyID", async (req, res) => {
   }
 });
 
+router.put("/:companyID", async (req, res) => {
+  try {
+    const update = { ...req.body };
+    await Company.findOneAndReplace(
+      { _id: req.params.companyID },
+      update,
+      { new: true },
+      (err, doc) => {
+        if (err) {
+          return err;
+        } else {
+          res.status(200);
+          res.send(doc);
+        }
+      }
+    );
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
 module.exports = router;

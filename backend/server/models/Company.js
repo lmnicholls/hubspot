@@ -10,7 +10,7 @@ const CompanySchema = new mongoose.Schema({
   postalCode: { type: String },
   logo: { type: String },
   industry: { type: String },
-  createdDate: {
+  dateCreated: {
     type: Date,
     default: new Date(),
     required: true,
