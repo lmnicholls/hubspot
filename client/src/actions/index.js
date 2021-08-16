@@ -48,3 +48,5 @@ export const addCompany = async (
     payload: request,
   };
 };
+
+//TODO: add editCompany()
