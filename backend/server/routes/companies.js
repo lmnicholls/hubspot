@@ -68,6 +68,7 @@ router.put("/:companyID", async (req, res) => {
         if (err) {
           return err;
         } else {
+          res.status(200);
           res.send(doc);
         }
       }
