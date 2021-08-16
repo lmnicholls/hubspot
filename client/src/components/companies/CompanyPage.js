@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { StyleSheet, css } from "aphrodite";
 import { Button } from "react-bootstrap";
-import Header from "../Header";
 
 export default function CompanyPage() {
   const { id } = useParams();
@@ -19,7 +18,6 @@ export default function CompanyPage() {
 
   return (
     <>
-      <Header />
       <div className={css(styles.container)}>
         <div>
           <div className={css(styles.backButtonDiv)}>

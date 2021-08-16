@@ -8,6 +8,7 @@ import DealsContainer from "./components/deals/DealsContainer";
 import DealPage from "./components/deals/DealPage";
 import DashboardContainer from "./components/dashboard/DashboardContainer";
 import { getCompanies } from "./actions";
+import Header from "./components/Header";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <Switch>
         <Route exact path="/companies" component={CompaniesContainer} />
         <Route path="/companies/:id" component={CompanyPage} />
