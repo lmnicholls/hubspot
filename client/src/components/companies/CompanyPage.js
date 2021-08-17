@@ -36,6 +36,7 @@ export default function CompanyPage() {
         show={show}
         handleClose={handleClose}
         handleShow={handleShow}
+        companyID={currentCompany._id}
         companyName={currentCompany.companyName}
         owner={currentCompany.owner}
         phone={currentCompany.phone}
