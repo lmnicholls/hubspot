@@ -1,6 +1,11 @@
 import axios from "axios";
 
-import { GET_COMPANIES, GET_ONE_COMPANY, ADD_COMPANY } from "./names";
+import {
+  GET_COMPANIES,
+  GET_ONE_COMPANY,
+  ADD_COMPANY,
+  EDIT_COMPANY,
+} from "./names";
 
 export const getCompanies = async () => {
   const request = await axios.get("http://localhost:8000/companies");
@@ -47,4 +52,30 @@ export const addCompany = async (
   };
 };
 
-//TODO: add editCompany()
+export const editCompany = async (
+  id,
+  companyName,
+  owner,
+  phone,
+  city,
+  state_region,
+  postalCode,
+  logo,
+  industry
+) => {
+  const request = await axios.put(`http://localhost:8000/companies/${id}`, {
+    companyName,
+    owner,
+    phone,
+    city,
+    state_region,
+    postalCode,
+    logo,
+    industry,
+  });
+
+  return {
+    type: EDIT_COMPANY,
+    payload: request,
+  };
+};
