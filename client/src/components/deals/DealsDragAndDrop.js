@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   },
   headers: {
     textAlign: "center",
+    fontWeight: "bold",
     width: "20%",
     borderRight: "1px solid gray",
     borderBottom: "1px solid gray",
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   },
   dealColumn: {
     borderRight: "1px solid gray",
-    height: "200px", // min height for deals
+    minHeight: "200px",
     width: "20%",
     ":hover": {
       backgroundColor: "rgba(0, 0, 0, 0.075)",
