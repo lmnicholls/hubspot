@@ -57,11 +57,15 @@ export default function CompaniesListView() {
                   </span>
                 </td>
                 <td>
-                  <img
-                    src={company.logo}
-                    className={css(styles.companyListImg)}
-                    alt="logo"
-                  ></img>
+                  {company.logo === "" ? (
+                    <span></span>
+                  ) : (
+                    <img
+                      src={company.logo}
+                      className={css(styles.companyListImg)}
+                      alt="logo"
+                    ></img>
+                  )}
                   {company.companyName}
                 </td>
                 <td>{company.owner}</td>
