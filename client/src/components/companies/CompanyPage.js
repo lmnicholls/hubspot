@@ -55,11 +55,20 @@ export default function CompanyPage() {
           </div>
           <div className={css(styles.companyDiv)}>
             <div className={css(styles.companyTitle)}>
-              <img
+              {currentCompany.logo === "" ? (
+                <span></span>
+              ) : (
+                <img
+                  src={currentCompany.logo}
+                  className={css(styles.companyListImg)}
+                  alt="logo"
+                ></img>
+              )}
+              {/* <img
                 src={currentCompany.logo}
                 className={css(styles.img)}
                 alt="companyLogo"
-              />
+              /> */}
               {currentCompany.companyName}
             </div>
             <hr />
@@ -143,6 +152,9 @@ const styles = StyleSheet.create({
     fontSize: "36px",
     fontWeight: "bold",
     textAlign: "center",
+  },
+  companyListImg: {
+    height: "40px",
   },
   detail: {
     paddingTop: "15px",
