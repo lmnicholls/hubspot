@@ -66,5 +66,8 @@ const styles = StyleSheet.create({
     borderColor: "#25537d",
     fontWeight: "bold",
     color: "white",
+    ":hover": {
+      backgroundColor: "#193753",
+    },
   },
 });

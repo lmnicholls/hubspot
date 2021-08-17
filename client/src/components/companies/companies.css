@@ -31,3 +31,11 @@
   margin-left: 20px;
   overflow-x: "scroll",
 }
+
+.modal-header {
+  background-color: #193753;
+}
+
+.modal-content {
+  border: none !important;
+}
