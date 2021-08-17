@@ -1,11 +1,18 @@
 import React from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { StyleSheet, css } from "aphrodite";
 import { Button } from "react-bootstrap";
 import spinner from "../../images/Spinner.gif";
+import EditCompany from "./EditCompany";
 
 export default function CompanyPage() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const { id } = useParams();
   const currentCompany = useSelector((state) =>
     state.companies?.find((company) => {
@@ -24,6 +31,20 @@ export default function CompanyPage() {
 
   return (
     <>
+      <EditCompany
+        setShow={setShow}
+        show={show}
+        handleClose={handleClose}
+        handleShow={handleShow}
+        companyName={currentCompany.companyName}
+        owner={currentCompany.owner}
+        phone={currentCompany.phone}
+        city={currentCompany.city}
+        state={currentCompany.state_region}
+        postalCode={currentCompany.postalCode}
+        logo={currentCompany.logo}
+        industry={currentCompany.industry}
+      />
       <div className={css(styles.container)}>
         <div>
           <div className={css(styles.backButtonDiv)}>
@@ -75,7 +96,10 @@ export default function CompanyPage() {
               <h6 className={css(styles.heading)}>Deals</h6>
             </div>
             <div className={css(styles.editButtonDiv)}>
-              <Button className={css(styles.editCompanyButton)}>
+              <Button
+                onClick={handleShow}
+                className={css(styles.editCompanyButton)}
+              >
                 Edit Company
               </Button>
             </div>
