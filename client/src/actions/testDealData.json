@@ -3,6 +3,7 @@
     "name": "Consulting services",
     "user": "Danna Alvarado",
     "stage": "initialized",
+    "amount": 20000,
     "company": {
       "companyName": "Keeg",
       "owner": "Miriam Goodwin",
@@ -24,6 +25,7 @@
     "name": "Supply Computer Chips",
     "user": "Lauren Nichols",
     "stage": "qualified",
+    "amount": 5000,
     "company": {
       "companyName": "Accidency",
       "owner": "Allison Donovan",
@@ -45,6 +47,7 @@
     "name": "Supply Card Decks",
     "user": "Jeremy Wheless",
     "stage": "contract sent",
+    "amount": 3500,
     "company": {
       "companyName": "Bisba",
       "owner": "Jean Stokes",
@@ -66,6 +69,7 @@
     "name": "Consulting Services",
     "user": "Danna Alvarado",
     "stage": "closed won",
+    "amount": 5000,
     "company": {
       "companyName": "Slofast",
       "owner": "Estella Carey",
@@ -87,6 +91,7 @@
     "name": "Consulting Services",
     "user": "Lauren",
     "stage": "closed won",
+    "amount": 7500,
     "company": {
       "companyName": "Quordate",
       "owner": "Felicia Vasquez",
@@ -108,6 +113,7 @@
     "name": "Supply Tires",
     "user": "Jeremy Wheless",
     "stage": "initialized",
+    "amount": 6500,
     "company": {
       "companyName": "Viocular",
       "owner": "Cortez Robinson",
@@ -129,6 +135,7 @@
     "name": "Supply Paper",
     "user": "Danna Alvarado",
     "stage": "closed lost",
+    "amount": 15000,
     "company": {
       "companyName": "Minga",
       "owner": "Lakisha Buckner",
