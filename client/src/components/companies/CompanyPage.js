@@ -30,7 +30,13 @@ export default function CompanyPage() {
     );
   }
 
-  const testDataForDeals = testDealData;
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  let dealKey = 0;
+  //for testing if there are no deals to display
+  //testDealData.length = 0;
 
   return (
     <>
@@ -132,23 +138,47 @@ export default function CompanyPage() {
 
                   <div className={css(styles.companyDetails)}>
                     <Container>
-                      <h6 className={css(styles.heading)}>Deal Title</h6>
-                      <Row>
-                        <Col xs={4}>
-                          <h5 className={css(styles.dealTitle)}>
-                            Deal State:{" "}
-                          </h5>
-                          <h5 className={css(styles.dealTitle)}>Amount: </h5>
-                          <h5 className={css(styles.dealTitle)}>
-                            Close Date:{" "}
-                          </h5>
-                        </Col>
-                        <Col>
-                          <h5 className={css(styles.info)}>Initiated</h5>
-                          <h5 className={css(styles.info)}>$5,000</h5>
-                          <h5 className={css(styles.info)}>8/31/2021</h5>
-                        </Col>
-                      </Row>
+                      {testDealData.length === 0 && (
+                        <h6 className={css(styles.heading)}>
+                          No deals with this company.
+                        </h6>
+                      )}
+
+                      {testDealData.length !== 0 &&
+                        testDealData.map((deal) => {
+                          return (
+                            <div key={dealKey++}>
+                              <h6 className={css(styles.heading)}>
+                                {deal.name}
+                              </h6>
+                              <Row>
+                                <Col xs={4}>
+                                  <h5 className={css(styles.dealTitle)}>
+                                    Deal State:{" "}
+                                  </h5>
+                                  <h5 className={css(styles.dealTitle)}>
+                                    Amount:{" "}
+                                  </h5>
+                                  <h5 className={css(styles.dealTitle)}>
+                                    Close Date:{" "}
+                                  </h5>
+                                </Col>
+                                <Col>
+                                  <h5 className={css(styles.info)}>
+                                    {deal.stage}
+                                  </h5>
+                                  <h5 className={css(styles.info)}>
+                                    ${numberWithCommas(deal.amount)}
+                                  </h5>
+                                  <h5 className={css(styles.info)}>
+                                    {deal.expectedCloseDate}
+                                  </h5>
+                                </Col>
+                              </Row>
+                              <hr />
+                            </div>
+                          );
+                        })}
                     </Container>
                     <hr />
                   </div>
