@@ -131,10 +131,14 @@ export default function CompanyPage() {
                     <Container>
                       <h6 className={css(styles.heading)}>Deal Title</h6>
                       <Row>
-                        <Col xs={3}>
-                          <h5 className={css(styles.title)}>Deal State: </h5>
-                          <h5 className={css(styles.title)}>Amount: </h5>
-                          <h5 className={css(styles.title)}>Close Date: </h5>
+                        <Col xs={4}>
+                          <h5 className={css(styles.dealTitle)}>
+                            Deal State:{" "}
+                          </h5>
+                          <h5 className={css(styles.dealTitle)}>Amount: </h5>
+                          <h5 className={css(styles.dealTitle)}>
+                            Close Date:{" "}
+                          </h5>
                         </Col>
                         <Col>
                           <h5 className={css(styles.info)}>Initiated</h5>
@@ -197,6 +201,11 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "900",
     fontSize: "18px",
+  },
+  dealTitle: {
+    color: "white",
+    fontWeight: "900",
+    fontSize: "22px",
   },
   info: {
     fontSize: "22px",
