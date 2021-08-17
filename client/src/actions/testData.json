@@ -10,7 +10,26 @@
     "lastActivityDate": "Fri Dec 17 1971 08:57:04 GMT-0500 (Eastern Standard Time)",
     "industry": "Construction",
     "logo": "https://icon2.cleanpng.com/20180328/zxq/kisspng-circle-logo-symbol-font-templates-5abbf957999038.858167711522268503629.jpg",
-    "deals": []
+    "deals": [
+      {
+        "name": "Consulting services",
+        "user": "Danna Alvarado",
+        "stage": "initialized",
+        "amount": 20000,
+        "dateCreated": "Fri Dec 23 1977 02:44:41 GMT-0500 (Eastern Standard Time)",
+        "lastActivityDate": "Fri Dec 17 1971 08:57:04 GMT-0500 (Eastern Standard Time)",
+        "expectedCloseDate": "Fri Jan 17 1978 08:57:04 GMT-0500 (Eastern Standard Time)"
+      },
+      {
+        "name": "More Consulting services",
+        "user": "Danna Alvarado",
+        "stage": "initialized",
+        "amount": 15000,
+        "dateCreated": "Fri Dec 23 1977 02:44:41 GMT-0500 (Eastern Standard Time)",
+        "lastActivityDate": "Fri Dec 17 1971 08:57:04 GMT-0500 (Eastern Standard Time)",
+        "expectedCloseDate": "Fri Jan 17 1978 08:57:04 GMT-0500 (Eastern Standard Time)"
+      }
+    ]
   },
   {
     "companyName": "Accidency",
@@ -23,7 +42,26 @@
     "lastActivityDate": "Tue Apr 27 2021 08:22:18 GMT-0400 (Eastern Daylight Time)",
     "industry": "Computer Games",
     "logo": "https://icon2.cleanpng.com/20180328/zxq/kisspng-circle-logo-symbol-font-templates-5abbf957999038.858167711522268503629.jpg",
-    "deals": []
+    "deals": [
+      {
+        "name": "Supply Computer Chips",
+        "user": "Lauren Nichols",
+        "stage": "qualified",
+        "amount": 5000,
+        "dateCreated": "Mon Aug 18 1975 16:10:30 GMT-0400 (Eastern Daylight Time)",
+        "lastActivityDate": "Tue Apr 27 2021 08:22:18 GMT-0400 (Eastern Daylight Time)",
+        "expectedCloseDate": "Tue June 27 2021 08:22:18 GMT-0400 (Eastern Daylight Time)"
+      },
+      {
+        "name": "More Supply Computer Chips",
+        "user": "Lauren Nichols",
+        "stage": "qualified",
+        "amount": 7500,
+        "dateCreated": "Mon Aug 18 1975 16:10:30 GMT-0400 (Eastern Daylight Time)",
+        "lastActivityDate": "Tue Apr 27 2021 08:22:18 GMT-0400 (Eastern Daylight Time)",
+        "expectedCloseDate": "Tue June 27 2021 08:22:18 GMT-0400 (Eastern Daylight Time)"
+      }
+    ]
   },
   {
     "companyName": "Bisba",
