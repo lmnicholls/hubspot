@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { StyleSheet, css } from "aphrodite";
 import { Button } from "react-bootstrap";
+import spinner from "../../images/Spinner.gif";
 
 export default function CompanyPage() {
   const { id } = useParams();
@@ -13,7 +14,12 @@ export default function CompanyPage() {
   );
 
   if (!currentCompany) {
-    return <div>Company Not Found</div>;
+    return (
+      <div className={css(styles.loadingText)}>
+        <img src={spinner} className={css(styles.spinner)} alt="spinner" />
+        Loading Company...
+      </div>
+    );
   }
 
   return (
@@ -141,5 +147,14 @@ const styles = StyleSheet.create({
     ":hover": {
       backgroundColor: "#193753",
     },
+  },
+  loadingText: {
+    fontFamily: "Quicksand",
+    fontSize: "20px",
+    fontWeight: "bold",
+    paddingLeft: "20px",
+  },
+  spinner: {
+    height: "40px",
   },
 });

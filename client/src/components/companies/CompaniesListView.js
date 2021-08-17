@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { StyleSheet, css } from "aphrodite";
 import { useHistory } from "react-router-dom";
 import "./companies.css";
+import spinner from "../../images/Spinner.gif";
 
 export default function CompaniesListView() {
   const companies = useSelector((state) => state.companies);
@@ -14,7 +15,12 @@ export default function CompaniesListView() {
   };
 
   if (!companies) {
-    return <div>No companies to show.</div>;
+    return (
+      <div className={css(styles.loadingText)}>
+        <img src={spinner} className={css(styles.spinner)} alt="spinner" />
+        Loading Companies...
+      </div>
+    );
   }
 
   return (
@@ -94,5 +100,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: "18px",
     color: "#193753",
+  },
+  loadingText: {
+    fontFamily: "Quicksand",
+    fontSize: "20px",
+    fontWeight: "bold",
+    paddingLeft: "20px",
+  },
+  spinner: {
+    height: "40px",
   },
 });
