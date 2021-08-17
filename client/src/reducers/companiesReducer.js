@@ -7,7 +7,7 @@ export const companiesReducer = function (state = null, action) {
 
     case ADD_COMPANY:
       //add the new company to the end of the array
-      return [...state, action.payload.data];
+      return [action.payload.data, ...state];
 
     case EDIT_COMPANY:
       const updatedCompany = action.payload.data;
