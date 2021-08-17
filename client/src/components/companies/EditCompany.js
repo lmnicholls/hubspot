@@ -7,6 +7,7 @@ import "./companies.css";
 
 export default function EditCompany(props) {
   const dispatch = useDispatch();
+  const companyID = props.companyID;
   const [companyName, setCompanyName] = useState(props.companyName);
   const [companyOwner, setCompanyOwner] = useState(props.owner);
   const [phoneNumber, setPhoneNumber] = useState(props.phone);
@@ -20,6 +21,7 @@ export default function EditCompany(props) {
     e.preventDefault();
     dispatch(
       editCompany(
+        companyID,
         companyName,
         companyOwner,
         phoneNumber,
@@ -149,6 +151,7 @@ export default function EditCompany(props) {
               <Form.Label className={css(styles.label)}>Logo</Form.Label>
               <Form.Control
                 type="text"
+                value={logo}
                 placeholder="Enter company logo"
                 className={css(styles.input)}
                 onChange={(e) => {
@@ -169,7 +172,7 @@ export default function EditCompany(props) {
               className={css(styles.buttons)}
               type="submit"
             >
-              Save
+              Save Changes
             </Button>
           </Form>
         </Modal.Body>
