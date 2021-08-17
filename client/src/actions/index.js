@@ -12,9 +12,7 @@ export const getCompanies = async () => {
 };
 
 export const getOneCompany = async (id) => {
-  const request = await axios.get(
-    `http://localhost:8000/companies?companyID=${id}`
-  );
+  const request = await axios.get(`http://localhost:8000/companies/${id}`);
 
   return {
     type: GET_ONE_COMPANY,
