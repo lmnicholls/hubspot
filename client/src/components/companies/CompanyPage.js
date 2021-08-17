@@ -6,6 +6,7 @@ import { StyleSheet, css } from "aphrodite";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import spinner from "../../images/Spinner.gif";
 import EditCompany from "./EditCompany";
+import testDealData from "../../actions/testDealData.json";
 
 export default function CompanyPage() {
   const [show, setShow] = useState(false);
@@ -28,6 +29,8 @@ export default function CompanyPage() {
       </div>
     );
   }
+
+  const testDataForDeals = testDealData;
 
   return (
     <>
