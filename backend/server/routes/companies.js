@@ -60,7 +60,10 @@ router.get("/:companyID", async (req, res) => {
 
 router.put("/:companyID", async (req, res) => {
   try {
-    const update = { ...req.body };
+    const company = await Company.findById(req.params.companyID);
+    const deals = company.deals;
+    const update = { ...req.body, deals: deals };
+
     await Company.findOneAndReplace(
       { _id: req.params.companyID },
       update,
