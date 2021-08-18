@@ -22,7 +22,9 @@ router.post("/", async (req, res) => {
     const newDeal = new Deal({
       user: req.body.user,
       name: req.body.name,
-      stage: req.body.stage || "Initiated",
+      stage: {
+        stage: req.body.stage || "Initialized",
+      },
       amount: req.body.amount,
       company: company._id,
       expectedCloseDate: req.body.expectedCloseDate,
@@ -49,16 +51,22 @@ router.post("/", async (req, res) => {
 //put /:id to update deal stage
 router.put("/:dealID", async (req, res) => {
   try {
-    // const deal = await Deal.findById(req.params.dealID);
+    const deal = await Deal.findById(req.params.dealID);
+    const prevStage = deal.stage.status;
+    const update = {
+      $addToSet: { stageHistory: prevStage },
+      stage: { status: req.body.stage.status },
+    };
+
     await Deal.findByIdAndUpdate(
       req.params.dealID,
-      { stage: req.body.stage },
+      update,
       { new: true },
       (err, deal) => {
         if (err) {
           return res.send(err);
         } else {
-          res.status(200).send(deal);
+          res.send(deal);
         }
       }
     );
