@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   columnWrapper: {
     display: "flex",
     flexDirection: "column",
-    padding: "20px",
+    padding: "10px",
     backgroundColor: "rgb(220, 220, 224)",
     borderTop: "1px solid gray",
     borderBottom: "1px solid gray",

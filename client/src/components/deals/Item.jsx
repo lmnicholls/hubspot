@@ -61,16 +61,14 @@ const Item = ({ item, index, moveItem, status }) => {
         className={css(styles.item)}
         onClick={onOpenItem}
       >
-        <div
-          className={css(styles.colorBar)}
-          style={{ backgroundColor: status.color }}
-        />
-        <p className={css(styles.itemTitle)}>{item.name}</p>
-        <p className={css(styles.itemAmount)}>Amount: ${item.amount}</p>
-        <p className={css(styles.closeDate)}>
+        <p className={css(styles.itemTitle, styles.itemComponent)}>
+          {item.name}
+        </p>
+        <p className={css(styles.itemComponent)}>Amount: ${item.amount}</p>
+        <p className={css(styles.itemComponent)}>
           Close Date: {new Date(item.expectedCloseDate).toDateString()}
         </p>
-        <p className={css(styles.itemCompany)}>
+        <p className={css(styles.itemCompany, styles.itemComponent)}>
           <img
             src={item.company.logo}
             className={css(styles.itemCompanyImg)}
@@ -97,17 +95,14 @@ const styles = StyleSheet.create({
       cursor: "pointer",
     },
   },
-  colorBar: {
-    width: "40px",
-    height: "10px",
-    borderRadius: "5px",
+  itemComponent: {
+    marginBottom: "5px",
   },
   itemTitle: {
     fontWeight: "600",
     fontSize: "16px",
+    color: "#193753",
   },
-  itemAmount: {},
-  closeDate: {},
   itemCompanyImg: {
     width: "25px",
     paddingRight: "5px",
