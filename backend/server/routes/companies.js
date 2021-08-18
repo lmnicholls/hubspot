@@ -1,9 +1,11 @@
 const router = require("express").Router();
 const Company = require("../models/Company");
+const Deal = require("../models/Deal");
 
 router.get("/", async (req, res) => {
   try {
-    const companies = await Company.find({});
+    const companies = await Company.find({}).populate("deals");
+
     if (companies.length === 0) {
       return res.status(404).send("No companies in database.");
     }
