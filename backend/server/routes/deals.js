@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
       user: req.body.user,
       name: req.body.name,
       stage: {
-        stage: req.body.stage || "Initialized",
+        stage: req.body.stage || "Initiated",
       },
       amount: req.body.amount,
       company: company._id,
@@ -68,7 +68,7 @@ router.put("/:dealID", async (req, res) => {
         if (err) {
           return res.send(err);
         } else {
-          res.send(deal);
+          res.status(200).send(deal);
         }
       }
     );
