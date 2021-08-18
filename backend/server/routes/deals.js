@@ -29,13 +29,14 @@ router.post("/", async (req, res) => {
     });
 
     await newDeal.save();
+
     //adds new deal to deals array for company
     await Company.findByIdAndUpdate(
       company._id,
       { $addToSet: { deals: newDeal } },
       (err, company) => {
         if (err) {
-          res.send(err);
+          return res.send(err);
         }
       }
     );
@@ -44,5 +45,7 @@ router.post("/", async (req, res) => {
     res.status(400).send(err);
   }
 });
+
+//put /:id to update deal stage
 
 module.exports = router;
