@@ -47,5 +47,24 @@ router.post("/", async (req, res) => {
 });
 
 //put /:id to update deal stage
+router.put("/:dealID", async (req, res) => {
+  try {
+    // const deal = await Deal.findById(req.params.dealID);
+    await Deal.findByIdAndUpdate(
+      req.params.dealID,
+      { stage: req.body.stage },
+      { new: true },
+      (err, deal) => {
+        if (err) {
+          return res.send(err);
+        } else {
+          res.status(200).send(deal);
+        }
+      }
+    );
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
 
 module.exports = router;
