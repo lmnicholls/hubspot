@@ -3,10 +3,9 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { StyleSheet, css } from "aphrodite";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Button, Container, Row, Col, Table } from "react-bootstrap";
 import spinner from "../../images/Spinner.gif";
 import EditCompany from "./EditCompany";
-import testDealData from "../../actions/testDealData.json";
 
 export default function CompanyPage() {
   const [show, setShow] = useState(false);
@@ -21,6 +20,10 @@ export default function CompanyPage() {
     })
   );
 
+  const deals = currentCompany?.deals;
+
+  let dealKey = 0;
+
   if (!currentCompany) {
     return (
       <div className={css(styles.loadingText)}>
@@ -33,10 +36,6 @@ export default function CompanyPage() {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-
-  let dealKey = 0;
-  //for testing if there are no deals to display
-  //testDealData.length = 0;
 
   return (
     <>
@@ -142,42 +141,50 @@ export default function CompanyPage() {
 
                   <div className={css(styles.companyDetails)}>
                     <Container>
-                      {testDealData.length === 0 && (
+                      {deals.length === 0 && (
                         <h6 className={css(styles.heading)}>
                           No deals with this company.
                         </h6>
                       )}
 
-                      {testDealData.length !== 0 &&
-                        testDealData.map((deal) => {
+                      {deals.length !== 0 &&
+                        deals.map((deal) => {
                           return (
                             <div key={dealKey++}>
-                              <h6 className={css(styles.heading)}>
-                                {deal.name}
-                              </h6>
                               <Row>
-                                <Col xs={4}>
-                                  <h5 className={css(styles.dealTitle)}>
-                                    Deal State:{" "}
-                                  </h5>
-                                  <h5 className={css(styles.dealTitle)}>
-                                    Amount:{" "}
-                                  </h5>
-                                  <h5 className={css(styles.dealTitle)}>
-                                    Close Date:{" "}
-                                  </h5>
-                                </Col>
-                                <Col>
-                                  <h5 className={css(styles.info)}>
-                                    {deal.stage}
-                                  </h5>
-                                  <h5 className={css(styles.info)}>
-                                    ${numberWithCommas(deal.amount)}
-                                  </h5>
-                                  <h5 className={css(styles.info)}>
-                                    {deal.expectedCloseDate}
-                                  </h5>
-                                </Col>
+                                <Table borderless>
+                                  <thead>
+                                    <tr className={css(styles.heading)}>
+                                      <th colspan={2}>{deal.name}</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td className={css(styles.dealTitle)}>
+                                        Deal State:
+                                      </td>
+                                      <td className={css(styles.info)}>
+                                        {deal.stage.status}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className={css(styles.dealTitle)}>
+                                        Amount:
+                                      </td>
+                                      <td className={css(styles.info)}>
+                                        ${numberWithCommas(deal.amount)}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className={css(styles.dealTitle)}>
+                                        Close Date:
+                                      </td>
+                                      <td className={css(styles.info)}>
+                                        {deal.expectedCloseDate}
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </Table>
                               </Row>
                               <hr />
                             </div>
