@@ -3,7 +3,7 @@ const Company = require("../models/Company");
 
 router.get("/", async (req, res) => {
   try {
-    const companies = await Company.find({}).populate("deals");
+    const companies = await Company.find({});
     if (companies.length === 0) {
       return res.status(404).send("No companies in database.");
     }
@@ -49,9 +49,7 @@ router.post("/", async (req, res) => {
 
 router.get("/:companyID", async (req, res) => {
   try {
-    const company = await Company.findById({
-      _id: req.params.companyID,
-    });
+    const company = await Company.findById({ _id: req.params.companyID });
     res.status(200).send(company);
   } catch (err) {
     res.status(400).send(err);
