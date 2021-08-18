@@ -22,24 +22,56 @@ router.post("/", async (req, res) => {
     const newDeal = new Deal({
       user: req.body.user,
       name: req.body.name,
-      stage: req.body.stage || "Initiated",
+      stage: {
+        stage: req.body.stage || "Initiated",
+      },
       amount: req.body.amount,
       company: company._id,
       expectedCloseDate: req.body.expectedCloseDate,
     });
 
     await newDeal.save();
+
     //adds new deal to deals array for company
     await Company.findByIdAndUpdate(
       company._id,
       { $addToSet: { deals: newDeal } },
       (err, company) => {
         if (err) {
-          res.send(err);
+          return res.send(err);
         }
       }
     );
     res.status(200).send(newDeal);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
+//put /:id to update deal stage
+router.put("/:dealID", async (req, res) => {
+  try {
+    const deal = await Deal.findById(req.params.dealID);
+    const prevStage = deal.stage.status;
+
+    //pushes prev stage to stageHistoy and updates stage.staus with curret stage
+    const update = {
+      $addToSet: { stageHistory: prevStage },
+      stage: { status: req.body.stage.status },
+    };
+
+    await Deal.findByIdAndUpdate(
+      req.params.dealID,
+      update,
+      { new: true },
+      (err, deal) => {
+        if (err) {
+          return res.send(err);
+        } else {
+          res.status(200).send(deal);
+        }
+      }
+    );
   } catch (err) {
     res.status(400).send(err);
   }
