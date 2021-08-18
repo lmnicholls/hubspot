@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const Company = require("../models/Company");
 const Deal = require("../models/Deal");
+const mongoose = require("mongoose");
+mongoose.set("useFindAndModify", false);
 
 //gets all deals for a given user
 router.get("/", async (req, res) => {
@@ -27,6 +29,16 @@ router.post("/", async (req, res) => {
     });
 
     await newDeal.save();
+    //adds new deal to deals array for company
+    await Company.findByIdAndUpdate(
+      company._id,
+      { $addToSet: { deals: newDeal } },
+      (err, company) => {
+        if (err) {
+          res.send(err);
+        }
+      }
+    );
     res.status(200).send(newDeal);
   } catch (err) {
     res.status(400).send(err);
