@@ -67,6 +67,10 @@ const Item = ({ item, index, moveItem, status }) => {
         <p className={"item-title"}>{item.name}</p>
         <p className={"item-amount"}>Amount: ${item.amount}</p>
         <p className={"item-closeDate"}>Close Date: {item.expectedCloseDate}</p>
+        <p className={"item-company"}>
+          <img src={item.company.logo} alt="logo" />
+          {item.company.companyName}
+        </p>
         <p className={"item-status"}>{item.icon}</p>
       </div>
       <Window item={item} onClose={onClose} show={show} />

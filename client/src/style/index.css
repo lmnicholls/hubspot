@@ -128,6 +128,11 @@ select {
   background-color: white;
 }
 
+.item-company img {
+  width: 25px;
+  padding-right: 5px;
+}
+
 .item:hover {
   cursor: pointer;
 }
