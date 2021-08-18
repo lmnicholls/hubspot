@@ -1,17 +1,22 @@
 import React from "react";
 import NavigationTabs from "../Navigation/NavigationTabs";
-import DealsDragAndDrop from "./DealsDragAndDrop";
+import Homepage from "./Homepage";
 import { Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import "../../style/index.css";
 
 export default function DealsContainer() {
   return (
     <>
-      <div className={css(styles.nav_buttons)}>
-        <NavigationTabs defaultActiveKey="/companies" />
-        <Button className={css(styles.addDealButton)}>Add Deal</Button>
-      </div>
-      <DealsDragAndDrop />
+      <DndProvider backend={HTML5Backend}>
+        <div className={css(styles.nav_buttons)}>
+          <NavigationTabs defaultActiveKey="/companies" />
+          <Button className={css(styles.addDealButton)}>Add Deal</Button>
+        </div>
+        <Homepage />
+      </DndProvider>
     </>
   );
 }
