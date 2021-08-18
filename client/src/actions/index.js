@@ -6,6 +6,7 @@ import {
   ADD_COMPANY,
   EDIT_COMPANY,
   GET_DEALS,
+  ADD_DEAL,
 } from "./names";
 
 export const getCompanies = async () => {
@@ -86,6 +87,29 @@ export const getDeals = async () => {
 
   return {
     type: GET_DEALS,
+    payload: request,
+  };
+};
+
+export const addDeal = async (
+  companyName,
+  user,
+  name,
+  status,
+  amount,
+  expectedCloseDate
+) => {
+  const request = await axios.post(`http://localhost:8000/deals`, {
+    companyName,
+    user,
+    name,
+    status,
+    amount,
+    expectedCloseDate,
+  });
+
+  return {
+    type: ADD_DEAL,
     payload: request,
   };
 };
