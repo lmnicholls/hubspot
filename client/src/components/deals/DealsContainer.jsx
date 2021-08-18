@@ -6,6 +6,7 @@ import { StyleSheet, css } from "aphrodite";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import "../../style/index.css";
+import "./deals.css";
 
 export default function DealsContainer() {
   return (

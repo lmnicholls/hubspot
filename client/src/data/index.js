@@ -1,28 +1,24 @@
 const data = [
   {
     id: 1,
-    icon: "🟢",
     status: "initiated",
     title: "Human Interest Form",
     content: "Fill out human interest distribution form",
   },
   {
     id: 2,
-    icon: "🟢",
     status: "initiated",
     title: "Purchase present",
     content: "Get an anniversary gift",
   },
   {
     id: 3,
-    icon: "🟢",
     status: "initiated",
     title: "Invest in investments",
     content: "Call the bank to talk about investments",
   },
   {
     id: 4,
-    icon: "🟢",
     status: "initiated",
     title: "Daily reading",
     content: "Finish reading Intro to UI/UX",
@@ -35,7 +31,6 @@ const dealData = [
     name: "Consulting services",
     user: "Danna Alvarado",
     stage: "initiated",
-    icon: "🟢",
     amount: 20000,
     company: {
       companyName: "Keeg",
@@ -62,7 +57,6 @@ const dealData = [
     name: "Supply Computer Chips",
     user: "Lauren Nichols",
     stage: "qualified",
-    icon: "🔆️",
     amount: 5000,
     company: {
       companyName: "Accidency",
@@ -89,7 +83,6 @@ const dealData = [
     name: "Supply Card Decks",
     user: "Jeremy Wheless",
     stage: "contract sent",
-    icon: "📝",
     amount: 3500,
     company: {
       companyName: "Bisba",
@@ -116,7 +109,6 @@ const dealData = [
     name: "Consulting Services",
     user: "Danna Alvarado",
     stage: "closed won",
-    icon: "✅",
     amount: 5000,
     company: {
       companyName: "Slofast",
@@ -143,7 +135,6 @@ const dealData = [
     name: "Consulting Services",
     user: "Lauren",
     stage: "closed won",
-    icon: "✅",
     amount: 7500,
     company: {
       companyName: "Quordate",
@@ -170,7 +161,6 @@ const dealData = [
     name: "Supply Tires",
     user: "Jeremy Wheless",
     stage: "initiated",
-    icon: "🟢",
     amount: 6500,
     company: {
       companyName: "Viocular",
@@ -197,7 +187,6 @@ const dealData = [
     name: "Supply Paper",
     user: "Danna Alvarado",
     stage: "closed lost",
-    icon: "❌",
     amount: 15000,
     company: {
       companyName: "Minga",
@@ -224,27 +213,22 @@ const dealData = [
 const statuses = [
   {
     status: "initiated",
-    icon: "🟢",
     color: "#EB5A46",
   },
   {
     status: "qualified",
-    icon: "🔆️",
     color: "#00C2E0",
   },
   {
     status: "contract sent",
-    icon: "📝",
     color: "#C377E0",
   },
   {
     status: "closed won",
-    icon: "✅",
     color: "#3981DE",
   },
   {
     status: "closed lost",
-    icon: "❌",
     color: "#3981DE",
   },
 ];

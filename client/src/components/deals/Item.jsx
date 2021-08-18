@@ -2,6 +2,7 @@ import React, { Fragment, useState, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import Window from "./Window";
 import ITEM_TYPE from "../../data/types";
+import { StyleSheet, css } from "aphrodite";
 
 const Item = ({ item, index, moveItem, status }) => {
   const ref = useRef(null);
@@ -57,25 +58,63 @@ const Item = ({ item, index, moveItem, status }) => {
       <div
         ref={ref}
         style={{ opacity: isDragging ? 0 : 1 }}
-        className={"item"}
+        className={css(styles.item)}
         onClick={onOpenItem}
       >
         <div
-          className={"color-bar"}
+          className={css(styles.colorBar)}
           style={{ backgroundColor: status.color }}
         />
-        <p className={"item-title"}>{item.name}</p>
-        <p className={"item-amount"}>Amount: ${item.amount}</p>
-        <p className={"item-closeDate"}>Close Date: {item.expectedCloseDate}</p>
-        <p className={"item-company"}>
-          <img src={item.company.logo} alt="logo" />
+        <p className={css(styles.itemTitle)}>{item.name}</p>
+        <p className={css(styles.itemAmount)}>Amount: ${item.amount}</p>
+        <p className={css(styles.closeDate)}>
+          Close Date: {new Date(item.expectedCloseDate).toDateString()}
+        </p>
+        <p className={css(styles.itemCompany)}>
+          <img
+            src={item.company.logo}
+            className={css(styles.itemCompanyImg)}
+            alt="logo"
+          />
           {item.company.companyName}
         </p>
-        <p className={"item-status"}>{item.icon}</p>
       </div>
       <Window item={item} onClose={onClose} show={show} />
     </Fragment>
   );
 };
+
+const styles = StyleSheet.create({
+  item: {
+    fontFamily: "Quicksand",
+    fontSize: "15px",
+    marginBottom: "10px",
+    padding: "10px",
+    borderRadius: "5px",
+    zIndex: "1",
+    backgroundColor: "white",
+    ":hover": {
+      cursor: "pointer",
+    },
+  },
+  colorBar: {
+    width: "40px",
+    height: "10px",
+    borderRadius: "5px",
+  },
+  itemTitle: {
+    fontWeight: "600",
+    fontSize: "16px",
+  },
+  itemAmount: {},
+  closeDate: {},
+  itemCompanyImg: {
+    width: "25px",
+    paddingRight: "5px",
+  },
+  itemStatus: {
+    textAlign: "right",
+  },
+});
 
 export default Item;
