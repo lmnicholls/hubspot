@@ -17,13 +17,15 @@ router.get("/", async (req, res) => {
 //posts a deal based on company search by name
 router.post("/", async (req, res) => {
   try {
-    const company = await Company.findOne({ name: req.body.companyName });
+    const company = await Company.findOne({
+      companyName: req.body.companyName,
+    });
 
     const newDeal = new Deal({
       user: req.body.user,
       name: req.body.name,
       stage: {
-        stage: req.body.stage || "Initiated",
+        status: req.body.status || "Initiated",
       },
       amount: req.body.amount,
       company: company._id,
