@@ -4,3 +4,4 @@ export const ADD_COMPANY = "ADD_COMPANY";
 export const EDIT_COMPANY = "EDIT_COMPANY";
 export const GET_DEALS = "GET_DEALS";
 export const ADD_DEAL = "ADD_DEAL";
+export const EDIT_DEAL_STATUS = "EDIT_DEAL_STATUS";

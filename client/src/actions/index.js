@@ -7,6 +7,7 @@ import {
   EDIT_COMPANY,
   GET_DEALS,
   ADD_DEAL,
+  EDIT_DEAL_STATUS,
 } from "./names";
 
 export const getCompanies = async () => {
@@ -110,6 +111,17 @@ export const addDeal = async (
 
   return {
     type: ADD_DEAL,
+    payload: request,
+  };
+};
+
+export const editDealStatus = async (id, newStatus) => {
+  const request = await axios.put(`http://localhost:8000/deals/${id}`, {
+    stage: { status: newStatus },
+  });
+
+  return {
+    type: EDIT_DEAL_STATUS,
     payload: request,
   };
 };
