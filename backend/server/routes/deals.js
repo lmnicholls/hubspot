@@ -53,6 +53,8 @@ router.put("/:dealID", async (req, res) => {
   try {
     const deal = await Deal.findById(req.params.dealID);
     const prevStage = deal.stage.status;
+
+    //pushes prev stage to stageHistoy and updates stage.staus with curret stage
     const update = {
       $addToSet: { stageHistory: prevStage },
       stage: { status: req.body.stage.status },
