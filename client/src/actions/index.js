@@ -5,6 +5,7 @@ import {
   GET_ONE_COMPANY,
   ADD_COMPANY,
   EDIT_COMPANY,
+  GET_DEALS,
 } from "./names";
 
 export const getCompanies = async () => {
@@ -76,6 +77,15 @@ export const editCompany = async (
 
   return {
     type: EDIT_COMPANY,
+    payload: request,
+  };
+};
+
+export const getDeals = async () => {
+  const request = await axios.get("http://localhost:8000/deals");
+
+  return {
+    type: GET_DEALS,
     payload: request,
   };
 };
