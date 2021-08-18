@@ -7,7 +7,7 @@ import CompanyPage from "./components/companies/CompanyPage";
 import DealsContainer from "./components/deals/DealsContainer";
 import DealPage from "./components/deals/DealPage";
 import DashboardContainer from "./components/dashboard/DashboardContainer";
-import { getCompanies } from "./actions";
+import { getCompanies, getDeals } from "./actions";
 import Header from "./components/Header";
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getCompanies());
+    dispatch(getDeals());
   }, [dispatch]);
 
   return (
