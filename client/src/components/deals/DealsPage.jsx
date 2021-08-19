@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import IndividualDeal from "./IndividualDeal";
 import DropWrapper from "./DropWrapper";
 import Col from "./Col";
-import { dealData, statuses } from "../../data";
+import { statuses } from "../../data";
 import spinner from "../../images/Spinner.gif";
 import { StyleSheet, css } from "aphrodite";
 
@@ -24,7 +24,7 @@ const Homepage = () => {
         .filter((i) => i._id !== item._id)
         .concat({
           ...item,
-          stage: { ...stage, status: stage },
+          stage: { status: stage },
         });
       console.log("newItems", newItems);
       return [...newItems];
