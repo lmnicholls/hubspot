@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
     owner: req.body.owner,
     phone: req.body.phone,
     city: req.body.city || "",
-    state_region: req.body.state || "",
+    state_region: req.body.state_region || "",
     postalCode: req.body.postalCode || "",
     logo: req.body.logo || "",
     industry: req.body.industry || "",
@@ -77,6 +77,25 @@ router.put("/:companyID", async (req, res) => {
         }
       }
     );
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
+//DELETE company
+//delete count??
+router.delete("/:companyID", async (req, res) => {
+  try {
+    const company = await Company.findById(req.params.companyID);
+    const deal = await Deal.find({ company: company._id });
+
+    //deletes company
+    await Company.deleteOne({ _id: company._id });
+
+    //deletes any deal associated with that company
+    await Deal.deleteMany({ company: company._id });
+
+    res.status(200).send(`${company.companyName} has been deleted.`);
   } catch (err) {
     res.status(400).send(err);
   }

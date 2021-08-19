@@ -32,6 +32,10 @@ router.post("/", async (req, res) => {
     return res.status(400).send("Amount field is required.");
   }
 
+  if (!req.body.companyName) {
+    return res.status(400).send("Company name is required.");
+  }
+
   try {
     const company = await Company.findOne({
       companyName: req.body.companyName,
