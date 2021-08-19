@@ -16,6 +16,22 @@ router.get("/", async (req, res) => {
 
 //posts a deal based on company search by name
 router.post("/", async (req, res) => {
+  if (!req.body.user) {
+    return res.status(400).send("User must be logged in.");
+  }
+
+  if (!req.body.name) {
+    return res.status(400).send("Name field is required.");
+  }
+
+  if (!req.body.stage.status) {
+    return res.status(400).send("Stage status field is required.");
+  }
+
+  if (!req.body.amount) {
+    return res.status(400).send("Amount field is required.");
+  }
+
   try {
     const company = await Company.findOne({
       companyName: req.body.companyName,

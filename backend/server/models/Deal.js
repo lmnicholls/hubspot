@@ -5,7 +5,7 @@ const DealSchema = new mongoose.Schema({
   user: { type: String, required: true },
   name: { type: String, required: true },
   stage: {
-    status: { type: String, required: true },
+    status: { type: String },
     lastActivity: { type: Date, default: new Date() },
   },
   stageHistory: [{ type: String }],
