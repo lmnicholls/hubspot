@@ -31,6 +31,10 @@ const Homepage = () => {
     });
   };
 
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
     <div className={css(styles.dealRow)}>
       {statuses.map((s) => {
@@ -59,7 +63,16 @@ const Homepage = () => {
                   ))}
               </Col>
             </DropWrapper>
-            <div className={css(styles.total)}> TOTAL: $</div>
+            <div className={css(styles.total)}>
+              TOTAL: ${" "}
+              {numberWithCommas(
+                items
+                  .filter((i) => i.stage === s.status)
+                  .reduce((pv, cv) => {
+                    return pv + cv.amount;
+                  }, 0)
+              )}
+            </div>
           </div>
         );
       })}
