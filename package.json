@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon backend/server/index.js",
-    "build": "cd client && npm install && npm run build"
+    "start": "node backend/server/index.js",
+    "dev": "nodemon backend/server/index.js --ignore client ",
+    "build": "cd client && npm install && npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
