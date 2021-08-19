@@ -213,23 +213,18 @@ const dealData = [
 const statuses = [
   {
     status: "initiated",
-    color: "#EB5A46",
   },
   {
     status: "qualified",
-    color: "#00C2E0",
   },
   {
     status: "contract sent",
-    color: "#C377E0",
   },
   {
     status: "closed won",
-    color: "#3981DE",
   },
   {
     status: "closed lost",
-    color: "#3981DE",
   },
 ];
 

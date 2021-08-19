@@ -36,9 +36,14 @@ const Homepage = () => {
       {statuses.map((s) => {
         return (
           <div key={s.status} className={css(styles.columnWrapper)}>
-            <h2 className={css(styles.columnHeader)}>
-              {s.status.toUpperCase()}
-            </h2>
+            <div className={css(styles.columnHeader)}>
+              <h2 className={css(styles.columnHeaderText)}>
+                {s.status.toUpperCase()}
+              </h2>
+              <h2 className={css(styles.columnHeaderText)}>
+                {items.filter((item) => item.stage === s.status).length}
+              </h2>
+            </div>
             <DropWrapper onDrop={onDrop} status={s.status}>
               <Col>
                 {items
@@ -81,11 +86,16 @@ const styles = StyleSheet.create({
     },
   },
   columnHeader: {
+    display: "flex",
+    justifyContent: "space-between",
     fontFamily: "Quicksand",
-    fontSize: "20px",
     fontWeight: "600",
     marginBottom: "20px",
     marginTop: "0",
+  },
+  columnHeaderText: {
+    fontSize: "20px",
+    fontWeight: "bold",
   },
   total: {
     fontFamily: "Quicksand",
