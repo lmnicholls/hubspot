@@ -20,11 +20,15 @@ export default function CompanyPage() {
     })
   );
 
-  const deals = currentCompany?.deals;
+  const deals = useSelector((state) =>
+    state.deals?.filter((deal) => {
+      return deal.company._id === id;
+    })
+  );
 
   let dealKey = 0;
 
-  if (!currentCompany) {
+  if (!currentCompany || !deals) {
     return (
       <div className={css(styles.loadingText)}>
         <img src={spinner} className={css(styles.spinner)} alt="spinner" />
@@ -155,7 +159,7 @@ export default function CompanyPage() {
                                 <Table borderless>
                                   <thead>
                                     <tr className={css(styles.heading)}>
-                                      <th colspan={2}>{deal.name}</th>
+                                      <th colSpan={2}>{deal.name}</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -186,7 +190,6 @@ export default function CompanyPage() {
                                   </tbody>
                                 </Table>
                               </Row>
-                              <hr />
                             </div>
                           );
                         })}
