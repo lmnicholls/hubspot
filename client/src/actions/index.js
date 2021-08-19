@@ -11,7 +11,7 @@ import {
 } from "./names";
 
 export const getCompanies = async () => {
-  const request = await axios.get("companies");
+  const request = await axios.get("/companies");
 
   return {
     type: GET_COMPANIES,
@@ -20,7 +20,7 @@ export const getCompanies = async () => {
 };
 
 export const getOneCompany = async (id) => {
-  const request = await axios.get(`companies/${id}`);
+  const request = await axios.get(`/companies/${id}`);
 
   return {
     type: GET_ONE_COMPANY,
@@ -38,7 +38,7 @@ export const addCompany = async (
   logo,
   industry
 ) => {
-  const request = await axios.post(`companies`, {
+  const request = await axios.post(`/companies`, {
     companyName,
     owner,
     phone,
@@ -66,7 +66,7 @@ export const editCompany = async (
   logo,
   industry
 ) => {
-  const request = await axios.put(`companies/${id}`, {
+  const request = await axios.put(`/companies/${id}`, {
     companyName,
     owner,
     phone,
@@ -84,7 +84,7 @@ export const editCompany = async (
 };
 
 export const getDeals = async () => {
-  const request = await axios.get("deals");
+  const request = await axios.get("/deals");
 
   return {
     type: GET_DEALS,
@@ -100,7 +100,7 @@ export const addDeal = async (
   amount,
   expectedCloseDate
 ) => {
-  const request = await axios.post(`deals`, {
+  const request = await axios.post(`/deals`, {
     companyName,
     user,
     name,
@@ -116,7 +116,7 @@ export const addDeal = async (
 };
 
 export const editDealStatus = async (id, newStatus) => {
-  const request = await axios.put(`deals/${id}`, {
+  const request = await axios.put(`/deals/${id}`, {
     stage: { status: newStatus },
   });
 
