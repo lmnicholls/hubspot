@@ -63,7 +63,11 @@ const Homepage = () => {
                 {s.status.toUpperCase()}
               </h2>
               <h2 className={css(styles.columnHeaderText)}>
-                {items?.filter((item) => item.stage.status === s.status).length}
+                {
+                  items?.filter(
+                    (item) => item.stage.status.toLowerCase() === s.status
+                  ).length
+                }
               </h2>
             </div>
             <DropWrapper onDrop={onDrop} status={s.status}>
@@ -85,7 +89,7 @@ const Homepage = () => {
               TOTAL: $
               {numberWithCommas(
                 items
-                  ?.filter((i) => i.stage.status === s.status)
+                  ?.filter((i) => i.stage.status.toLowerCase() === s.status)
                   .reduce((pv, cv) => {
                     return pv + cv.amount;
                   }, 0)
