@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Item from "./Item";
+import IndividualDeal from "./IndividualDeal";
 import DropWrapper from "./DropWrapper";
 import Col from "./Col";
 import { dealData, statuses } from "../../data";
@@ -44,7 +44,7 @@ const Homepage = () => {
                 {items
                   .filter((i) => i.stage === s.status)
                   .map((i, idx) => (
-                    <Item
+                    <IndividualDeal
                       key={i._id}
                       item={i}
                       index={idx}

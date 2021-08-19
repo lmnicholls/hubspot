@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
+import { Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
 
 Modal.setAppElement("#root");
@@ -13,16 +14,66 @@ const Window = ({ show, onClose, item }) => {
       overlayClassName={css(styles.overlay)}
     >
       <div className={css(styles.closeBtnCtn)}>
-        <h1 style={{ flex: "1 90%" }}>{item.title}</h1>
+        <h1 style={{ flex: "1 90%" }} className={css(styles.dealHeader)}>
+          {item.name}
+        </h1>
         <button className={css(styles.closeBtn)} onClick={onClose}>
-          X
+          ✕
         </button>
       </div>
       <div>
-        <h2>Description</h2>
-        <p>{item.name}</p>
-        <h2>Status</h2>
-        <p>{`${item.stage.charAt(0).toUpperCase()}${item.stage.slice(1)}`}</p>
+        <h4 className={css(styles.detailTitle, styles.detailAboutTitle)}>
+          About this deal
+        </h4>
+        <p className={css(styles.detail)}>
+          <span className={css(styles.detailLabel)}>Amount: </span>$
+          {item.amount}
+        </p>
+        <p className={css(styles.detail)}>
+          <span className={css(styles.detailLabel)}>Stage: </span>
+          {`${item.stage.charAt(0).toUpperCase()}${item.stage.slice(1)}`}
+        </p>
+        <p className={css(styles.detail)}>
+          <span className={css(styles.detailLabel)}>Owner: </span>
+          {item.user}
+        </p>
+        <p className={css(styles.detail)}>
+          <span className={css(styles.detailLabel)}>Close date: </span>
+          {new Date(item.expectedCloseDate).toDateString()}
+        </p>
+        <hr />
+        <h4 className={css(styles.detailTitle)}>Company details</h4>
+        <p className={css(styles.detail)}>
+          <span className={css(styles.detailLabel)}>Name: </span>
+          {item.company.companyName}
+        </p>
+        <p className={css(styles.detail)}>
+          <span className={css(styles.detailLabel)}>Owner: </span>
+          {item.company.owner}
+        </p>
+        <p className={css(styles.detail)}>
+          <span className={css(styles.detailLabel)}>Phone: </span>
+          {item.company.phone}
+        </p>
+        <p className={css(styles.detail)}>
+          <span className={css(styles.detailLabel)}>Industry: </span>
+          {item.company.industry}
+        </p>
+        <p className={css(styles.detail)}>
+          <span className={css(styles.detailLabel)}>Date Created: </span>
+          {new Date(item.company.dateCreated).toDateString()}
+        </p>
+        <p className={css(styles.detail)}>
+          <span className={css(styles.detailLabel)}>Last Activity Date: </span>
+          {new Date(item.company.lastActivityDate).toDateString()}
+        </p>
+        <hr />
+        <div className={css(styles.btnCtn)}>
+          <Button className={css(styles.save)}>Save</Button>
+          <Button className={css(styles.close)} onClick={onClose}>
+            Close
+          </Button>
+        </div>
       </div>
     </Modal>
   );
@@ -33,10 +84,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#F4F5F7",
     borderRadius: "2px",
     margin: "48px 0 80px",
-    minHeight: "450px",
+    minHeight: "500px",
     width: "800px",
     outline: "none",
-    padding: "20px",
+    fontFamily: "Quicksand",
   },
   overlay: {
     display: "flex",
@@ -48,18 +99,57 @@ const styles = StyleSheet.create({
     bottom: "0",
     backgroundColor: "rgba(0,0,0,0.5)",
   },
+  dealHeader: {
+    fontSize: "32px",
+  },
   closeBtnCtn: {
     display: "flex",
+    backgroundColor: "#193753",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    color: "white",
+    fontFamily: "Quicksand",
   },
   closeBtn: {
-    height: "40px",
-    width: "35px",
     fontSize: "20px",
-    color: "#031D2C",
+    color: "white",
     border: "none",
-    borderRadius: "25px",
+    backgroundColor: "#193753",
     ":hover": {
-      backgroundColor: "#DCDCDC",
+      color: "red",
+    },
+  },
+  detailAboutTitle: {
+    paddingTop: "10px",
+  },
+  detailTitle: {
+    paddingLeft: "10px",
+    color: "#193753",
+    fontWeight: "bold",
+  },
+  detail: {
+    paddingLeft: "20px",
+    marginBottom: "1px",
+  },
+  detailLabel: {
+    fontWeight: "bold",
+  },
+  btnCtn: {
+    display: "flex",
+    justifyContent: "flex-end",
+    paddingRight: "10px",
+  },
+  save: {
+    marginRight: "5px",
+    fontWeight: "bold",
+    ":hover": {
+      backgroundColor: "#193753",
+    },
+  },
+  close: {
+    fontWeight: "bold",
+    ":hover": {
+      backgroundColor: "#193753",
     },
   },
 });
