@@ -1,61 +1,59 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import React, { useState } from "react";
 import { StyleSheet, css } from "aphrodite";
-import { useDispatch } from "react-redux";
-import { addCompany } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addDeal } from "../../actions";
 import "./deals.css";
 
 export default function CreateDeal(props) {
   const dispatch = useDispatch();
-  const [companyName, setCompanyName] = useState("");
-  const [companyOwner, setCompanyOwner] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [logo, setLogo] = useState("");
-  const [industry, setIndustry] = useState("");
+  const companies = useSelector((state) => state.companies);
+  const companyNames = companies?.map((company) => company.companyName);
 
-  const handleAddCompany = (e) => {
+  const [companyName, setCompanyName] = useState("");
+  const [user, setUser] = useState("");
+  const [name, setName] = useState("");
+  const [status, setStatus] = useState("");
+  const [amount, setAmount] = useState("");
+  const [expectedCloseDate, setExpectedCloseDate] = useState("");
+
+  const handleAddDeal = (e) => {
     e.preventDefault();
     dispatch(
-      addCompany(
-        companyName,
-        companyOwner,
-        phoneNumber,
-        city,
-        state,
-        postalCode,
-        logo,
-        industry
-      )
+      addDeal(companyName, user, name, status, amount, expectedCloseDate)
     );
     props.handleClose();
   };
+
+  let companyKey = 0;
 
   return (
     <>
       <Modal show={props.show} onHide={props.handleClose} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title className={css(styles.title)}>
-            Create Company
-          </Modal.Title>
+          <Modal.Title className={css(styles.title)}>Add A Deal</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={(e) => handleAddCompany(e)}>
+          <Form onSubmit={(e) => handleAddDeal(e)}>
             <Form.Group className="mb-3" controlId="formCompanyName">
               <Form.Label className={css(styles.label)}>
                 Company Name
               </Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter company name"
-                className={css(styles.input)}
+              <Form.Select
+                id="inlineFormCustomSelect"
                 required
+                className={css(styles.input)}
                 onChange={(e) => {
                   setCompanyName(e.target.value);
                 }}
-              />
+              >
+                <option value="">Choose A Company...</option>
+                {companyNames?.map((name) => (
+                  <option key={companyKey++} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </Form.Select>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formCompanyOwner">
@@ -68,84 +66,66 @@ export default function CreateDeal(props) {
                 className={css(styles.input)}
                 required
                 onChange={(e) => {
-                  setCompanyOwner(e.target.value);
+                  setUser(e.target.value);
                 }}
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formPhoneNumber">
-              <Form.Label className={css(styles.label)}>
-                Phone Number
-              </Form.Label>
+            <Form.Group className="mb-3" controlId="formname">
+              <Form.Label className={css(styles.label)}>Deal Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter phone number"
+                placeholder="Enter a name for this deal"
                 className={css(styles.input)}
                 required
                 onChange={(e) => {
-                  setPhoneNumber(e.target.value);
+                  setName(e.target.value);
                 }}
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formCity">
-              <Form.Label className={css(styles.label)}>City</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter city"
+            <Form.Group className="mb-3" controlId="formStatus">
+              <Form.Label className={css(styles.label)}>Status</Form.Label>
+              <Form.Select
+                id="formStatusSelect"
                 className={css(styles.input)}
                 onChange={(e) => {
-                  setCity(e.target.value);
+                  setStatus(e.target.value);
+                }}
+              >
+                <option value="Initiated">Choose...</option>
+                <option value="Initiated">Initiated</option>
+                <option value="Qualified">Qualified</option>
+                <option value="Contract Sent">Contract Sent</option>
+                <option value="Closed Won">Closed Won</option>
+                <option value="Closed Lost">Closed Lost</option>
+              </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formAmount">
+              <Form.Label className={css(styles.label)}>Amount</Form.Label>
+              <Form.Control
+                type="number"
+                required
+                placeholder="Deal Amount"
+                className={css(styles.input)}
+                onChange={(e) => {
+                  setAmount(e.target.value);
                 }}
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formStateRegion">
+            <Form.Group className="mb-3" controlId="formCloseDate">
               <Form.Label className={css(styles.label)}>
-                State/Region
+                Expected Close Date
               </Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Enter state or region"
+                type="date"
+                required
+                placeholder="Enter expected close date"
                 className={css(styles.input)}
                 onChange={(e) => {
-                  setState(e.target.value);
-                }}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formPostalCode">
-              <Form.Label className={css(styles.label)}>Postal Code</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter postal code"
-                className={css(styles.input)}
-                onChange={(e) => {
-                  setPostalCode(e.target.value);
-                }}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formIndustry">
-              <Form.Label className={css(styles.label)}>Industry</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter industry"
-                className={css(styles.input)}
-                onChange={(e) => {
-                  setIndustry(e.target.value);
-                }}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formLogo">
-              <Form.Label className={css(styles.label)}>Logo</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter company logo"
-                className={css(styles.input)}
-                onChange={(e) => {
-                  setLogo(e.target.value);
+                  setExpectedCloseDate(e.target.value);
                 }}
               />
             </Form.Group>

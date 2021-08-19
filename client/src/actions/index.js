@@ -100,7 +100,7 @@ export const addDeal = async (
   amount,
   expectedCloseDate
 ) => {
-  const request = await axios.post(`/deals`, {
+  const request = await axios.post("/deals", {
     companyName,
     user,
     name,
