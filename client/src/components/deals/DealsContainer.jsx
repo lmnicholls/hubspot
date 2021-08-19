@@ -1,6 +1,6 @@
 import React from "react";
 import NavigationTabs from "../Navigation/NavigationTabs";
-import Homepage from "./Homepage";
+import DealsPage from "./DealsPage";
 import { Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
 import { DndProvider } from "react-dnd";
@@ -15,7 +15,7 @@ export default function DealsContainer() {
           <NavigationTabs defaultActiveKey="/companies" />
           <Button className={css(styles.addDealButton)}>Add Deal</Button>
         </div>
-        <Homepage />
+        <DealsPage />
       </DndProvider>
     </>
   );

@@ -64,17 +64,26 @@ const Item = ({ item, index, moveItem, status }) => {
         <p className={css(styles.itemTitle, styles.itemComponent)}>
           {item.name}
         </p>
-        <p className={css(styles.itemComponent)}>Amount: ${item.amount}</p>
         <p className={css(styles.itemComponent)}>
-          Close Date: {new Date(item.expectedCloseDate).toDateString()}
+          <span className={css(styles.itemLabel)}> Amount:</span> ${item.amount}
         </p>
-        <p className={css(styles.itemCompany, styles.itemComponent)}>
+        <p className={css(styles.itemComponent)}>
+          <span className={css(styles.itemLabel)}>Close Date: </span>
+          {new Date(item.expectedCloseDate).toDateString()}
+        </p>
+        <p
+          className={css(
+            styles.itemCompany,
+            styles.itemComponent,
+            styles.itemLabel
+          )}
+        >
           <img
             src={item.company.logo}
             className={css(styles.itemCompanyImg)}
             alt="logo"
           />
-          {item.company.companyName}
+          {item.company.companyName.toUpperCase()}
         </p>
       </div>
       <Window item={item} onClose={onClose} show={show} />
@@ -109,6 +118,9 @@ const styles = StyleSheet.create({
   },
   itemStatus: {
     textAlign: "right",
+  },
+  itemLabel: {
+    fontWeight: "bold",
   },
 });
 
