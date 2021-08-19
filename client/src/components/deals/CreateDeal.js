@@ -88,12 +88,13 @@ export default function CreateDeal(props) {
               <Form.Label className={css(styles.label)}>Status</Form.Label>
               <Form.Select
                 id="formStatusSelect"
+                required
                 className={css(styles.input)}
                 onChange={(e) => {
                   setStatus(e.target.value);
                 }}
               >
-                <option value="Initiated">Choose...</option>
+                <option value="">Choose...</option>
                 <option value="Initiated">Initiated</option>
                 <option value="Qualified">Qualified</option>
                 <option value="Contract Sent">Contract Sent</option>
