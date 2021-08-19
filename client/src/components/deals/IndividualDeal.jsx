@@ -83,7 +83,7 @@ const Item = ({ item, index, moveItem, status }) => {
             className={css(styles.itemCompanyImg)}
             alt="logo"
           />
-          {item.company.companyName.toUpperCase()}
+          {item.company.companyName?.toUpperCase()}
         </p>
       </div>
       <Window item={item} onClose={onClose} show={show} />

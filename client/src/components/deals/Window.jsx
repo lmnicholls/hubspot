@@ -31,7 +31,9 @@ const Window = ({ show, onClose, item }) => {
         </p>
         <p className={css(styles.detail)}>
           <span className={css(styles.detailLabel)}>Stage: </span>
-          {`${item.stage.charAt(0).toUpperCase()}${item.stage.slice(1)}`}
+          {`${item.stage.status
+            .charAt(0)
+            .toUpperCase()}${item.stage.status.slice(1)}`}
         </p>
         <p className={css(styles.detail)}>
           <span className={css(styles.detailLabel)}>Owner: </span>
