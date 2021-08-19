@@ -97,5 +97,30 @@ router.put("/:dealID", async (req, res) => {
 
 //PUT /:id/edit
 //edit deal details
+//in prev PR--merge in ORDER to avoid conflicts.
+
+//DELETE deal
+//delete count??
+router.delete("/:dealID", async (req, res) => {
+  try {
+    const deal = await Deal.findById(req.params.dealID);
+    const company = await Company.find({ _id: deal.company });
+    const update = { $pull: { deals: deal._id } };
+
+    //deletes deal in deals collection
+    await Deal.deleteOne({ _id: deal._id });
+
+    //deletes deal from company deals array in companies collection
+    await Company.findByIdAndUpdate(company._id, update, (err, company) => {
+      if (err) {
+        return err;
+      }
+    });
+
+    res.status(200).send(`${deal} has been deleted.`);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
 
 module.exports = router;
