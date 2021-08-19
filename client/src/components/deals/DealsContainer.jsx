@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import NavigationTabs from "../Navigation/NavigationTabs";
-import Homepage from "./Homepage";
+import DealsPage from "./DealsPage";
 import { Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
 import { DndProvider } from "react-dnd";
@@ -24,7 +24,7 @@ export default function DealsContainer() {
             Add Deal
           </Button>
         </div>
-        <Homepage />
+        <DealsPage />
       </DndProvider>
       <CreateDeal
         setShow={setShow}
