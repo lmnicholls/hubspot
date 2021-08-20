@@ -78,7 +78,7 @@ router.put("/:dealID", async (req, res) => {
   try {
     const deal = await Deal.findById(req.params.dealID);
 
-    if (!req.body.stage.status) {
+    if (!req.body.status) {
       return res.status(400).send("Stage status feild is required.");
     }
     const prevStage = deal.stage.status;
@@ -87,21 +87,21 @@ router.put("/:dealID", async (req, res) => {
     //not sure if this is needed??
     const update = {
       $addToSet: { stageHistory: prevStage },
-      stage: { status: req.body.stage.status },
+      stage: { status: req.body.status },
     };
 
-    await Deal.findByIdAndUpdate(
+    const dealStatusEdit = await Deal.findByIdAndUpdate(
       req.params.dealID,
       update,
       { new: true },
       (err, deal) => {
         if (err) {
           return res.send(err);
-        } else {
-          res.status(200).send(deal);
         }
       }
-    );
+    ).populate("company");
+
+    res.status(200).send(dealStatusEdit);
   } catch (err) {
     res.status(400).send(err);
   }
