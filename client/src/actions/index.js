@@ -33,7 +33,7 @@ export const addCompany = async (
   owner,
   phone,
   city,
-  state_region,
+  state,
   postalCode,
   logo,
   industry
@@ -43,7 +43,7 @@ export const addCompany = async (
     owner,
     phone,
     city,
-    state_region,
+    state,
     postalCode,
     logo,
     industry,
