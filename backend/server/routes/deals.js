@@ -104,7 +104,7 @@ router.put("/:dealID", async (req, res) => {
 router.delete("/:dealID", async (req, res) => {
   try {
     const deal = await Deal.findById(req.params.dealID);
-    const company = await Company.find({ _id: deal.company });
+    const company = await Company.findById(deal.company);
     const update = { $pull: { deals: deal._id } };
 
     //deletes deal in deals collection
@@ -117,7 +117,7 @@ router.delete("/:dealID", async (req, res) => {
       }
     });
 
-    res.status(200).send(`${deal} has been deleted.`);
+    res.status(200).send(`${deal.name} has been deleted.`);
   } catch (err) {
     res.status(400).send(err);
   }
