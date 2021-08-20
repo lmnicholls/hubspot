@@ -32,6 +32,10 @@ router.post("/", async (req, res) => {
     return res.status(400).send("Amount field is required.");
   }
 
+  if (!req.body.companyName) {
+    return res.status(400).send("Company name field is required.");
+  }
+
   try {
     const company = await Company.findOne({
       companyName: req.body.companyName,
@@ -102,10 +106,26 @@ router.put("/:dealID", async (req, res) => {
 
 //edit deal details
 router.put("/:dealID/edit", async (req, res) => {
+  if (!req.body.name) {
+    return res.status(400).send("Name field is required.");
+  }
+
+  if (!req.body.stage.status) {
+    return res.status(400).send("Stage status field is required.");
+  }
+
+  if (!req.body.amount) {
+    return res.status(400).send("Amount field is required.");
+  }
+
+  if (!req.body.companyName) {
+    return res.status(400).send("Company name field is required.");
+  }
+
   try {
     const deal = await Deal.findById(req.params.dealID);
-    const company = deal.company;
-    const update = { ...req.body, company: company };
+    const companyID = deal.company;
+    const update = { ...req.body, company: companyID };
 
     const dealEdit = await Deal.findOneAndReplace(
       { _id: req.params.dealID },
