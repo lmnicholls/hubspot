@@ -93,4 +93,23 @@ router.put("/:companyID", async (req, res) => {
   }
 });
 
+//DELETE company
+//delete count??
+router.delete("/:companyID", async (req, res) => {
+  try {
+    const company = await Company.findById(req.params.companyID);
+    const deal = await Deal.find({ company: company._id });
+
+    //deletes company
+    await Company.deleteOne({ _id: company._id });
+
+    //deletes any deal associated with that company
+    await Deal.deleteMany({ company: company._id });
+
+    res.status(200).send(`${company.companyName} has been deleted.`);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
 module.exports = router;
