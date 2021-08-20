@@ -32,6 +32,10 @@ router.post("/", async (req, res) => {
     return res.status(400).send("Amount field is required.");
   }
 
+  if (!req.body.companyName) {
+    return res.status(400).send("Company name field is required.");
+  }
+
   try {
     const company = await Company.findOne({
       companyName: req.body.companyName,
@@ -66,7 +70,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-//put /:id to update deal stage
+//put /:id to update deal stage for drag and drop
 router.put("/:dealID", async (req, res) => {
   try {
     const deal = await Deal.findById(req.params.dealID);
@@ -100,7 +104,66 @@ router.put("/:dealID", async (req, res) => {
   }
 });
 
-//PUT /:id/edit
 //edit deal details
+router.put("/:dealID/edit", async (req, res) => {
+  if (!req.body.name) {
+    return res.status(400).send("Name field is required.");
+  }
+
+  if (!req.body.stage.status) {
+    return res.status(400).send("Stage status field is required.");
+  }
+
+  if (!req.body.amount) {
+    return res.status(400).send("Amount field is required.");
+  }
+
+  if (!req.body.companyName) {
+    return res.status(400).send("Company name field is required.");
+  }
+
+  try {
+    const deal = await Deal.findById(req.params.dealID);
+    const companyID = deal.company;
+    const update = { ...req.body, company: companyID };
+
+    const dealEdit = await Deal.findOneAndReplace(
+      { _id: req.params.dealID },
+      update,
+      { new: true },
+      (err, deal) => {
+        if (err) {
+          return err;
+        }
+      }
+    ).populate("company");
+
+    res.status(200).send(dealEdit);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
+router.delete("/:dealID", async (req, res) => {
+  try {
+    const deal = await Deal.findById(req.params.dealID);
+    const company = await Company.findById(deal.company);
+    const update = { $pull: { deals: deal._id } };
+
+    //deletes deal in deals collection
+    await Deal.deleteOne({ _id: deal._id });
+
+    //deletes deal from company deals array in companies collection
+    await Company.findByIdAndUpdate(company._id, update, (err, company) => {
+      if (err) {
+        return err;
+      }
+    });
+
+    res.status(200).send(`${deal.name} has been deleted.`);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
 
 module.exports = router;

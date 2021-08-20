@@ -3,6 +3,7 @@ import {
   GET_COMPANIES,
   EDIT_COMPANY,
   EDIT_DEAL_STATUS,
+  ADD_DEAL,
 } from "../actions/names";
 
 export const companiesReducer = function (state = null, action) {
@@ -40,11 +41,20 @@ export const companiesReducer = function (state = null, action) {
             }
           });
 
+    case ADD_DEAL:
+      const newDeal = action.payload.data;
+      const companyID = action.payload.data.company;
+
+      const updatedCompaniesList = state.map((company) => {
+        if (company._id === companyID) {
+          company.deals = [newDeal, ...company.deals];
           return company;
         } else {
           return company;
         }
       });
+
+      return updatedCompaniesList;
 
     default:
       return state;
