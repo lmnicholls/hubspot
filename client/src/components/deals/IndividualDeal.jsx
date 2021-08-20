@@ -1,10 +1,18 @@
-import React, { Fragment, useState, useRef } from "react";
+import React, { Fragment, useState, useRef, useEffect } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import Window from "./Window";
 import ITEM_TYPE from "../../data/types";
 import { StyleSheet, css } from "aphrodite";
+import { useDispatch } from "react-redux";
+import { getCompanies, getDeals } from "../../actions";
 
 const Item = ({ item, index, moveItem, status }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCompanies());
+    dispatch(getDeals());
+  }, [dispatch]);
+
   const ref = useRef(null);
 
   const [, drop] = useDrop({
