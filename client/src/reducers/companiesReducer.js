@@ -40,13 +40,15 @@ export const companiesReducer = function (state = null, action) {
               return deal;
             }
           });
+        }
+      });
 
     case ADD_DEAL:
       const newDeal = action.payload.data;
-      const companyID = action.payload.data.company;
+      const companyId = action.payload.data.company;
 
       const updatedCompaniesList = state.map((company) => {
-        if (company._id === companyID) {
+        if (company._id === companyId) {
           company.deals = [newDeal, ...company.deals];
           return company;
         } else {
