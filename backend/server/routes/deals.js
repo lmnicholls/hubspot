@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
     return res.status(400).send("Name field is required.");
   }
 
-  if (!req.body.stage.status) {
+  if (!req.body.status) {
     return res.status(400).send("Stage status field is required.");
   }
 
