@@ -29,7 +29,7 @@ export const companiesReducer = function (state = null, action) {
     case EDIT_DEAL_STATUS:
       const updatedDeal = action.payload.data;
       const dealID = action.payload.data._id;
-      const companyID = action.payload.data.company;
+      const companyID = action.payload.data.company._id;
 
       return state.map((company) => {
         if (company._id === companyID) {
@@ -48,7 +48,7 @@ export const companiesReducer = function (state = null, action) {
 
     case ADD_DEAL:
       const newDeal = action.payload.data;
-      const companyId = action.payload.data.company;
+      const companyId = action.payload.data.company._id;
 
       const updatedCompaniesList = state.map((company) => {
         if (company._id === companyId) {
