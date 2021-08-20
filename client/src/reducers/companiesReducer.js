@@ -1,4 +1,9 @@
-import { ADD_COMPANY, GET_COMPANIES, EDIT_COMPANY } from "../actions/names";
+import {
+  ADD_COMPANY,
+  GET_COMPANIES,
+  EDIT_COMPANY,
+  EDIT_DEAL_STATUS,
+} from "../actions/names";
 
 export const companiesReducer = function (state = null, action) {
   switch (action.type) {
@@ -19,6 +24,27 @@ export const companiesReducer = function (state = null, action) {
         }
       });
       return newCompaniesList;
+
+    case EDIT_DEAL_STATUS:
+      const updatedDeal = action.payload.data;
+      const dealID = action.payload.data._id;
+      const companyID = action.payload.data.company;
+
+      return state.map((company) => {
+        if (company._id === companyID) {
+          company.deals = company.deals.map((deal) => {
+            if (deal._id === dealID) {
+              return updatedDeal;
+            } else {
+              return deal;
+            }
+          });
+
+          return company;
+        } else {
+          return company;
+        }
+      });
 
     default:
       return state;

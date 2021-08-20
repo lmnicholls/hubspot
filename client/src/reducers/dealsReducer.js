@@ -16,7 +16,6 @@ export const dealsReducer = function (state = null, action) {
           return deal;
         }
       });
-      console.log(newDealsList);
       return newDealsList;
 
     default:
