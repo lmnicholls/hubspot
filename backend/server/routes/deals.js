@@ -54,6 +54,8 @@ router.post("/", async (req, res) => {
 
     await newDeal.save();
 
+    const savedDeal = await Deal.findById(newDeal._id).populate("company");
+
     //adds new deal to deals array for company
     await Company.findByIdAndUpdate(
       company._id,
@@ -63,8 +65,9 @@ router.post("/", async (req, res) => {
           return res.send(err);
         }
       }
-    );
-    res.status(200).send(newDeal);
+    ).populate("company");
+
+    res.status(200).send(savedDeal);
   } catch (err) {
     res.status(400).send(err);
   }
