@@ -7,8 +7,6 @@ import { statuses } from "../../data";
 import spinner from "../../images/Spinner.gif";
 import { StyleSheet, css } from "aphrodite";
 
-// need to import deals data
-
 const Homepage = () => {
   const deals = useSelector((state) => state.deals);
 
@@ -26,19 +24,11 @@ const Homepage = () => {
           ...item,
           stage: { status: stage },
         });
-      console.log("newItems", newItems);
       return [...newItems];
     });
   };
 
-  const moveItem = (dragIndex, hoverIndex) => {
-    const item = items[dragIndex];
-    setItems((prevState) => {
-      const newItems = prevState.filter((i, idx) => idx !== dragIndex);
-      newItems.splice(hoverIndex, 0, item);
-      return [...newItems];
-    });
-  };
+  const moveItem = (dragIndex, hoverIndex) => {};
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -63,7 +53,11 @@ const Homepage = () => {
                 {s.status.toUpperCase()}
               </h2>
               <h2 className={css(styles.columnHeaderText)}>
-                {items?.filter((item) => item.stage.status === s.status).length}
+                {
+                  items?.filter(
+                    (item) => item.stage.status.toLowerCase() === s.status
+                  ).length
+                }
               </h2>
             </div>
             <DropWrapper onDrop={onDrop} status={s.status}>
@@ -85,7 +79,7 @@ const Homepage = () => {
               TOTAL: $
               {numberWithCommas(
                 items
-                  ?.filter((i) => i.stage.status === s.status)
+                  ?.filter((i) => i.stage.status.toLowerCase() === s.status)
                   .reduce((pv, cv) => {
                     return pv + cv.amount;
                   }, 0)
