@@ -70,9 +70,14 @@ router.post("/", async (req, res) => {
 router.put("/:dealID", async (req, res) => {
   try {
     const deal = await Deal.findById(req.params.dealID);
+
+    if (!req.body.stage.status) {
+      return res.status(400).send("Stage status feild is required.");
+    }
     const prevStage = deal.stage.status;
 
-    //pushes prev stage to stageHistoy and updates stage.staus with curret stage
+    //pushes prev stage to stageHistoy and updates stage.staus with current stage
+    //not sure if this is needed??
     const update = {
       $addToSet: { stageHistory: prevStage },
       stage: { status: req.body.stage.status },
