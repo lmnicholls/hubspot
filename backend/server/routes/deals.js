@@ -65,7 +65,7 @@ router.post("/", async (req, res) => {
           return res.send(err);
         }
       }
-    ).populate("company");
+    );
 
     res.status(200).send(savedDeal);
   } catch (err) {
