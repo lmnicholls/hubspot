@@ -9,8 +9,7 @@ router.get("/", async (req, res) => {
     if (companies.length === 0) {
       return res.status(404).send("No companies in database.");
     }
-    res.status(200);
-    res.send(companies);
+    res.status(200).send(companies);
   } catch (err) {
     res.status(400).send(err);
   }
@@ -33,11 +32,11 @@ router.post("/", async (req, res) => {
     companyName: req.body.companyName,
     owner: req.body.owner,
     phone: req.body.phone,
-    city: req.body.city || "",
-    state_region: req.body.state || "",
-    postalCode: req.body.postalCode || "",
-    logo: req.body.logo || "",
-    industry: req.body.industry || "",
+    city: req.body.city || null,
+    state_region: req.body.state || null,
+    postalCode: req.body.postalCode || null,
+    logo: req.body.logo || null,
+    industry: req.body.industry || null,
   });
 
   try {
@@ -58,7 +57,19 @@ router.get("/:companyID", async (req, res) => {
   }
 });
 
+//edit company details
 router.put("/:companyID", async (req, res) => {
+  if (!req.body.companyName) {
+    return res.status(400).send("Name field is required.");
+  }
+
+  if (!req.body.owner) {
+    return res.status(400).send("Company owner field is required.");
+  }
+
+  if (!req.body.phone) {
+    return res.status(400).send("Phone number field is required.");
+  }
   try {
     const company = await Company.findById(req.params.companyID);
     const deals = company.deals;
