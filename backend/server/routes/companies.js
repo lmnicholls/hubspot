@@ -59,6 +59,17 @@ router.get("/:companyID", async (req, res) => {
 
 //edit company details
 router.put("/:companyID", async (req, res) => {
+  if (!req.body.companyName) {
+    return res.status(400).send("Name field is required.");
+  }
+
+  if (!req.body.owner) {
+    return res.status(400).send("Company owner field is required.");
+  }
+
+  if (!req.body.phone) {
+    return res.status(400).send("Phone number field is required.");
+  }
   try {
     const company = await Company.findById(req.params.companyID);
     const deals = company.deals;
