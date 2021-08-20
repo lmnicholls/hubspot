@@ -40,6 +40,9 @@ export const companiesReducer = function (state = null, action) {
               return deal;
             }
           });
+          return company;
+        } else {
+          return company;
         }
       });
 
