@@ -32,6 +32,10 @@ router.post("/", async (req, res) => {
     return res.status(400).send("Amount field is required.");
   }
 
+  if (!req.body.companyName) {
+    return res.status(400).send("Company name field is required.");
+  }
+
   try {
     const company = await Company.findOne({
       companyName: req.body.companyName,
@@ -66,13 +70,18 @@ router.post("/", async (req, res) => {
   }
 });
 
-//put /:id to update deal stage
+//put /:id to update deal stage for drag and drop
 router.put("/:dealID", async (req, res) => {
   try {
     const deal = await Deal.findById(req.params.dealID);
+
+    if (!req.body.stage.status) {
+      return res.status(400).send("Stage status feild is required.");
+    }
     const prevStage = deal.stage.status;
 
-    //pushes prev stage to stageHistoy and updates stage.staus with curret stage
+    //pushes prev stage to stageHistoy and updates stage.staus with current stage
+    //not sure if this is needed??
     const update = {
       $addToSet: { stageHistory: prevStage },
       stage: { status: req.body.stage.status },
@@ -95,12 +104,46 @@ router.put("/:dealID", async (req, res) => {
   }
 });
 
-//PUT /:id/edit
 //edit deal details
-//in prev PR--merge in ORDER to avoid conflicts.
+router.put("/:dealID/edit", async (req, res) => {
+  if (!req.body.name) {
+    return res.status(400).send("Name field is required.");
+  }
 
-//DELETE deal
-//delete count??
+  if (!req.body.stage.status) {
+    return res.status(400).send("Stage status field is required.");
+  }
+
+  if (!req.body.amount) {
+    return res.status(400).send("Amount field is required.");
+  }
+
+  if (!req.body.companyName) {
+    return res.status(400).send("Company name field is required.");
+  }
+
+  try {
+    const deal = await Deal.findById(req.params.dealID);
+    const companyID = deal.company;
+    const update = { ...req.body, company: companyID };
+
+    const dealEdit = await Deal.findOneAndReplace(
+      { _id: req.params.dealID },
+      update,
+      { new: true },
+      (err, deal) => {
+        if (err) {
+          return err;
+        }
+      }
+    ).populate("company");
+
+    res.status(200).send(dealEdit);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
 router.delete("/:dealID", async (req, res) => {
   try {
     const deal = await Deal.findById(req.params.dealID);
