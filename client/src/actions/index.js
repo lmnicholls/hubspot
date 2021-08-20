@@ -117,7 +117,7 @@ export const addDeal = async (
 
 export const editDealStatus = async (id, newStatus) => {
   const request = await axios.put(`/deals/${id}`, {
-    stage: { status: newStatus },
+    status: newStatus,
   });
 
   return {
