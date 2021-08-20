@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import IndividualDeal from "./IndividualDeal";
 import DropWrapper from "./DropWrapper";
 import Col from "./Col";
 import { statuses } from "../../data";
 import spinner from "../../images/Spinner.gif";
 import { StyleSheet, css } from "aphrodite";
+import { editDealStatus } from "../../actions";
 
 const Homepage = () => {
   const deals = useSelector((state) => state.deals);
+  const dispatch = useDispatch();
 
   const [items, setItems] = useState(deals);
 
@@ -24,6 +26,7 @@ const Homepage = () => {
           ...item,
           stage: { status: stage },
         });
+      dispatch(editDealStatus(item._id, stage));
       return [...newItems];
     });
   };
