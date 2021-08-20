@@ -14,7 +14,7 @@ export default function CompaniesListView() {
     history.push(`/companies/${company._id}`);
   };
 
-  if (!companies) {
+  if (companies.length === 0) {
     return (
       <div className={css(styles.loadingText)}>
         <img src={spinner} className={css(styles.spinner)} alt="spinner" />
