@@ -6,7 +6,7 @@ import {
   ADD_DEAL,
 } from "../actions/names";
 
-export const companiesReducer = function (state = null, action) {
+export const companiesReducer = function (state = [], action) {
   switch (action.type) {
     case GET_COMPANIES:
       return action.payload.data;
