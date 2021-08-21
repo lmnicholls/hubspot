@@ -6,22 +6,18 @@ import cylinder from "highcharts/modules/cylinder";
 import highcharts3d from "highcharts/highcharts-3d";
 
 export default function StatusGraph() {
-  let yy = {};
+  let dealObject = {};
   const deals = useSelector((state) => state.deals).map((deal) => {
     if (
-      yy[deal.stage.status.toLowerCase()] === undefined ||
-      yy[deal.stage.status.toLowerCase()] === 0
+      dealObject[deal.stage.status.toUpperCase()] === undefined ||
+      dealObject[deal.stage.status.toUpperCase()] === 0
     ) {
-      return (yy[deal.stage.status.toLowerCase()] = 1);
+      return (dealObject[deal.stage.status.toUpperCase()] = 1);
     } else {
-      return (yy[deal.stage.status.toLowerCase()] =
-        yy[deal.stage.status.toLowerCase()] + 1);
+      return (dealObject[deal.stage.status.toUpperCase()] =
+        dealObject[deal.stage.status.toUpperCase()] + 1);
     }
   });
-
-  console.log(yy);
-  // console.log(deals);
-  // console.log(yy);
 
   highcharts3d(Highcharts);
   cylinder(Highcharts);
@@ -38,7 +34,7 @@ export default function StatusGraph() {
       },
     },
     title: {
-      text: "Deals Per Status",
+      text: "Status of Deals",
     },
     plotOptions: {
       series: {
@@ -47,11 +43,16 @@ export default function StatusGraph() {
       },
     },
     xAxis: {
-      categories: Object.keys(yy),
+      categories: Object.keys(dealObject),
+    },
+    yAxis: {
+      title: {
+        text: "# of Deals",
+      },
     },
     series: [
       {
-        data: Object.values(yy),
+        data: Object.values(dealObject),
         name: "Deals",
         showInLegend: false,
       },
