@@ -7,7 +7,9 @@ import highcharts3d from "highcharts/highcharts-3d";
 
 export default function StatusGraph() {
   let dealObject = {};
-  const deals = useSelector((state) => state.deals).map((deal) => {
+  const deals = useSelector((state) => state.deals);
+
+  deals.map((deal) => {
     if (
       dealObject[deal.stage.status.toUpperCase()] === undefined ||
       dealObject[deal.stage.status.toUpperCase()] === 0

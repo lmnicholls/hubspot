@@ -5,6 +5,7 @@ import { StyleSheet, css } from "aphrodite";
 import spinner from "../../images/Spinner.gif";
 import DealsClosedVsLost from "./DealsClosedVsLost";
 import StatusGraph from "./StatusGraph";
+import OpportunityForRevenue from "./OpportunityForRevenue";
 import "./dashboard.css";
 import { getDeals } from "../../actions";
 
@@ -39,7 +40,9 @@ export default function DashboardContainer() {
       </div>
       <div className={css(styles.graphsContainer)}>
         <div className={css(styles.graphContainer)}>Graph Container</div>
-        <div className={css(styles.graphContainer)}>Graph Container</div>
+        <div className={css(styles.graphContainer)}>
+          <OpportunityForRevenue />
+        </div>
       </div>
       <div className={css(styles.graphsContainer)}>
         <div className={css(styles.graphContainer)}>Graph Container</div>
