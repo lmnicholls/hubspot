@@ -9,6 +9,7 @@ import OpportunityForRevenue from "./OpportunityForRevenue";
 import "./dashboard.css";
 import { getDeals } from "../../actions";
 import { Container, Row, Col } from "react-bootstrap";
+import PotentialForRevenueByCompany from "./PotentialRevenueByCompany";
 
 export default function DashboardContainer() {
   const dealsFromState = useSelector((state) => state.deals);
@@ -44,9 +45,11 @@ export default function DashboardContainer() {
 
         <Row>
           <Col className={css(styles.graphContainer)}>
+            <PotentialForRevenueByCompany />
+          </Col>
+          <Col className={css(styles.graphContainer)}>
             <OpportunityForRevenue />
           </Col>
-          <Col className={css(styles.graphContainer)}></Col>
         </Row>
       </Container>
     </>
