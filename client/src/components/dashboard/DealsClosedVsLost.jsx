@@ -27,7 +27,6 @@ export default function DealsClosedVsLost() {
     },
     title: {
       verticalAlign: "top",
-      floating: true,
       text: "Deals Closed Won vs. Closed Lost",
     },
     tooltip: {
