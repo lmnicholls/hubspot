@@ -184,7 +184,9 @@ export default function CompanyPage() {
                                         Close Date:
                                       </td>
                                       <td className={css(styles.info)}>
-                                        {deal.expectedCloseDate}
+                                        {new Date(
+                                          deal.expectedCloseDate
+                                        ).toDateString()}
                                       </td>
                                     </tr>
                                   </tbody>
