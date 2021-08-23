@@ -8,6 +8,7 @@ import StatusGraph from "./StatusGraph";
 import OpportunityForRevenue from "./OpportunityForRevenue";
 import "./dashboard.css";
 import { getDeals } from "../../actions";
+import { Container, Row, Col } from "react-bootstrap";
 
 export default function DashboardContainer() {
   const dealsFromState = useSelector((state) => state.deals);
@@ -30,36 +31,29 @@ export default function DashboardContainer() {
   return (
     <>
       <NavigationTabs defaultActiveKey="/dashboard" />
-      <div className={css(styles.graphsContainer)}>
-        <div className={css(styles.graphContainer)}>
-          <DealsClosedVsLost />
-        </div>
-        <div className={css(styles.graphContainer)}>
-          <StatusGraph />
-        </div>
-      </div>
-      <div className={css(styles.graphsContainer)}>
-        <div className={css(styles.graphContainer)}>Graph Container</div>
-        <div className={css(styles.graphContainer)}>
-          <OpportunityForRevenue />
-        </div>
-      </div>
-      <div className={css(styles.graphsContainer)}>
-        <div className={css(styles.graphContainer)}>Graph Container</div>
-        <div className={css(styles.graphContainer)}>Graph Container</div>
-      </div>
+
+      <Container>
+        <Row>
+          <Col className={css(styles.graphContainer)}>
+            <DealsClosedVsLost />
+          </Col>
+          <Col className={css(styles.graphContainer)}>
+            <StatusGraph />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col className={css(styles.graphContainer)}>
+            <OpportunityForRevenue />
+          </Col>
+          <Col className={css(styles.graphContainer)}></Col>
+        </Row>
+      </Container>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  graphsContainer: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "stretch",
-    overflow: "hidden",
-  },
   graphContainer: {
     width: "500px",
     border: "1px solid gray",
