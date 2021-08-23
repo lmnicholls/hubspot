@@ -182,7 +182,6 @@ const styles = StyleSheet.create({
     },
   },
   editDetailButton: {
-    marginTop: "5px",
     marginLeft: "20px",
   },
 });
