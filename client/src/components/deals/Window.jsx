@@ -1,11 +1,18 @@
 import React from "react";
+import { useState } from "react";
 import Modal from "react-modal";
 import { Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
+import EditDeal from "./EditDeal";
 
 Modal.setAppElement("#root");
 
 const Window = ({ show, onClose, item }) => {
+  const [showEdit, setShowEdit] = useState(false);
+
+  const handleClose = () => setShowEdit(false);
+  const handleShow = () => setShowEdit(true);
+
   return (
     <Modal
       isOpen={show}
@@ -43,6 +50,13 @@ const Window = ({ show, onClose, item }) => {
           <span className={css(styles.detailLabel)}>Close date: </span>
           {new Date(item.expectedCloseDate).toDateString()}
         </p>
+        <Button
+          variant="info"
+          className={css(styles.editDetailButton)}
+          onClick={handleShow}
+        >
+          Edit Deal
+        </Button>
         <hr />
         <h4 className={css(styles.detailTitle)}>Company details</h4>
         <p className={css(styles.detail)}>
@@ -77,6 +91,19 @@ const Window = ({ show, onClose, item }) => {
           </Button>
         </div>
       </div>
+      <EditDeal
+        setShow={setShowEdit}
+        show={showEdit}
+        handleClose={handleClose}
+        handleShow={handleShow}
+        companyName={item.company.companyName}
+        dealID={item._id}
+        user={item.user}
+        name={item.name}
+        status={item.stage.status}
+        amount={item.amount}
+        expectedCloseDate={item.expectedCloseDate}
+      />
     </Modal>
   );
 };
@@ -153,6 +180,10 @@ const styles = StyleSheet.create({
     ":hover": {
       backgroundColor: "#193753",
     },
+  },
+  editDetailButton: {
+    marginTop: "5px",
+    marginLeft: "20px",
   },
 });
 

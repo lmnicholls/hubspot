@@ -132,13 +132,17 @@ export const editDealDetails = async (
   name,
   status,
   amount,
-  companyName
+  companyName,
+  user,
+  expectedCloseDate
 ) => {
   const request = await axios.put(`/deals/${id}/edit`, {
     name,
     stage: { status: status },
     amount,
     companyName,
+    user,
+    expectedCloseDate,
   });
 
   return {
