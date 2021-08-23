@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
   graphsContainer: {
     display: "flex",
     flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "stretch",
+    overflow: "hidden",
   },
   graphContainer: {
     width: "500px",

@@ -43,6 +43,12 @@ export default function OpportunityForRevenue() {
         innerSize: 100,
         depth: 45,
       },
+      series: {
+        dataLabels: {
+          enabled: true,
+          format: "{point.name} </br> $ {y}",
+        },
+      },
     },
     series: [
       {
