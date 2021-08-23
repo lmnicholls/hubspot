@@ -30,7 +30,14 @@ const Window = ({ show, onClose, item }) => {
       </div>
       <div>
         <h4 className={css(styles.detailTitle, styles.detailAboutTitle)}>
-          About this deal
+          About this deal{" "}
+          <Button
+            variant="info"
+            className={css(styles.editDetailButton)}
+            onClick={handleShow}
+          >
+            Edit Deal
+          </Button>
         </h4>
         <p className={css(styles.detail)}>
           <span className={css(styles.detailLabel)}>Amount: </span>$
@@ -50,13 +57,7 @@ const Window = ({ show, onClose, item }) => {
           <span className={css(styles.detailLabel)}>Close date: </span>
           {new Date(item.expectedCloseDate).toDateString()}
         </p>
-        <Button
-          variant="info"
-          className={css(styles.editDetailButton)}
-          onClick={handleShow}
-        >
-          Edit Deal
-        </Button>
+
         <hr />
         <h4 className={css(styles.detailTitle)}>Company details</h4>
         <p className={css(styles.detail)}>
@@ -85,7 +86,6 @@ const Window = ({ show, onClose, item }) => {
         </p>
         <hr />
         <div className={css(styles.btnCtn)}>
-          <Button className={css(styles.save)}>Save</Button>
           <Button className={css(styles.close)} onClick={onClose}>
             Close
           </Button>
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   btnCtn: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     paddingRight: "10px",
   },
   save: {
