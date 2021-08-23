@@ -103,7 +103,7 @@ export default function EditDeal(props) {
               <Form.Label className={css(styles.label)}>Status</Form.Label>
               <Form.Select
                 id="formStatusSelect"
-                defaultValue={status}
+                value={status.toLowerCase()}
                 required
                 className={css(styles.input)}
                 onChange={(e) => {
@@ -115,7 +115,7 @@ export default function EditDeal(props) {
                 <option value="qualified">Qualified</option>
                 <option value="contract sent">Contract Sent</option>
                 <option value="closed won">Closed Won</option>
-                <option value="closed Lost">Closed Lost</option>
+                <option value="closed lost">Closed Lost</option>
               </Form.Select>
             </Form.Group>
 
