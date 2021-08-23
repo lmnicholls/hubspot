@@ -4,13 +4,14 @@ import NavigationTabs from "../Navigation/NavigationTabs";
 import { StyleSheet, css } from "aphrodite";
 import spinner from "../../images/Spinner.gif";
 import DealsClosedVsLost from "./DealsClosedVsLost";
+import StatusGraph from "./StatusGraph";
+import OpportunityForRevenue from "./OpportunityForRevenue";
 import "./dashboard.css";
 import { getDeals } from "../../actions";
 
 export default function DashboardContainer() {
   const dealsFromState = useSelector((state) => state.deals);
   const [deals, setDeals] = useState(dealsFromState);
-  console.log(deals);
 
   useEffect(() => {
     getDeals();
@@ -33,11 +34,15 @@ export default function DashboardContainer() {
         <div className={css(styles.graphContainer)}>
           <DealsClosedVsLost />
         </div>
-        <div className={css(styles.graphContainer)}>Graph Container</div>
+        <div className={css(styles.graphContainer)}>
+          <StatusGraph />
+        </div>
       </div>
       <div className={css(styles.graphsContainer)}>
         <div className={css(styles.graphContainer)}>Graph Container</div>
-        <div className={css(styles.graphContainer)}>Graph Container</div>
+        <div className={css(styles.graphContainer)}>
+          <OpportunityForRevenue />
+        </div>
       </div>
       <div className={css(styles.graphsContainer)}>
         <div className={css(styles.graphContainer)}>Graph Container</div>
@@ -51,6 +56,9 @@ const styles = StyleSheet.create({
   graphsContainer: {
     display: "flex",
     flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "stretch",
+    overflow: "hidden",
   },
   graphContainer: {
     width: "500px",
