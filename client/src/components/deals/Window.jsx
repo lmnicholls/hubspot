@@ -20,75 +20,79 @@ const Window = ({ show, onClose, item }) => {
       className={css(styles.modal)}
       overlayClassName={css(styles.overlay)}
     >
-      <div className={css(styles.closeBtnCtn)}>
-        <h1 style={{ flex: "1 90%" }} className={css(styles.dealHeader)}>
-          {item.name}
-        </h1>
-        <button className={css(styles.closeBtn)} onClick={onClose}>
-          ✕
-        </button>
-      </div>
-      <div>
-        <h4 className={css(styles.detailTitle, styles.detailAboutTitle)}>
-          About this deal{" "}
-          <Button
-            variant="info"
-            className={css(styles.editDetailButton)}
-            onClick={handleShow}
-          >
-            Edit Deal
-          </Button>
-        </h4>
-        <p className={css(styles.detail)}>
-          <span className={css(styles.detailLabel)}>Amount: </span>$
-          {item.amount}
-        </p>
-        <p className={css(styles.detail)}>
-          <span className={css(styles.detailLabel)}>Stage: </span>
-          {`${item.stage.status
-            .charAt(0)
-            .toUpperCase()}${item.stage.status.slice(1)}`}
-        </p>
-        <p className={css(styles.detail)}>
-          <span className={css(styles.detailLabel)}>Owner: </span>
-          {item.user}
-        </p>
-        <p className={css(styles.detail)}>
-          <span className={css(styles.detailLabel)}>Close date: </span>
-          {new Date(item.expectedCloseDate).toDateString()}
-        </p>
+      <div className={css(styles.modalContentCtn)}>
+        <div className={css(styles.closeBtnCtn)}>
+          <h1 style={{ flex: "1 90%" }} className={css(styles.dealHeader)}>
+            {item.name}
+          </h1>
+          <button className={css(styles.closeBtn)} onClick={onClose}>
+            ✕
+          </button>
+        </div>
+        <div>
+          <h4 className={css(styles.detailTitle, styles.detailAboutTitle)}>
+            About this deal{" "}
+          </h4>
+          <p className={css(styles.detail)}>
+            <span className={css(styles.detailLabel)}>Amount: </span>$
+            {item.amount}
+          </p>
+          <p className={css(styles.detail)}>
+            <span className={css(styles.detailLabel)}>Stage: </span>
+            {`${item.stage.status
+              .charAt(0)
+              .toUpperCase()}${item.stage.status.slice(1)}`}
+          </p>
+          <p className={css(styles.detail)}>
+            <span className={css(styles.detailLabel)}>Owner: </span>
+            {item.user}
+          </p>
+          <p className={css(styles.detail)}>
+            <span className={css(styles.detailLabel)}>Close date: </span>
+            {new Date(item.expectedCloseDate).toDateString()}
+          </p>
 
-        <hr />
-        <h4 className={css(styles.detailTitle)}>Company details</h4>
-        <p className={css(styles.detail)}>
-          <span className={css(styles.detailLabel)}>Name: </span>
-          {item.company.companyName}
-        </p>
-        <p className={css(styles.detail)}>
-          <span className={css(styles.detailLabel)}>Owner: </span>
-          {item.company.owner}
-        </p>
-        <p className={css(styles.detail)}>
-          <span className={css(styles.detailLabel)}>Phone: </span>
-          {item.company.phone}
-        </p>
-        <p className={css(styles.detail)}>
-          <span className={css(styles.detailLabel)}>Industry: </span>
-          {item.company.industry}
-        </p>
-        <p className={css(styles.detail)}>
-          <span className={css(styles.detailLabel)}>Date Created: </span>
-          {new Date(item.company.dateCreated).toDateString()}
-        </p>
-        <p className={css(styles.detail)}>
-          <span className={css(styles.detailLabel)}>Last Activity Date: </span>
-          {new Date(item.company.lastActivityDate).toDateString()}
-        </p>
-        <hr />
-        <div className={css(styles.btnCtn)}>
-          <Button className={css(styles.close)} onClick={onClose}>
-            Close
-          </Button>
+          <hr />
+          <h4 className={css(styles.detailTitle)}>Company details</h4>
+          <p className={css(styles.detail)}>
+            <span className={css(styles.detailLabel)}>Name: </span>
+            {item.company.companyName}
+          </p>
+          <p className={css(styles.detail)}>
+            <span className={css(styles.detailLabel)}>Owner: </span>
+            {item.company.owner}
+          </p>
+          <p className={css(styles.detail)}>
+            <span className={css(styles.detailLabel)}>Phone: </span>
+            {item.company.phone}
+          </p>
+          <p className={css(styles.detail)}>
+            <span className={css(styles.detailLabel)}>Industry: </span>
+            {item.company.industry}
+          </p>
+          <p className={css(styles.detail)}>
+            <span className={css(styles.detailLabel)}>Date Created: </span>
+            {new Date(item.company.dateCreated).toDateString()}
+          </p>
+          <p className={css(styles.detail)}>
+            <span className={css(styles.detailLabel)}>
+              Last Activity Date:{" "}
+            </span>
+            {new Date(item.company.lastActivityDate).toDateString()}
+          </p>
+          <hr />
+          <div className={css(styles.btnCtn)}>
+            <Button
+              variant="info"
+              className={css(styles.editDetailButton)}
+              onClick={handleShow}
+            >
+              Edit Deal
+            </Button>
+            <Button className={css(styles.close)} onClick={onClose}>
+              Close
+            </Button>
+          </div>
         </div>
       </div>
       <EditDeal
@@ -111,13 +115,14 @@ const Window = ({ show, onClose, item }) => {
 const styles = StyleSheet.create({
   modal: {
     backgroundColor: "#F4F5F7",
-    borderRadius: "2px",
-    margin: "48px 0 80px",
-    minHeight: "500px",
-    width: "800px",
+    borderRadius: "3px",
+    width: "600px",
     outline: "none",
     fontFamily: "Quicksand",
+    placeSelf: "center",
+    paddingBottom: "10px",
   },
+
   overlay: {
     display: "flex",
     justifyContent: "center",
@@ -165,7 +170,7 @@ const styles = StyleSheet.create({
   },
   btnCtn: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     paddingRight: "10px",
   },
   save: {
@@ -177,12 +182,22 @@ const styles = StyleSheet.create({
   },
   close: {
     fontWeight: "bold",
+    backgroundColor: "rgb(37, 83, 125)",
+    border: "none",
     ":hover": {
       backgroundColor: "#193753",
     },
   },
   editDetailButton: {
     marginLeft: "20px",
+    fontWeight: "bold",
+    backgroundColor: "rgb(37, 83, 125)",
+    border: "none",
+    color: "white",
+    marginRight: "10px",
+    ":hover": {
+      backgroundColor: "#193753",
+    },
   },
 });
 
