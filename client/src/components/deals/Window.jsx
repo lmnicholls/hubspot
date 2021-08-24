@@ -13,6 +13,10 @@ const Window = ({ show, onClose, item }) => {
   const handleClose = () => setShowEdit(false);
   const handleShow = () => setShowEdit(true);
 
+  console.log(item.expectedCloseDate);
+  console.log(new Date(item.expectedCloseDate));
+  console.log(new Date(item.expectedCloseDate).toDateString());
+
   return (
     <Modal
       isOpen={show}
