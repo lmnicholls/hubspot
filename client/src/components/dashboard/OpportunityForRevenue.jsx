@@ -50,6 +50,11 @@ export default function DealsClosedVsLost() {
   const chartOptions = {
     chart: {
       type: "pie",
+      options3d: {
+        enabled: true,
+        alpha: 45,
+        beta: 0,
+      },
     },
     title: {
       verticalAlign: "top",
@@ -65,7 +70,7 @@ export default function DealsClosedVsLost() {
     },
     legend: {
       layout: "vertical",
-      align: "left",
+      align: "center",
       verticalAlign: "top",
       floating: true,
       borderWidth: 1,
@@ -73,13 +78,14 @@ export default function DealsClosedVsLost() {
       shadow: true,
       itemMarginTop: 5,
       itemMarginBottom: 5,
-      x: 0,
-      y: 60,
+      x: -250,
+      y: 250,
     },
     plotOptions: {
       pie: {
         allowPointSelect: true,
         cursor: "pointer",
+        depth: 35,
         dataLabels: {
           enabled: true,
           format: `{point.name}: $ {point.y}`,
