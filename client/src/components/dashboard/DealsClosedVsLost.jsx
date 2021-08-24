@@ -2,8 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import HC_drilldown from "highcharts/modules/drilldown";
 
 export default function DealsClosedVsLost() {
+  HC_drilldown(Highcharts);
+
   const deals = useSelector((state) => state.deals);
 
   const count = function (ary, classifier) {
@@ -20,6 +23,22 @@ export default function DealsClosedVsLost() {
   };
 
   const dealTypeCount = count(deals, dealStatus);
+
+  const dealsLostObject = {};
+  const dealsLost = deals.filter((deal) => {
+    if (deal.stage.status.toUpperCase() === "CLOSED LOST") {
+      return (dealsLostObject[deal.company.companyName] = deal.amount);
+    }
+  });
+
+  const dealsWonObject = {};
+  const dealsWon = deals.filter((deal) => {
+    if (deal.stage.status.toUpperCase() === "CLOSED WON") {
+      return (dealsWonObject[deal.company.companyName] = deal.amount);
+    }
+  });
+  console.log(dealsWon);
+  console.log(Object.entries(dealsWonObject));
 
   const chartOptions = {
     chart: {
@@ -67,14 +86,28 @@ export default function DealsClosedVsLost() {
           {
             y: dealTypeCount["Closed Won".toLowerCase()],
             name: "Closed Won: " + dealTypeCount["Closed Won".toLowerCase()],
+            drilldown: "closed won",
           },
           {
             y: dealTypeCount["Closed Lost".toLowerCase()],
             name: "Closed Lost: " + dealTypeCount["Closed Lost".toLowerCase()],
+            drilldown: "closed lost",
           },
         ],
       },
     ],
+    drilldown: {
+      series: [
+        {
+          id: "closed won",
+          data: Object.entries(dealsWonObject),
+        },
+        {
+          id: "closed lost",
+          data: Object.entries(dealsLostObject),
+        },
+      ],
+    },
   };
 
   return (
