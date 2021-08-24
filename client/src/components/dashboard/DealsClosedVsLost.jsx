@@ -58,7 +58,7 @@ export default function DealsClosedVsLost() {
     },
     legend: {
       layout: "vertical",
-      align: "right",
+      align: "left",
       verticalAlign: "top",
       floating: true,
       borderWidth: 1,
