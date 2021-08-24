@@ -7,9 +7,6 @@ mongoose.set("useFindAndModify", false);
 //gets all deals for a given user
 //add filtering for seeing deals only by company
 router.get("/", async (req, res) => {
-  const perPage = 5;
-  const page = req.query.page || 1;
-
   let query = {};
   let data = {};
 
@@ -35,8 +32,6 @@ router.get("/", async (req, res) => {
     } else {
       await Deal.find(query)
         .populate("company")
-        .skip(perPage * page - perPage)
-        .limit(perPage)
         .exec((err, deals) => {
           Deal.countDocuments(query, (err, count) => {
             if (err) return next(err);
