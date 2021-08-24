@@ -25,20 +25,18 @@ export default function DealsClosedVsLost() {
   const dealTypeCount = count(deals, dealStatus);
 
   const dealsLostObject = {};
-  const dealsLost = deals.filter((deal) => {
+  deals.forEach((deal) => {
     if (deal.stage.status.toUpperCase() === "CLOSED LOST") {
       return (dealsLostObject[deal.company.companyName] = deal.amount);
     }
   });
 
   const dealsWonObject = {};
-  const dealsWon = deals.filter((deal) => {
+  deals.forEach((deal) => {
     if (deal.stage.status.toUpperCase() === "CLOSED WON") {
       return (dealsWonObject[deal.company.companyName] = deal.amount);
     }
   });
-  console.log(dealsWon);
-  console.log(Object.entries(dealsWonObject));
 
   const chartOptions = {
     chart: {
