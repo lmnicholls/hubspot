@@ -40,7 +40,7 @@ export default function GrossRevenueByCompany() {
     yAxis: {
       min: 0,
       title: {
-        text: "Gross Income",
+        text: "Gross Revenue",
       },
     },
     legend: {
