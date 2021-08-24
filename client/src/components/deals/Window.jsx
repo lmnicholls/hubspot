@@ -49,7 +49,9 @@ const Window = ({ show, onClose, item }) => {
           </p>
           <p className={css(styles.detail)}>
             <span className={css(styles.detailLabel)}>Close date: </span>
-            {new Date(item.expectedCloseDate).toDateString()}
+            {new Date(
+              item.expectedCloseDate.split("T")[0] + ` 00:00`
+            ).toDateString()}
           </p>
 
           <hr />

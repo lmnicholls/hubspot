@@ -69,7 +69,9 @@ const Item = ({ item, index, moveItem, status }) => {
         </p>
         <p className={css(styles.itemComponent)}>
           <span className={css(styles.itemLabel)}>Close Date: </span>
-          {new Date(item.expectedCloseDate).toDateString()}
+          {new Date(
+            item.expectedCloseDate.split("T")[0] + ` 00:00`
+          ).toDateString()}
         </p>
         <p
           className={css(
