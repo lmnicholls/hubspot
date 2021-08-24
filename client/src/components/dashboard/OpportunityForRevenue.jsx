@@ -50,6 +50,10 @@ export default function DealsClosedVsLost() {
   const chartOptions = {
     chart: {
       type: "pie",
+      style: {
+        fontFamily: "Quicksand",
+        fontWeight: "bold",
+      },
       options3d: {
         enabled: true,
         alpha: 45,

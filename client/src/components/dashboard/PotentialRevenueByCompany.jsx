@@ -49,6 +49,10 @@ export default function PotentialForRevenueByCompany() {
   const chartOptions = {
     chart: {
       type: "bar",
+      style: {
+        fontFamily: "Quicksand",
+        fontWeight: "bold",
+      },
     },
     title: {
       text: "Potential Revenue by Company",

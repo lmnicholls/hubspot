@@ -41,6 +41,10 @@ export default function DealsClosedVsLost() {
   const chartOptions = {
     chart: {
       type: "pie",
+      style: {
+        fontFamily: "Quicksand",
+        fontWeight: "bold",
+      },
     },
     title: {
       verticalAlign: "top",
