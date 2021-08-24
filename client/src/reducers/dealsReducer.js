@@ -8,7 +8,7 @@ import {
 export const dealsReducer = function (state = null, action) {
   switch (action.type) {
     case GET_DEALS:
-      return action.payload.data;
+      return action.payload.data.deals;
     case ADD_DEAL:
       return [action.payload.data, ...state];
     case EDIT_DEAL_STATUS:
