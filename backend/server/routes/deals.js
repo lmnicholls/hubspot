@@ -8,45 +8,26 @@ mongoose.set("useFindAndModify", false);
 //add filtering for seeing deals only by company
 router.get("/", async (req, res) => {
   let query = {};
-  let data = {};
-
   //searching company deals by name
   //add some normilized values to the model vs have front end send _id???
   try {
     if (req.query.companyName) {
-      let dealCount = 0;
-
       const company = await Company.find({
         companyName: req.query.companyName,
       }).populate("deals");
 
       const companyDeals = company[0].deals;
 
-      for (let i = 0; i < companyDeals.length; i++) {
-        dealCount++;
-      }
-
-      data = { deals: companyDeals, count: dealCount };
-
-      res.status(200).send(data);
+      res.status(200).send(companyDeals);
     } else {
       await Deal.find(query)
         .populate("company")
         .exec((err, deals) => {
-          Deal.countDocuments(query, (err, count) => {
-            if (err) return next(err);
-
-            data = {
-              deals: deals,
-              count: count,
-            };
-
-            if (data.count === 0) {
-              return res.status(404).send("Deals not found.");
-            } else {
-              res.send(data);
-            }
-          });
+          if (err) {
+            return err;
+          } else {
+            res.status(200).send(deals);
+          }
         });
     }
   } catch (err) {
