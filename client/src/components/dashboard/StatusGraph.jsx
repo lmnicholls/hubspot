@@ -27,6 +27,10 @@ export default function StatusGraph() {
   const chartOptions = {
     chart: {
       type: "cylinder",
+      style: {
+        fontFamily: "Quicksand",
+        fontWeight: "bold",
+      },
       options3d: {
         enabled: true,
         alpha: 15,
