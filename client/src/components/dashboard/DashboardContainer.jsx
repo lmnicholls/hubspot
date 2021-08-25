@@ -11,6 +11,7 @@ import { getDeals } from "../../actions";
 import { Container, Row, Col } from "react-bootstrap";
 import PotentialForRevenueByCompany from "./PotentialRevenueByCompany";
 import GrossRevenueByCompany from "./GrossRevenueByCompany";
+import RevenueByRegion from "./RevenueByRegion";
 
 export default function DashboardContainer() {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ export default function DashboardContainer() {
             <DealsClosedVsLost />
           </Col>
           <Col xs={7} className={css(styles.graphContainer)}>
-            <StatusGraph />
+            <RevenueByRegion />
           </Col>
         </Row>
 
@@ -62,7 +63,9 @@ export default function DashboardContainer() {
           <Col className={css(styles.graphContainer)}>
             <GrossRevenueByCompany />
           </Col>
-          <Col className={css(styles.graphContainer)}></Col>
+          <Col className={css(styles.graphContainer)}>
+            <StatusGraph />
+          </Col>
         </Row>
       </Container>
     </>
