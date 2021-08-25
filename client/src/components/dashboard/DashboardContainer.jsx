@@ -39,21 +39,21 @@ export default function DashboardContainer() {
     <>
       <NavigationTabs defaultActiveKey="/dashboard" />
 
-      <Container>
+      <Container className={css(styles.container)}>
         <Row>
-          <Col className={css(styles.graphContainer)}>
+          <Col xs={5} className={css(styles.graphContainer)}>
             <DealsClosedVsLost />
           </Col>
-          <Col className={css(styles.graphContainer)}>
+          <Col xs={7} className={css(styles.graphContainer)}>
             <StatusGraph />
           </Col>
         </Row>
 
         <Row>
-          <Col className={css(styles.graphContainer)}>
+          <Col xs={7} className={css(styles.graphContainer)}>
             <PotentialForRevenueByCompany />
           </Col>
-          <Col className={css(styles.graphContainer)}>
+          <Col xs={5} className={css(styles.graphContainer)}>
             <OpportunityForRevenue />
           </Col>
         </Row>
@@ -70,8 +70,12 @@ export default function DashboardContainer() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    maxWidth: "85vw",
+  },
   graphContainer: {
-    width: "500px",
     border: "1px solid gray",
   },
 });
