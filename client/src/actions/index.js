@@ -85,11 +85,8 @@ export const editCompany = async (
 };
 
 export const getDeals = async (companyId, priceRange) => {
-  let request = "";
+  let request = await axios.get(`/deals`);
 
-  if (!companyId && !priceRange) {
-    return (request = await axios.get(`/deals`));
-  }
   if (companyId && !priceRange) {
     return (request = await axios.get(`/deals?companyId=${companyId}`));
   }

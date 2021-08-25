@@ -24,8 +24,8 @@ export default function FilterDealsByCompany() {
 
   return (
     <>
-      <Col className={css(styles.colCtn)} md={{ span: 3, offset: 1 }}>
-        <Form onChange={(e) => handleSelect(e)}>
+      <Col className={css(styles.colCtn)} md={{ span: 4, offset: 1 }}>
+        <Form className={css(styles.formCtn)} onChange={(e) => handleSelect(e)}>
           <Form.Group
             className={css(styles.filterByCompany)}
             controlId="formCompanyName"
@@ -74,10 +74,14 @@ export default function FilterDealsByCompany() {
 
 const styles = StyleSheet.create({
   filterByCompany: {
-    fontFamily: "Quicksand",
-    fontWeight: "bold",
+    paddingRight: "30px",
   },
   colCtn: {
     paddingLeft: 0,
+  },
+  formCtn: {
+    display: "flex",
+    flexFlow: "row",
+    width: "85vw",
   },
 });
