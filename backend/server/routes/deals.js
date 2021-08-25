@@ -4,9 +4,8 @@ const Deal = require("../models/Deal");
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 
-//gets all deals for a given user
-//add filtering for seeing deals only by company
 router.get("/", async (req, res) => {
+  //gets all deals for a given user
   let query = {};
 
   // filter by company _id
@@ -15,30 +14,16 @@ router.get("/", async (req, res) => {
   }
 
   //filter by deal amount
-  if (req.query.amount) {
-    if (req.query.amount === "<100k") {
-      query = { amount: { $lt: 100000 } };
-    } else if (req.query.amount === "100-200k") {
-      query = { amount: { $gt: 100000, $lt: 200000 } };
-    } else if (req.query.amount === ">200k") {
-      query = { amount: { $gt: 200000 } };
-    } else {
-      query = {};
-    }
+  if (req.query.min && req.query.max) {
+    query = { amount: { $gt: req.query.min, $lt: req.query.max } };
   }
 
   //filter by company and deal amount
-  if (req.query.companyID && req.query.amount) {
-    if (req.query.amount === "<100k") {
-      query = { company: req.query.companyID, amount: { $lt: 100000 } };
-    } else if (req.query.amount === "100-200k") {
-      query = {
-        company: req.query.companyID,
-        amount: { $gt: 100000, $lt: 200000 },
-      };
-    } else if (req.query.amount === ">200k") {
-      query = { company: req.query.companyID, amount: { $gt: 200000 } };
-    }
+  if (req.query.companyID && req.query.min && req.query.max) {
+    query = {
+      company: req.query.companyID,
+      amount: { $gt: req.query.min, $lt: req.query.max },
+    };
   }
 
   try {
