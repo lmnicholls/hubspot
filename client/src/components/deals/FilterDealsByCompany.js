@@ -12,7 +12,6 @@ export default function FilterDealsByCompany() {
   const dispatch = useDispatch();
 
   const handleSelect = (e) => {
-    console.log(e.target.value);
     dispatch(getDeals(e.target.value));
   };
 
@@ -25,7 +24,7 @@ export default function FilterDealsByCompany() {
               <Form.Group className="mb-3" controlId="formCompanyName">
                 <Form.Label>Filter Deals By Company</Form.Label>
                 <Form.Select id="inlineFormCustomSelect" required>
-                  <option value="">Choose A Company...</option>
+                  <option value="">Show All Deals</option>
                   {companyNames?.map((name) => (
                     <option key={companyKey++} value={name}>
                       {name}
