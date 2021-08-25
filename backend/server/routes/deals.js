@@ -4,35 +4,39 @@ const Deal = require("../models/Deal");
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 
-//gets all deals for a given user
-//add filtering for seeing deals only by company
 router.get("/", async (req, res) => {
+  //gets all deals for a given user
   let query = {};
-  //searching company deals by name
-  //add some normilized values to the model vs have front end send _id???
+
+  // filter by company _id
+  if (req.query.companyID) {
+    query = { company: req.query.companyID };
+  }
+
+  //filter by deal amount
+  if (req.query.min && req.query.max) {
+    query = { amount: { $gt: req.query.min, $lt: req.query.max } };
+  }
+
+  //filter by company and deal amount
+  if (req.query.companyID && req.query.min && req.query.max) {
+    query = {
+      company: req.query.companyID,
+      amount: { $gt: req.query.min, $lt: req.query.max },
+    };
+  }
+
   try {
-    if (req.query.companyName) {
-      const company = await Company.find({
-        companyName: req.query.companyName,
-      }).populate({
-        path: "deals",
-        populate: { path: "company" },
+    await Deal.find(query)
+      .sort({ amount: -1 })
+      .populate("company")
+      .exec((err, deals) => {
+        if (err) {
+          return err;
+        } else {
+          res.status(200).send(deals);
+        }
       });
-
-      const companyDeals = company[0].deals;
-
-      res.status(200).send(companyDeals);
-    } else {
-      await Deal.find(query)
-        .populate("company")
-        .exec((err, deals) => {
-          if (err) {
-            return err;
-          } else {
-            res.status(200).send(deals);
-          }
-        });
-    }
   } catch (err) {
     res.status(400).send(err);
   }
