@@ -13,14 +13,14 @@ import PotentialForRevenueByCompany from "./PotentialRevenueByCompany";
 import GrossRevenueByCompany from "./GrossRevenueByCompany";
 
 export default function DashboardContainer() {
-  const dealsFromState = useSelector((state) => state.deals);
-  const [deals, setDeals] = useState(dealsFromState);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getDeals());
   }, [dispatch]);
+
+  const dealsFromState = useSelector((state) => state.deals);
+  const [deals, setDeals] = useState(dealsFromState);
 
   useEffect(() => {
     setDeals(dealsFromState);
