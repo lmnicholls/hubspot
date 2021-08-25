@@ -8,12 +8,9 @@ export default function FilterDealsByCompany() {
   const companies = useSelector((state) => state.companies);
   const companyNames = companies?.map((company) => company.companyName);
   const companyIds = companies?.map((company) => company._id);
-  console.log(companyIds);
 
-  const [company, setCompany] = useState("");
+  const [companyId, setCompanyId] = useState("");
   const [priceRange, setPriceRange] = useState("null");
-
-  console.log(company, priceRange);
 
   let companyKey = 0;
   let PriceKey = 0;
@@ -22,7 +19,7 @@ export default function FilterDealsByCompany() {
 
   const handleSelect = (e) => {
     e.preventDefault();
-    dispatch(getDeals(company, priceRange));
+    dispatch(getDeals(companyId, priceRange));
   };
 
   return (
@@ -36,7 +33,7 @@ export default function FilterDealsByCompany() {
             <Form.Label>Filter Deals By Company</Form.Label>
             <Form.Select
               id="inlineFormCustomSelect"
-              onChange={(e) => setCompany(e.target.value)}
+              onChange={(e) => setCompanyId(e.target.value)}
               required
             >
               <option value="">Show All Deals</option>
