@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import FilterDealsByCompany from "./FilterDealsByCompany";
-import FilterDealsByPrice from "./FilterDealsByPrice";
+import FilterDeals from "./FilterDeals";
+// import FilterDealsByPrice from "./FilterDealsByPrice";
 import { StyleSheet, css } from "aphrodite";
 
 export default function FilterDealsContainer() {
@@ -9,8 +9,7 @@ export default function FilterDealsContainer() {
     <>
       <Container>
         <Row className={css(styles.rowCtn)}>
-          <FilterDealsByCompany />
-          <FilterDealsByPrice />
+          <FilterDeals />
         </Row>
       </Container>
     </>
