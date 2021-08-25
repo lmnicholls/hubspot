@@ -72,19 +72,6 @@ export default function DealsClosedVsLost() {
         valueSuffix: "%",
       },
     },
-    legend: {
-      layout: "vertical",
-      align: "center",
-      verticalAlign: "top",
-      floating: true,
-      borderWidth: 1,
-      backgroundColor: "#FFFFFF",
-      shadow: true,
-      itemMarginTop: 5,
-      itemMarginBottom: 5,
-      x: -250,
-      y: 250,
-    },
     plotOptions: {
       pie: {
         allowPointSelect: true,

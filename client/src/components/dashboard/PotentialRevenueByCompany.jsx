@@ -63,7 +63,7 @@ export default function PotentialForRevenueByCompany() {
     yAxis: {
       min: 0,
       title: {
-        text: "Total fruit consumption",
+        text: "Revenue ($)",
       },
     },
     legend: {

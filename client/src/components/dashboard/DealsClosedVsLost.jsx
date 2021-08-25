@@ -62,14 +62,14 @@ export default function DealsClosedVsLost() {
       layout: "vertical",
       align: "left",
       verticalAlign: "top",
-      floating: true,
+      floating: false,
       borderWidth: 1,
       backgroundColor: "#FFFFFF",
       shadow: true,
       itemMarginTop: 5,
       itemMarginBottom: 5,
       x: 0,
-      y: 40,
+      y: 150,
     },
     plotOptions: {
       pie: {
