@@ -7,18 +7,12 @@ import { useState, useEffect } from "react";
 import CreateCompany from "./CreateCompany";
 import { useDispatch } from "react-redux";
 import { getDeals } from "../../actions";
-//import CompanyUrlModal from "./CompanyURLModal";
 
 export default function CompaniesContainer() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  // const [showURLModal, setShowURLModal] = useState(false);
-
-  // const handleCloseURLModal = () => setShowURLModal(false);
-  // const handleShowURLModal = () => setShowURLModal(true);
 
   const dispatch = useDispatch();
 
