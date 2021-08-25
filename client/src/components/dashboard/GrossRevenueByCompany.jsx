@@ -30,6 +30,10 @@ export default function GrossRevenueByCompany() {
   const chartOptions = {
     chart: {
       type: "column",
+      style: {
+        fontFamily: "Quicksand",
+        fontWeight: "bold",
+      },
     },
     title: {
       text: "Gross Revenue by Company",

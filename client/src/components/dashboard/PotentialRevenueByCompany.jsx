@@ -49,6 +49,10 @@ export default function PotentialForRevenueByCompany() {
   const chartOptions = {
     chart: {
       type: "bar",
+      style: {
+        fontFamily: "Quicksand",
+        fontWeight: "bold",
+      },
     },
     title: {
       text: "Potential Revenue by Company",
@@ -59,7 +63,7 @@ export default function PotentialForRevenueByCompany() {
     yAxis: {
       min: 0,
       title: {
-        text: "Total fruit consumption",
+        text: "Revenue ($)",
       },
     },
     legend: {

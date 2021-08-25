@@ -84,8 +84,10 @@ export const editCompany = async (
   };
 };
 
-export const getDeals = async () => {
-  const request = await axios.get("/deals");
+export const getDeals = async (companyName) => {
+  const request = !companyName
+    ? await axios.get(`/deals`)
+    : await axios.get(`/deals?companyName=${companyName}`);
 
   return {
     type: GET_DEALS,

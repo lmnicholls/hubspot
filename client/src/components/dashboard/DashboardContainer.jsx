@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import NavigationTabs from "../Navigation/NavigationTabs";
 import { StyleSheet, css } from "aphrodite";
 import spinner from "../../images/Spinner.gif";
@@ -11,13 +11,19 @@ import { getDeals } from "../../actions";
 import { Container, Row, Col } from "react-bootstrap";
 import PotentialForRevenueByCompany from "./PotentialRevenueByCompany";
 import GrossRevenueByCompany from "./GrossRevenueByCompany";
+import RevenueByRegion from "./RevenueByRegion";
 
 export default function DashboardContainer() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDeals());
+  }, [dispatch]);
+
   const dealsFromState = useSelector((state) => state.deals);
   const [deals, setDeals] = useState(dealsFromState);
 
   useEffect(() => {
-    getDeals();
     setDeals(dealsFromState);
   }, [dealsFromState]);
 
@@ -34,21 +40,21 @@ export default function DashboardContainer() {
     <>
       <NavigationTabs defaultActiveKey="/dashboard" />
 
-      <Container>
+      <Container className={css(styles.container)}>
         <Row>
-          <Col className={css(styles.graphContainer)}>
+          <Col xs={5} className={css(styles.graphContainer)}>
             <DealsClosedVsLost />
           </Col>
-          <Col className={css(styles.graphContainer)}>
-            <StatusGraph />
+          <Col xs={7} className={css(styles.graphContainer)}>
+            <RevenueByRegion />
           </Col>
         </Row>
 
         <Row>
-          <Col className={css(styles.graphContainer)}>
+          <Col xs={7} className={css(styles.graphContainer)}>
             <PotentialForRevenueByCompany />
           </Col>
-          <Col className={css(styles.graphContainer)}>
+          <Col xs={5} className={css(styles.graphContainer)}>
             <OpportunityForRevenue />
           </Col>
         </Row>
@@ -57,7 +63,9 @@ export default function DashboardContainer() {
           <Col className={css(styles.graphContainer)}>
             <GrossRevenueByCompany />
           </Col>
-          <Col className={css(styles.graphContainer)}></Col>
+          <Col className={css(styles.graphContainer)}>
+            <StatusGraph />
+          </Col>
         </Row>
       </Container>
     </>
@@ -65,8 +73,12 @@ export default function DashboardContainer() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    maxWidth: "85vw",
+  },
   graphContainer: {
-    width: "500px",
     border: "1px solid gray",
   },
 });

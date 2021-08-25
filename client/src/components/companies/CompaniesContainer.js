@@ -3,14 +3,22 @@ import CompaniesListView from "./CompaniesListView";
 import "./companies.css";
 import { Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CreateCompany from "./CreateCompany";
+import { useDispatch } from "react-redux";
+import { getDeals } from "../../actions";
 
 export default function CompaniesContainer() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDeals());
+  }, [dispatch]);
 
   return (
     <>
