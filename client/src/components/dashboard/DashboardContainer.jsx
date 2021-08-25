@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import NavigationTabs from "../Navigation/NavigationTabs";
 import { StyleSheet, css } from "aphrodite";
 import spinner from "../../images/Spinner.gif";
@@ -16,8 +16,13 @@ export default function DashboardContainer() {
   const dealsFromState = useSelector((state) => state.deals);
   const [deals, setDeals] = useState(dealsFromState);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getDeals();
+    dispatch(getDeals());
+  }, [dispatch]);
+
+  useEffect(() => {
     setDeals(dealsFromState);
   }, [dealsFromState]);
 
