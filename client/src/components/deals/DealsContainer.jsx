@@ -8,7 +8,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import "./deals.css";
 import CreateDeal from "./CreateDeal";
-import FilterDealsByCompany from "./FilterDealsByCompany";
+import FilterDealsContainer from "./FilterDealsContainer";
 
 export default function DealsContainer() {
   const [show, setShow] = useState(false);
@@ -25,7 +25,7 @@ export default function DealsContainer() {
             Add Deal
           </Button>
         </div>
-        <FilterDealsByCompany />
+        <FilterDealsContainer />
         <DealsPage />
       </DndProvider>
       <CreateDeal

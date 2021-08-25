@@ -84,15 +84,46 @@ export const editCompany = async (
   };
 };
 
-export const getDeals = async (companyName) => {
-  const request = !companyName
-    ? await axios.get(`/deals`)
-    : await axios.get(`/deals?companyName=${companyName}`);
+export const getDeals = async (companyID, priceRange) => {
+  if (!companyID && !priceRange) {
+    let request = await axios.get(`/deals`);
+    return {
+      type: GET_DEALS,
+      payload: request,
+    };
+  }
 
-  return {
-    type: GET_DEALS,
-    payload: request,
-  };
+  if (companyID && priceRange) {
+    let priceRangeArr = priceRange?.split(",");
+    let request = axios.get(
+      `/deals?companyID=${companyID}&min=${parseInt(
+        priceRangeArr[0]
+      )}&max=${parseInt(priceRangeArr[1])}`
+    );
+    return {
+      type: GET_DEALS,
+      payload: request,
+    };
+  }
+  if (companyID && !priceRange) {
+    let request = await axios.get(`/deals?companyID=${companyID}`);
+    return {
+      type: GET_DEALS,
+      payload: request,
+    };
+  }
+  if (!companyID && priceRange) {
+    let priceRangeArr = priceRange?.split(",");
+    let request = await axios.get(
+      `/deals?min=${parseInt(priceRangeArr[0])}&max=${parseInt(
+        priceRangeArr[1]
+      )}`
+    );
+    return {
+      type: GET_DEALS,
+      payload: request,
+    };
+  }
 };
 
 export const addDeal = async (
