@@ -84,27 +84,46 @@ export const editCompany = async (
   };
 };
 
-export const getDeals = async (companyId, priceRange) => {
-  let request = await axios.get(`/deals`);
-
-  if (companyId && !priceRange) {
-    return (request = await axios.get(`/deals?companyId=${companyId}`));
-  }
-  if (!companyId && priceRange) {
-    return (request = await axios.get(
-      `/deals?min=${priceRange[0]}?max=${priceRange[1]}`
-    ));
-  }
-  if (companyId && priceRange) {
-    return (request = axios.get(
-      `/deals?companyId=${companyId}?min=${priceRange[0]}?max=${priceRange[1]}`
-    ));
+export const getDeals = async (companyID, priceRange) => {
+  if (!companyID && !priceRange) {
+    let request = await axios.get(`/deals`);
+    return {
+      type: GET_DEALS,
+      payload: request,
+    };
   }
 
-  return {
-    type: GET_DEALS,
-    payload: request,
-  };
+  if (companyID && priceRange) {
+    let priceRangeArr = priceRange?.split(",");
+    let request = axios.get(
+      `/deals?companyID=${companyID}&min=${parseInt(
+        priceRangeArr[0]
+      )}&max=${parseInt(priceRangeArr[1])}`
+    );
+    return {
+      type: GET_DEALS,
+      payload: request,
+    };
+  }
+  if (companyID && !priceRange) {
+    let request = await axios.get(`/deals?companyID=${companyID}`);
+    return {
+      type: GET_DEALS,
+      payload: request,
+    };
+  }
+  if (!companyID && priceRange) {
+    let priceRangeArr = priceRange?.split(",");
+    let request = await axios.get(
+      `/deals?min=${parseInt(priceRangeArr[0])}&max=${parseInt(
+        priceRangeArr[1]
+      )}`
+    );
+    return {
+      type: GET_DEALS,
+      payload: request,
+    };
+  }
 };
 
 export const addDeal = async (

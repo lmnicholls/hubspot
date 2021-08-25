@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getDeals } from "../../actions";
@@ -10,22 +10,21 @@ export default function FilterDealsByCompany() {
   const companyIds = companies?.map((company) => company._id);
 
   const [companyId, setCompanyId] = useState("");
-  const [priceRange, setPriceRange] = useState("null");
+  const [priceRange, setPriceRange] = useState(null);
 
   let companyKey = 0;
   let PriceKey = 0;
 
   const dispatch = useDispatch();
 
-  const handleSelect = (e) => {
-    e.preventDefault();
+  useEffect(() => {
     dispatch(getDeals(companyId, priceRange));
-  };
+  }, [companyId, priceRange, dispatch]);
 
   return (
     <>
       <Col className={css(styles.colCtn)} md={{ span: 4, offset: 1 }}>
-        <Form className={css(styles.formCtn)} onChange={(e) => handleSelect(e)}>
+        <Form className={css(styles.formCtn)}>
           <Form.Group
             className={css(styles.filterByCompany)}
             controlId="formCompanyName"
@@ -55,13 +54,13 @@ export default function FilterDealsByCompany() {
               required
             >
               <option value={null}>Show All Prices</option>
-              <option key={PriceKey++} value={[0, 100000]}>
+              <option key={PriceKey++} value="0,100000">
                 $100,000 or less
               </option>
-              <option key={PriceKey++} value={[100001, 200000]}>
+              <option key={PriceKey++} value="100001,200000">
                 $100,000 - $200,000
               </option>
-              <option key={PriceKey++} value={[200001, 2000000000]}>
+              <option key={PriceKey++} value="200001,2000000000">
                 more than $200,000
               </option>
             </Form.Select>
