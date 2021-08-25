@@ -4,6 +4,7 @@ import { StyleSheet, css } from "aphrodite";
 import { useDispatch } from "react-redux";
 import { addCompany } from "../../actions";
 import "./companies.css";
+import axios from "axios";
 
 export default function CreateCompany(props) {
   const dispatch = useDispatch();
@@ -15,6 +16,34 @@ export default function CreateCompany(props) {
   const [postalCode, setPostalCode] = useState("");
   const [logo, setLogo] = useState("");
   const [industry, setIndustry] = useState("");
+  const [companyURL, setCompanyURL] = useState("");
+
+  const apiKey = process.env.REACT_APP_BIGPICTURE_API_KEY;
+
+  const getCompanyInfoFromURL = async (e) => {
+    e.preventDefault();
+
+    return await axios
+      .get(
+        `https://company.bigpicture.io/v1/companies/find?domain=${companyURL}`,
+        {
+          headers: {
+            Authorization: `${apiKey}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        setCompanyName(res.data.name);
+        setPhoneNumber(res.data.site.phoneNumbers[0]);
+        setCity(res.data.geo.city);
+        setState(res.data.geo.state);
+        setPostalCode(res.data.geo.postalCode);
+        setLogo(res.data.logo);
+        setIndustry(res.data.category.industry);
+      })
+      .catch((error) => console.log(error));
+  };
 
   const handleAddCompany = (e) => {
     e.preventDefault();
@@ -42,6 +71,29 @@ export default function CreateCompany(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <Form onSubmit={(e) => getCompanyInfoFromURL(e)}>
+            <Form.Group className="mb-3" controlId="formCompanyURL">
+              <Form.Label className={css(styles.label)}>Company URL</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Company URL"
+                className={css(styles.input)}
+                required
+                onChange={(e) => {
+                  setCompanyURL(e.target.value);
+                }}
+              />
+            </Form.Group>
+
+            <Button
+              variant="primary"
+              className={css(styles.buttons)}
+              type="submit"
+            >
+              Prefill Company Info
+            </Button>
+          </Form>
+
           <Form onSubmit={(e) => handleAddCompany(e)}>
             <Form.Group className="mb-3" controlId="formCompanyName">
               <Form.Label className={css(styles.label)}>
@@ -49,6 +101,7 @@ export default function CreateCompany(props) {
               </Form.Label>
               <Form.Control
                 type="text"
+                value={companyName}
                 placeholder="Enter company name"
                 className={css(styles.input)}
                 required
@@ -79,6 +132,7 @@ export default function CreateCompany(props) {
               </Form.Label>
               <Form.Control
                 type="text"
+                value={phoneNumber}
                 placeholder="Enter phone number"
                 className={css(styles.input)}
                 required
@@ -92,6 +146,7 @@ export default function CreateCompany(props) {
               <Form.Label className={css(styles.label)}>City</Form.Label>
               <Form.Control
                 type="text"
+                value={city}
                 placeholder="Enter city"
                 className={css(styles.input)}
                 onChange={(e) => {
@@ -106,6 +161,7 @@ export default function CreateCompany(props) {
               </Form.Label>
               <Form.Control
                 type="text"
+                value={state}
                 placeholder="Enter state or region"
                 className={css(styles.input)}
                 onChange={(e) => {
@@ -118,6 +174,7 @@ export default function CreateCompany(props) {
               <Form.Label className={css(styles.label)}>Postal Code</Form.Label>
               <Form.Control
                 type="text"
+                value={postalCode}
                 placeholder="Enter postal code"
                 className={css(styles.input)}
                 onChange={(e) => {
@@ -130,6 +187,7 @@ export default function CreateCompany(props) {
               <Form.Label className={css(styles.label)}>Industry</Form.Label>
               <Form.Control
                 type="text"
+                value={industry}
                 placeholder="Enter industry"
                 className={css(styles.input)}
                 onChange={(e) => {
@@ -142,6 +200,7 @@ export default function CreateCompany(props) {
               <Form.Label className={css(styles.label)}>Logo</Form.Label>
               <Form.Control
                 type="text"
+                value={logo}
                 placeholder="Enter company logo"
                 className={css(styles.input)}
                 onChange={(e) => {
@@ -190,5 +249,6 @@ const styles = StyleSheet.create({
     fontFamily: "Quicksand",
     fontWeight: "bold",
     marginRight: "5px",
+    marginBottom: "15px",
   },
 });
