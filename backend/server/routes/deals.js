@@ -9,9 +9,14 @@ mongoose.set("useFindAndModify", false);
 router.get("/", async (req, res) => {
   let query = {};
 
-  //sort by price fliter
+  // filter by company _id
+  if (req.query.companyID) {
+    query = { company: req.query.companyID };
+  }
+
+  //filter by deal amount
   if (req.query.amount) {
-    if (req.query.amount === "<100K") {
+    if (req.query.amount === "<100k") {
       query = { amount: { $lt: 100000 } };
     } else if (req.query.amount === "100-200k") {
       query = { amount: { $gt: 100000, $lt: 200000 } };
@@ -22,29 +27,31 @@ router.get("/", async (req, res) => {
     }
   }
 
-  //searching company deals by name
-  //add some normilized values to the model vs have front end send _id???
-  try {
-    if (req.query.companyName) {
-      query = { companyName: req.query.companyName };
-
-      const company = await Company.find(query).populate("deals");
-
-      const companyDeals = company[0].deals;
-
-      res.status(200).send(companyDeals);
-    } else {
-      await Deal.find(query)
-        .sort({ amount: -1 })
-        .populate("company")
-        .exec((err, deals) => {
-          if (err) {
-            return err;
-          } else {
-            res.status(200).send(deals);
-          }
-        });
+  //filter by company and deal amount
+  if (req.query.companyID && req.query.amount) {
+    if (req.query.amount === "<100k") {
+      query = { company: req.query.companyID, amount: { $lt: 100000 } };
+    } else if (req.query.amount === "100-200k") {
+      query = {
+        company: req.query.companyID,
+        amount: { $gt: 100000, $lt: 200000 },
+      };
+    } else if (req.query.amount === ">200k") {
+      query = { company: req.query.companyID, amount: { $gt: 200000 } };
     }
+  }
+
+  try {
+    await Deal.find(query)
+      .sort({ amount: -1 })
+      .populate("company")
+      .exec((err, deals) => {
+        if (err) {
+          return err;
+        } else {
+          res.status(200).send(deals);
+        }
+      });
   } catch (err) {
     res.status(400).send(err);
   }
