@@ -32,15 +32,6 @@ export default function CompaniesContainer() {
         </Button>
       </div>
       <CompaniesListView />
-      {/* <CompanyUrlModal
-        setShow={setShowURLModal}
-        show={showURLModal}
-        handleClose={() => {
-          handleCloseURLModal();
-          handleShow();
-        }}
-        handleShow={handleShowURLModal}
-      /> */}
       <CreateCompany
         setShow={setShow}
         show={show}
