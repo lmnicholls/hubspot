@@ -14,7 +14,10 @@ router.get("/", async (req, res) => {
     if (req.query.companyName) {
       const company = await Company.find({
         companyName: req.query.companyName,
-      }).populate("deals");
+      }).populate({
+        path: "deals",
+        populate: { path: "company" },
+      });
 
       const companyDeals = company[0].deals;
 
