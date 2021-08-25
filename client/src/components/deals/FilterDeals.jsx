@@ -12,6 +12,9 @@ export default function FilterDealsByCompany() {
   const [companyId, setCompanyId] = useState("");
   const [priceRange, setPriceRange] = useState(null);
 
+  console.log("companyid", companyId);
+  console.log("pricerange", priceRange);
+
   let companyKey = 0;
   let PriceKey = 0;
 
@@ -53,7 +56,7 @@ export default function FilterDealsByCompany() {
               onChange={(e) => setPriceRange(e.target.value)}
               required
             >
-              <option value={null}>Show All Prices</option>
+              <option value={""}>Show All Prices</option>
               <option key={PriceKey++} value="0,100000">
                 $100,000 or less
               </option>
