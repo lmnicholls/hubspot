@@ -3,6 +3,7 @@ import { Form, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getDeals } from "../../actions";
 import { StyleSheet, css } from "aphrodite";
+import moment from "moment";
 
 export default function FilterDealsByCompany() {
   const companies = useSelector((state) => state.companies);
@@ -11,15 +12,24 @@ export default function FilterDealsByCompany() {
 
   const [companyId, setCompanyId] = useState("");
   const [priceRange, setPriceRange] = useState(null);
+  const [dateFilter, setDateFilter] = useState("");
+
+  // find current month
+  console.log(moment(new Date(), "M").format("MMMM"));
+  // find current day
+  console.log(moment(new Date(), "d").format("dddd"));
+  // find current year
+  console.log(moment(new Date(), "Y").format("YYYY"));
 
   let companyKey = 0;
-  let PriceKey = 0;
+  let priceKey = 0;
+  let dateKey = 0;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDeals(companyId, priceRange));
-  }, [companyId, priceRange, dispatch]);
+    dispatch(getDeals(companyId, priceRange, dateFilter));
+  }, [companyId, priceRange, dateFilter, dispatch]);
 
   return (
     <>
@@ -29,13 +39,13 @@ export default function FilterDealsByCompany() {
             className={css(styles.filterByCompany)}
             controlId="formCompanyName"
           >
-            <Form.Label>Filter Deals By Company</Form.Label>
+            <Form.Label>Filter By Company</Form.Label>
             <Form.Select
               id="inlineFormCustomSelect"
               onChange={(e) => setCompanyId(e.target.value)}
               required
             >
-              <option value="">Show All Deals</option>
+              <option value="">Show All Companies</option>
               {companyNames?.map((name, idx) => (
                 <option key={companyKey++} value={companyIds[idx]}>
                   {name}
@@ -47,21 +57,40 @@ export default function FilterDealsByCompany() {
             className={css(styles.filterByPrice)}
             controlId="formPriceRange"
           >
-            <Form.Label>Filter Deals By Price</Form.Label>
+            <Form.Label>Filter By Price</Form.Label>
             <Form.Select
               id="inlineFormCustomSelect"
               onChange={(e) => setPriceRange(e.target.value)}
               required
             >
               <option value={""}>Show All Prices</option>
-              <option key={PriceKey++} value="0,100000">
+              <option key={priceKey++} value="0,100000">
                 $100,000 or less
               </option>
-              <option key={PriceKey++} value="100001,200000">
+              <option key={priceKey++} value="100001,200000">
                 $100,000 - $200,000
               </option>
-              <option key={PriceKey++} value="200001,2000000000">
+              <option key={priceKey++} value="200001,2000000000">
                 more than $200,000
+              </option>
+            </Form.Select>
+          </Form.Group>
+          <Form.Group
+            className={css(styles.filterByPrice)}
+            controlId="formPriceRange"
+          >
+            <Form.Label>Filter By Last Activity Date</Form.Label>
+            <Form.Select
+              id="inlineFormCustomSelect"
+              onChange={(e) => setDateFilter(e.target.value)}
+              required
+            >
+              <option value={""}>Show All Dates</option>
+              <option
+                key={dateKey++}
+                value={moment(new Date(), "M").format("MMMM")}
+              >
+                This month
               </option>
             </Form.Select>
           </Form.Group>
