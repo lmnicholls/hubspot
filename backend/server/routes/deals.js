@@ -94,9 +94,20 @@ router.post("/", async (req, res) => {
       }
     );
 
+    const slackBody = {
+      mkdwn: true,
+      text: `A new deal was added to the board!`,
+      attachments: [
+        {
+          color: "#193753",
+          text: `${savedDeal.name} was *${savedDeal.stage.status}* for $${savedDeal.amount} to ${savedDeal.company.companyName} by ${savedDeal.user}.`,
+        },
+      ],
+    };
+
     await axios.post(
       `https://hooks.slack.com/services/${process.env.SLACK_SECRET}`,
-      { text: "A new deal was just added in Closing Time" }
+      slackBody
     );
 
     res.status(200).send(savedDeal);
@@ -133,6 +144,22 @@ router.put("/:dealID", async (req, res) => {
         }
       }
     ).populate("company");
+
+    const slackBody = {
+      mkdwn: true,
+      text: `A deal status change was added to the board!`,
+      attachments: [
+        {
+          color: "#193753",
+          text: `${dealStatusEdit.name} for ${dealStatusEdit.company.companyName} is now *${dealStatusEdit.stage.status}*`,
+        },
+      ],
+    };
+
+    await axios.post(
+      `https://hooks.slack.com/services/${process.env.SLACK_SECRET}`,
+      slackBody
+    );
 
     res.status(200).send(dealStatusEdit);
   } catch (err) {
