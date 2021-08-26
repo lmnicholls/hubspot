@@ -62,7 +62,7 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    const company = await findById(req.body.companyID);
+    const company = await Company.findById(req.body.companyID);
 
     if (!company) {
       return res.status(404).send("Company not found.");
