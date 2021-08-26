@@ -12,9 +12,6 @@ export default function FilterDealsByCompany() {
   const [companyId, setCompanyId] = useState("");
   const [priceRange, setPriceRange] = useState(null);
 
-  console.log("companyid", companyId);
-  console.log("pricerange", priceRange);
-
   let companyKey = 0;
   let PriceKey = 0;
 
