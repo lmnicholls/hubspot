@@ -100,7 +100,7 @@ router.post("/", async (req, res) => {
       attachments: [
         {
           color: "#193753",
-          text: `${savedDeal.name} was ${savedDeal.stage.status} for $${savedDeal.amount} to ${savedDeal.company.companyName} by ${savedDeal.user}.`,
+          text: `${savedDeal.name} was *${savedDeal.stage.status}* for $${savedDeal.amount} to ${savedDeal.company.companyName} by ${savedDeal.user}.`,
         },
       ],
     };
@@ -151,7 +151,7 @@ router.put("/:dealID", async (req, res) => {
       attachments: [
         {
           color: "#193753",
-          text: `${dealStatusEdit.name} for ${dealStatusEdit.company.companyName} is now ${dealStatusEdit.stage.status}`,
+          text: `${dealStatusEdit.name} for ${dealStatusEdit.company.companyName} is now *${dealStatusEdit.stage.status}*`,
         },
       ],
     };
