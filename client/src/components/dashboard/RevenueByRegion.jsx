@@ -20,8 +20,6 @@ export default function RevenueByRegion() {
       }
     });
 
-  console.log(dealObject);
-
   const chartOptions = {
     chart: {
       type: "column",
