@@ -8,9 +8,14 @@ import "./deals.css";
 export default function CreateDeal(props) {
   const dispatch = useDispatch();
   const companies = useSelector((state) => state.companies);
-  const companyNames = companies?.map((company) => company.companyName);
+  const companyNamesAndIDs = companies?.map((company) => {
+    return {
+      companyName: company.companyName,
+      companyID: company._id,
+    };
+  });
 
-  const [companyName, setCompanyName] = useState("");
+  const [companyID, setCompanyID] = useState("");
   const [user, setUser] = useState("");
   const [name, setName] = useState("");
   const [status, setStatus] = useState("");
@@ -19,9 +24,7 @@ export default function CreateDeal(props) {
 
   const handleAddDeal = (e) => {
     e.preventDefault();
-    dispatch(
-      addDeal(companyName, user, name, status, amount, expectedCloseDate)
-    );
+    dispatch(addDeal(companyID, user, name, status, amount, expectedCloseDate));
     props.handleClose();
   };
 
@@ -44,13 +47,13 @@ export default function CreateDeal(props) {
                 required
                 className={css(styles.input)}
                 onChange={(e) => {
-                  setCompanyName(e.target.value);
+                  setCompanyID(e.target.value);
                 }}
               >
                 <option value="">Choose A Company...</option>
-                {companyNames?.map((name) => (
-                  <option key={companyKey++} value={name}>
-                    {name}
+                {companyNamesAndIDs?.map((company) => (
+                  <option key={companyKey++} value={company.companyID}>
+                    {company.companyName}
                   </option>
                 ))}
               </Form.Select>
