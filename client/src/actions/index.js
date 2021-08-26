@@ -127,7 +127,7 @@ export const getDeals = async (companyID, priceRange) => {
 };
 
 export const addDeal = async (
-  companyName,
+  companyID,
   user,
   name,
   status,
@@ -135,7 +135,7 @@ export const addDeal = async (
   expectedCloseDate
 ) => {
   const request = await axios.post(`/deals`, {
-    companyName,
+    companyID,
     user,
     name,
     status,
