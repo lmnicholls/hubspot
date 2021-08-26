@@ -3,6 +3,7 @@ const Company = require("../models/Company");
 const Deal = require("../models/Deal");
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
+const axios = require("axios");
 
 router.get("/", async (req, res) => {
   //gets all deals for a given user
@@ -93,6 +94,11 @@ router.post("/", async (req, res) => {
           return res.send(err);
         }
       }
+    );
+
+    await axios.post(
+      `https://hooks.slack.com/services/${process.env.SLACK_SECRET}`,
+      { text: "A new deal was just added in Closing Time" }
     );
 
     res.status(200).send(savedDeal);
