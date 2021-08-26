@@ -122,6 +122,7 @@ router.put("/:dealID", async (req, res) => {
     const update = {
       $addToSet: { stageHistory: prevStage },
       stage: { status: req.body.status },
+      lastActivityDate: new Date(),
     };
 
     const dealStatusEdit = await Deal.findByIdAndUpdate(
