@@ -60,10 +60,10 @@ export default function DashboardContainer() {
         </Row>
 
         <Row>
-          <Col className={css(styles.graphContainer)}>
+          <Col xs={5} className={css(styles.graphContainer)}>
             <GrossRevenueByCompany />
           </Col>
-          <Col className={css(styles.graphContainer)}>
+          <Col xs={7} className={css(styles.graphContainer)}>
             <StatusGraph />
           </Col>
         </Row>
