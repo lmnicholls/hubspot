@@ -97,7 +97,7 @@ router.post("/", async (req, res) => {
     );
 
     await axios.post(
-      `https://hooks.slack.com/services/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`,
+      `https://hooks.slack.com/services/${process.env.SLACK_SECRET}`,
       { text: "A new deal was just added in Closing Time" }
     );
 
