@@ -48,9 +48,9 @@ router.get("/", async (req, res) => {
         expectedCloseDate: 1,
         lastActivityDate: 1,
         dateCreated: 1,
-        day: { $dayOfMonth: "$dateCreated" },
-        month: { $month: "$dateCreated" },
-        year: { $year: "$dateCreated" },
+        lastActivityDay: { $dayOfMonth: "$lastActivityDate" },
+        lastActivityMonth: { $month: "$lastActivityDate" },
+        lastActivityYear: { $year: "$lastActivityDate" },
       };
 
       parseDate = await Deal.aggregate([{ $project: project }]);
@@ -58,22 +58,48 @@ router.get("/", async (req, res) => {
       return err;
     }
 
-    if (req.query.filterDay) {
-      const day = req.filter.filterDay;
-      const filterDayResults = filterDate(parseDate, day, "day");
-      return res.status(200).send(filterDayResults);
+    //current day
+    if (req.query.filterDay && req.query.filterMonth && req.query.filterYear) {
+      const filterCurrentDate = parseDate.filter(
+        (deal) =>
+          deal.lastActivityDay === parseInt(req.query.filterDay) &&
+          deal.lastActivityMonth === parseInt(req.query.filterMonth) &&
+          deal.lastActivityYear === parseInt(req.query.filterYear)
+      );
+
+      if (filterCurrentDate.length === 0) {
+        return res.status(404).send("Deals not found. ");
+      }
+
+      return res.status(200).send(filterCurrentDate);
     }
 
-    if (req.query.filterMonth) {
-      const month = req.query.filterMonth;
-      const filterMonthResults = filterDate(parseDate, month, "month");
-      return res.status(200).send(filterMonthResults);
+    //filter current month
+    if (req.query.filterMonth && req.query.filterYear) {
+      const filterCurrentMonth = parseDate.filter(
+        (deal) =>
+          deal.lastActivityMonth === parseInt(req.query.filterMonth) &&
+          deal.lastActivityYear === parseInt(req.query.filterYear)
+      );
+
+      if (filterCurrentMonth.length === 0) {
+        return res.status(404).send("Deals not found. ");
+      }
+
+      return res.send(filterCurrentMonth);
     }
 
+    //filter year
     if (req.query.filterYear) {
-      const year = req.filter.filterYear;
-      const filterYearResults = filterDate(parseDate, year, "year");
-      return res.status(200).send(filterYearResults);
+      const filterYear = parseDate.filter(
+        (deal) => deal.lastActivityYear === parseInt(req.query.filterYear)
+      );
+
+      if (filterYear.length === 0) {
+        return res.status(404).send("Deals not found. ");
+      }
+
+      return res.status(200).send(filterYear);
     }
   }
 
