@@ -84,8 +84,15 @@ export const editCompany = async (
   };
 };
 
-export const getDeals = async (companyID, priceRange, filterDate) => {
-  if (!companyID && !priceRange && !filterDate) {
+export const getDeals = async (
+  companyID,
+  priceRange,
+  filterStatus,
+  filterDay,
+  filterMonth,
+  filterYear
+) => {
+  if (!companyID && !priceRange && !filterStatus) {
     let request = await axios.get(`/deals`);
     return {
       type: GET_DEALS,
@@ -93,26 +100,28 @@ export const getDeals = async (companyID, priceRange, filterDate) => {
     };
   }
 
-  if (companyID && priceRange && filterDate) {
+  if (companyID && priceRange && filterStatus) {
     let priceRangeArr = priceRange?.split(",");
     let request = axios.get(
       `/deals?companyID=${companyID}&min=${parseInt(
         priceRangeArr[0]
-      )}&max=${parseInt(priceRangeArr[1])}&filterDate=${filterDate}`
+      )}&max=${parseInt(
+        priceRangeArr[1]
+      )}&filterDay=${filterDay}&filterMonth=${filterMonth}$filterYear=${filterYear}`
     );
     return {
       type: GET_DEALS,
       payload: request,
     };
   }
-  if (companyID && !priceRange && !filterDate) {
+  if (companyID && !priceRange && !filterStatus) {
     let request = await axios.get(`/deals?companyID=${companyID}`);
     return {
       type: GET_DEALS,
       payload: request,
     };
   }
-  if (!companyID && priceRange && !filterDate) {
+  if (!companyID && priceRange && !filterStatus) {
     let priceRangeArr = priceRange?.split(",");
     let request = await axios.get(
       `/deals?min=${parseInt(priceRangeArr[0])}&max=${parseInt(
@@ -124,14 +133,16 @@ export const getDeals = async (companyID, priceRange, filterDate) => {
       payload: request,
     };
   }
-  if (!companyID && !priceRange && filterDate) {
-    let request = axios.get(`/deals?filterDate=${filterDate}`);
+  if (!companyID && !priceRange && filterStatus) {
+    let request = axios.get(
+      `/deals?filterDay=${filterDay}&filterMonth=${filterMonth}&filterYear=${filterYear}`
+    );
     return {
       type: GET_DEALS,
       payload: request,
     };
   }
-  if (companyID && priceRange && !filterDate) {
+  if (companyID && priceRange && !filterStatus) {
     let priceRangeArr = priceRange?.split(",");
     let request = axios.get(
       `/deals?companyID=${companyID}&min=${parseInt(
@@ -143,28 +154,28 @@ export const getDeals = async (companyID, priceRange, filterDate) => {
       payload: request,
     };
   }
-  if (companyID && !priceRange && filterDate) {
+  if (companyID && !priceRange && filterStatus) {
     let request = axios.get(
-      `/deals?companyID=${companyID}&filterDate=${filterDate}`
+      `/deals?companyID=${companyID}&filterDay=${filterDay}&filterMonth=${filterMonth}&filterYear=${filterYear}`
     );
     return {
       type: GET_DEALS,
       payload: request,
     };
   }
-  if (!companyID && priceRange && filterDate) {
+  if (!companyID && priceRange && filterStatus) {
     let priceRangeArr = priceRange?.split(",");
     let request = axios.get(
       `/deals?min=${parseInt(priceRangeArr[0])}&max=${parseInt(
         priceRangeArr[1]
-      )}&filterDate=${filterDate}`
+      )}&filterDay=${filterDay}&filterMonth=${filterMonth}&filterYear=${filterYear}`
     );
     return {
       type: GET_DEALS,
       payload: request,
     };
   }
-  if (companyID && priceRange && !filterDate) {
+  if (companyID && priceRange && !filterStatus) {
     let priceRangeArr = priceRange?.split(",");
     let request = axios.get(
       `/deals?min=${parseInt(priceRangeArr[0])}&max=${parseInt(

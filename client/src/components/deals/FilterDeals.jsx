@@ -12,14 +12,10 @@ export default function FilterDealsByCompany() {
 
   const [companyId, setCompanyId] = useState("");
   const [priceRange, setPriceRange] = useState(null);
-  const [dateFilter, setDateFilter] = useState("");
-
-  // find current month
-  console.log(moment(new Date(), "M").format("MMMM"));
-  // find current day
-  console.log(moment(new Date(), "d").format("dddd"));
-  // find current year
-  console.log(moment(new Date(), "Y").format("YYYY"));
+  const [filterStatus, setFilterStatus] = useState("");
+  const [filterDay, setFilterDay] = useState("");
+  const [filterMonth, setFilterMonth] = useState("");
+  const [filterYear, setFilterYear] = useState("");
 
   let companyKey = 0;
   let priceKey = 0;
@@ -28,8 +24,44 @@ export default function FilterDealsByCompany() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDeals(companyId, priceRange, dateFilter));
-  }, [companyId, priceRange, dateFilter, dispatch]);
+    dispatch(
+      getDeals(
+        companyId,
+        priceRange,
+        filterStatus,
+        filterDay,
+        filterMonth,
+        filterYear
+      )
+    );
+  }, [
+    companyId,
+    priceRange,
+    filterStatus,
+    filterDay,
+    filterMonth,
+    filterYear,
+    dispatch,
+  ]);
+
+  const handleDateFilter = (value) => {
+    setFilterStatus(value);
+    if (value === "year") {
+      setFilterDay("");
+      setFilterMonth("");
+      setFilterYear(moment(new Date(), "Y").format("YYYY"));
+    }
+    if (value === "month") {
+      setFilterDay("");
+      setFilterMonth(moment(new Date(), "M").format("MM"));
+      setFilterYear(moment(new Date(), "Y").format("YYYY"));
+    }
+    if (value === "day") {
+      setFilterDay(moment(new Date(), "D").format("DD"));
+      setFilterMonth(moment(new Date(), "M").format("MM"));
+      setFilterYear(moment(new Date(), "Y").format("YYYY"));
+    }
+  };
 
   return (
     <>
@@ -43,7 +75,6 @@ export default function FilterDealsByCompany() {
             <Form.Select
               id="inlineFormCustomSelect"
               onChange={(e) => setCompanyId(e.target.value)}
-              required
             >
               <option value="">Show All Companies</option>
               {companyNames?.map((name, idx) => (
@@ -61,7 +92,6 @@ export default function FilterDealsByCompany() {
             <Form.Select
               id="inlineFormCustomSelect"
               onChange={(e) => setPriceRange(e.target.value)}
-              required
             >
               <option value={""}>Show All Prices</option>
               <option key={priceKey++} value="0,100000">
@@ -82,8 +112,7 @@ export default function FilterDealsByCompany() {
             <Form.Label>Filter By Last Activity Date</Form.Label>
             <Form.Select
               id="inlineFormCustomSelect"
-              onChange={(e) => setDateFilter(e.target.value)}
-              required
+              onChange={(e) => handleDateFilter(e.target.value)}
             >
               <option value={""}>Show All Dates</option>
               <option key={dateKey++} value="day">
