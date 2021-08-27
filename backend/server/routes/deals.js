@@ -5,12 +5,6 @@ const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 const axios = require("axios");
 
-//helper methods
-const filterDate = (array, req, property) => {
-  const filterResults = array.filter((d) => d[property] === parseInt(req));
-  return filterResults;
-};
-
 router.get("/", async (req, res) => {
   //gets all deals for a given user
   let query = {};
