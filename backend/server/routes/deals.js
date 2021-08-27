@@ -5,6 +5,12 @@ const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 const axios = require("axios");
 
+//helper methods
+const filterDate = (array, req, date) => {
+  const filterResults = array.filter((d) => d[date] === parseInt(req));
+  return filterResults;
+};
+
 router.get("/", async (req, res) => {
   //gets all deals for a given user
   let query = {};
@@ -53,23 +59,20 @@ router.get("/", async (req, res) => {
     }
 
     if (req.query.filterDay) {
-      const filterDayResults = parseDate.filter(
-        (deal) => deal.day === parseInt(req.query.filterDay)
-      );
+      const day = req.filter.filterDay;
+      const filterDayResults = filterDate(parseDate, day, "day");
       return res.status(200).send(filterDayResults);
     }
 
     if (req.query.filterMonth) {
-      const filterMonthResults = parseDate.filter(
-        (deal) => deal.month === parseInt(req.query.filterMonth)
-      );
+      const month = req.query.filterMonth;
+      const filterMonthResults = filterDate(parseDate, month, "month");
       return res.status(200).send(filterMonthResults);
     }
 
     if (req.query.filterYear) {
-      const filterYearResults = parseDate.filter(
-        (deal) => deal.year === parseInt(req.query.filterYear)
-      );
+      const year = req.filter.filterYear;
+      const filterYearResults = filterDate(parseDate, year, "year");
       return res.status(200).send(filterYearResults);
     }
   }
