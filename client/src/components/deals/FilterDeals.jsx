@@ -86,11 +86,14 @@ export default function FilterDealsByCompany() {
               required
             >
               <option value={""}>Show All Dates</option>
-              <option
-                key={dateKey++}
-                value={moment(new Date(), "M").format("MMMM")}
-              >
+              <option key={dateKey++} value="day">
+                Today
+              </option>
+              <option key={dateKey++} value="month">
                 This month
+              </option>
+              <option key={dateKey++} value="year">
+                This year
               </option>
             </Form.Select>
           </Form.Group>
@@ -102,6 +105,9 @@ export default function FilterDealsByCompany() {
 
 const styles = StyleSheet.create({
   filterByCompany: {
+    paddingRight: "30px",
+  },
+  filterByPrice: {
     paddingRight: "30px",
   },
   colCtn: {
