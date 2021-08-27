@@ -27,6 +27,53 @@ router.get("/", async (req, res) => {
     };
   }
 
+  //filter by date
+  if (req.query.filterDay || req.query.filterMonth || req.query.filterYear) {
+    let parseDate;
+
+    try {
+      const project = {
+        user: 1,
+        name: 1,
+        amount: 1,
+        stage: 1,
+        stageHistory: 1,
+        company: 1,
+        expectedCloseDate: 1,
+        lastActivityDate: 1,
+        dateCreated: 1,
+        day: { $dayOfMonth: "$expectedCloseDate" },
+        month: { $month: "$expectedCloseDate" },
+        year: { $year: "$expectedCloseDate" },
+      };
+
+      parseDate = await Deal.aggregate([{ $project: project }]);
+    } catch (err) {
+      return err;
+    }
+
+    if (req.query.filterDay) {
+      const filterDayResults = parseDate.filter(
+        (deal) => deal.day === parseInt(req.query.filterDay)
+      );
+      return res.status(200).send(filterDayResults);
+    }
+
+    if (req.query.filterMonth) {
+      const filterMonthResults = parseDate.filter(
+        (deal) => deal.month === parseInt(req.query.filterMonth)
+      );
+      return res.status(200).send(filterMonthResults);
+    }
+
+    if (req.query.filterYear) {
+      const filterYearResults = parseDate.filter(
+        (deal) => deal.year === parseInt(req.query.filterYear)
+      );
+      return res.status(200).send(filterYearResults);
+    }
+  }
+
   try {
     await Deal.find(query)
       .sort({ amount: -1 })
