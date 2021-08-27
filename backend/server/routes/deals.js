@@ -6,8 +6,8 @@ mongoose.set("useFindAndModify", false);
 const axios = require("axios");
 
 //helper methods
-const filterDate = (array, req, date) => {
-  const filterResults = array.filter((d) => d[date] === parseInt(req));
+const filterDate = (array, req, property) => {
+  const filterResults = array.filter((d) => d[property] === parseInt(req));
   return filterResults;
 };
 
@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
     };
   }
 
-  //filter by date
+  //filter by date created
   if (req.query.filterDay || req.query.filterMonth || req.query.filterYear) {
     let parseDate;
 
@@ -48,9 +48,9 @@ router.get("/", async (req, res) => {
         expectedCloseDate: 1,
         lastActivityDate: 1,
         dateCreated: 1,
-        day: { $dayOfMonth: "$expectedCloseDate" },
-        month: { $month: "$expectedCloseDate" },
-        year: { $year: "$expectedCloseDate" },
+        day: { $dayOfMonth: "$dateCreated" },
+        month: { $month: "$dateCreated" },
+        year: { $year: "$dateCreated" },
       };
 
       parseDate = await Deal.aggregate([{ $project: project }]);
