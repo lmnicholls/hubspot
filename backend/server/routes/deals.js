@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
 
   //filter by date created
   if (req.query.filterDay || req.query.filterMonth || req.query.filterYear) {
-    let parseDate;
+    let parsedDateDeals;
 
     try {
       const project = {
@@ -47,14 +47,14 @@ router.get("/", async (req, res) => {
         lastActivityYear: { $year: "$lastActivityDate" },
       };
 
-      parseDate = await Deal.aggregate([{ $project: project }]);
+      parsedDateDeals = await Deal.aggregate([{ $project: project }]);
     } catch (err) {
       return err;
     }
 
     //current day
     if (req.query.filterDay && req.query.filterMonth && req.query.filterYear) {
-      const filterCurrentDate = parseDate.filter(
+      const filterCurrentDate = parsedDateDeals.filter(
         (deal) =>
           deal.lastActivityDay === parseInt(req.query.filterDay) &&
           deal.lastActivityMonth === parseInt(req.query.filterMonth) &&
@@ -70,7 +70,7 @@ router.get("/", async (req, res) => {
 
     //filter current month
     if (req.query.filterMonth && req.query.filterYear) {
-      const filterCurrentMonth = parseDate.filter(
+      const filterCurrentMonth = parsedDateDeals.filter(
         (deal) =>
           deal.lastActivityMonth === parseInt(req.query.filterMonth) &&
           deal.lastActivityYear === parseInt(req.query.filterYear)
@@ -80,12 +80,12 @@ router.get("/", async (req, res) => {
         return res.status(404).send("Deals not found. ");
       }
 
-      return res.send(filterCurrentMonth);
+      return res.status(200).send(filterCurrentMonth);
     }
 
     //filter year
     if (req.query.filterYear) {
-      const filterYear = parseDate.filter(
+      const filterYear = parsedDateDeals.filter(
         (deal) => deal.lastActivityYear === parseInt(req.query.filterYear)
       );
 
