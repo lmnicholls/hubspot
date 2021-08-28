@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import URI from "urijs";
+import moment from "moment";
 import {
   GET_COMPANIES,
   GET_ONE_COMPANY,
@@ -84,109 +85,50 @@ export const editCompany = async (
   };
 };
 
-export const getDeals = async (
-  companyID,
-  priceRange,
-  filterStatus,
-  filterDay,
-  filterMonth,
-  filterYear
-) => {
-  if (!companyID && !priceRange && !filterStatus) {
-    let request = await axios.get(`/deals`);
+export const getDeals = async (companyID, priceRange, filterDateBy) => {
+  var uri = new URI("/deals");
+
+  let request = axios.get(uri);
+
+  if (!companyID && !priceRange && !filterDateBy) {
     return {
       type: GET_DEALS,
       payload: request,
     };
   }
 
-  if (companyID && priceRange && filterStatus) {
+  if (companyID) {
+    uri.addQuery("companyID", companyID);
+  }
+
+  if (priceRange) {
     let priceRangeArr = priceRange?.split(",");
-    let request = axios.get(
-      `/deals?companyID=${companyID}&min=${parseInt(
-        priceRangeArr[0]
-      )}&max=${parseInt(
-        priceRangeArr[1]
-      )}&filterDay=${filterDay}&filterMonth=${filterMonth}$filterYear=${filterYear}`
-    );
-    return {
-      type: GET_DEALS,
-      payload: request,
-    };
+    uri.addQuery({ min: priceRangeArr[0], max: priceRangeArr[1] });
   }
-  if (companyID && !priceRange && !filterStatus) {
-    let request = await axios.get(`/deals?companyID=${companyID}`);
-    return {
-      type: GET_DEALS,
-      payload: request,
-    };
+
+  if (filterDateBy) {
+    if (filterDateBy === "year") {
+      let year = moment(new Date(), "YYYY").format("YYYY");
+      console.log(year);
+      uri.addQuery("filterYear", year);
+    }
+    if (filterDateBy === "month") {
+      let year = moment(new Date(), "YYYY").format("YYYY");
+      let month = moment(new Date(), "MM").format("MM");
+      uri.addQuery({ filterYear: year, filterMonth: month });
+    }
+    if (filterDateBy === "day") {
+      let year = moment(new Date(), "YYYY").format("YYYY");
+      let month = moment(new Date(), "MM").format("MM");
+      let day = moment(new Date(), "DD").format("DD");
+      uri.addQuery({ filterYear: year, filterMonth: month, filterDay: day });
+    }
   }
-  if (!companyID && priceRange && !filterStatus) {
-    let priceRangeArr = priceRange?.split(",");
-    let request = await axios.get(
-      `/deals?min=${parseInt(priceRangeArr[0])}&max=${parseInt(
-        priceRangeArr[1]
-      )}`
-    );
-    return {
-      type: GET_DEALS,
-      payload: request,
-    };
-  }
-  if (!companyID && !priceRange && filterStatus) {
-    let request = axios.get(
-      `/deals?filterDay=${filterDay}&filterMonth=${filterMonth}&filterYear=${filterYear}`
-    );
-    return {
-      type: GET_DEALS,
-      payload: request,
-    };
-  }
-  if (companyID && priceRange && !filterStatus) {
-    let priceRangeArr = priceRange?.split(",");
-    let request = axios.get(
-      `/deals?companyID=${companyID}&min=${parseInt(
-        priceRangeArr[0]
-      )}&max=${parseInt(priceRangeArr[1])}`
-    );
-    return {
-      type: GET_DEALS,
-      payload: request,
-    };
-  }
-  if (companyID && !priceRange && filterStatus) {
-    let request = axios.get(
-      `/deals?companyID=${companyID}&filterDay=${filterDay}&filterMonth=${filterMonth}&filterYear=${filterYear}`
-    );
-    return {
-      type: GET_DEALS,
-      payload: request,
-    };
-  }
-  if (!companyID && priceRange && filterStatus) {
-    let priceRangeArr = priceRange?.split(",");
-    let request = axios.get(
-      `/deals?min=${parseInt(priceRangeArr[0])}&max=${parseInt(
-        priceRangeArr[1]
-      )}&filterDay=${filterDay}&filterMonth=${filterMonth}&filterYear=${filterYear}`
-    );
-    return {
-      type: GET_DEALS,
-      payload: request,
-    };
-  }
-  if (companyID && priceRange && !filterStatus) {
-    let priceRangeArr = priceRange?.split(",");
-    let request = axios.get(
-      `/deals?min=${parseInt(priceRangeArr[0])}&max=${parseInt(
-        priceRangeArr[1]
-      )}`
-    );
-    return {
-      type: GET_DEALS,
-      payload: request,
-    };
-  }
+
+  return {
+    type: GET_DEALS,
+    payload: request,
+  };
 };
 
 export const addDeal = async (

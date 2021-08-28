@@ -3,7 +3,6 @@ import { Form, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getDeals } from "../../actions";
 import { StyleSheet, css } from "aphrodite";
-import moment from "moment";
 
 export default function FilterDealsByCompany() {
   const companies = useSelector((state) => state.companies);
@@ -12,10 +11,7 @@ export default function FilterDealsByCompany() {
 
   const [companyId, setCompanyId] = useState("");
   const [priceRange, setPriceRange] = useState(null);
-  const [filterStatus, setFilterStatus] = useState("");
-  const [filterDay, setFilterDay] = useState("");
-  const [filterMonth, setFilterMonth] = useState("");
-  const [filterYear, setFilterYear] = useState("");
+  const [filterDateBy, setFilterDateBy] = useState("");
 
   let companyKey = 0;
   let priceKey = 0;
@@ -24,44 +20,8 @@ export default function FilterDealsByCompany() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      getDeals(
-        companyId,
-        priceRange,
-        filterStatus,
-        filterDay,
-        filterMonth,
-        filterYear
-      )
-    );
-  }, [
-    companyId,
-    priceRange,
-    filterStatus,
-    filterDay,
-    filterMonth,
-    filterYear,
-    dispatch,
-  ]);
-
-  const handleDateFilter = (value) => {
-    setFilterStatus(value);
-    if (value === "year") {
-      setFilterDay("");
-      setFilterMonth("");
-      setFilterYear(moment(new Date(), "Y").format("YYYY"));
-    }
-    if (value === "month") {
-      setFilterDay("");
-      setFilterMonth(moment(new Date(), "M").format("MM"));
-      setFilterYear(moment(new Date(), "Y").format("YYYY"));
-    }
-    if (value === "day") {
-      setFilterDay(moment(new Date(), "D").format("DD"));
-      setFilterMonth(moment(new Date(), "M").format("MM"));
-      setFilterYear(moment(new Date(), "Y").format("YYYY"));
-    }
-  };
+    dispatch(getDeals(companyId, priceRange, filterDateBy));
+  }, [companyId, priceRange, filterDateBy, dispatch]);
 
   return (
     <>
@@ -112,7 +72,7 @@ export default function FilterDealsByCompany() {
             <Form.Label>Filter By Last Activity Date</Form.Label>
             <Form.Select
               id="inlineFormCustomSelect"
-              onChange={(e) => handleDateFilter(e.target.value)}
+              onChange={(e) => setFilterDateBy(e.target.value)}
             >
               <option value={""}>Show All Dates</option>
               <option key={dateKey++} value="day">
