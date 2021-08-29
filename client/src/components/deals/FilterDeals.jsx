@@ -25,7 +25,7 @@ export default function FilterDealsByCompany() {
 
   return (
     <>
-      <Col className={css(styles.colCtn)} md={{ span: 4, offset: 1 }}>
+      <Col className={css(styles.colCtn)} md={{ offset: 1 }}>
         <Form className={css(styles.formCtn)}>
           <Form.Group
             className={css(styles.filterByCompany)}
@@ -99,12 +99,7 @@ const styles = StyleSheet.create({
   filterByPrice: {
     paddingRight: "30px",
   },
-  colCtn: {
-    paddingLeft: 0,
-  },
   formCtn: {
     display: "flex",
-    flexFlow: "row",
-    width: "85vw",
   },
 });

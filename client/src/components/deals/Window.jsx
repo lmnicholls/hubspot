@@ -83,7 +83,7 @@ const Window = ({ show, onClose, item }) => {
             <span className={css(styles.detailLabel)}>
               Last Activity Date:{" "}
             </span>
-            {moment(new Date(item.company.lastActivityDate)).format(
+            {moment(new Date(item.lastActivityDate)).format(
               "ddd, MMM Do, YYYY"
             )}
           </p>

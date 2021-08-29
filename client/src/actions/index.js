@@ -87,7 +87,6 @@ export const editCompany = async (
 
 export const getDeals = async (companyID, priceRange, filterDateBy) => {
   var uri = new URI("/deals");
-
   let request = axios.get(uri);
 
   if (!companyID && !priceRange && !filterDateBy) {
@@ -114,13 +113,13 @@ export const getDeals = async (companyID, priceRange, filterDateBy) => {
     }
     if (filterDateBy === "month") {
       let year = moment(new Date(), "YYYY").format("YYYY");
-      let month = moment(new Date(), "MM").format("MM");
+      let month = moment(new Date(), "M").format("M");
       uri.addQuery({ filterYear: year, filterMonth: month });
     }
     if (filterDateBy === "day") {
       let year = moment(new Date(), "YYYY").format("YYYY");
-      let month = moment(new Date(), "MM").format("MM");
-      let day = moment(new Date(), "DD").format("DD");
+      let month = moment(new Date(), "M").format("M");
+      let day = moment(new Date(), "D").format("D");
       uri.addQuery({ filterYear: year, filterMonth: month, filterDay: day });
     }
   }
