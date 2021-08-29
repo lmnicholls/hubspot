@@ -108,7 +108,6 @@ export const getDeals = async (companyID, priceRange, filterDateBy) => {
   if (filterDateBy) {
     if (filterDateBy === "year") {
       let year = moment(new Date(), "YYYY").format("YYYY");
-      console.log(year);
       uri.addQuery("filterYear", year);
     }
     if (filterDateBy === "month") {

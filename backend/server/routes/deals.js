@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Company = require("../models/Company");
 const Deal = require("../models/Deal");
+const moment = require("moment");
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 
@@ -10,21 +11,41 @@ router.get("/", async (req, res) => {
 
   // filter by company _id
   if (req.query.companyID) {
-    query = { company: req.query.companyID };
+    query.company = req.query.companyID;
   }
 
   //filter by deal amount
   if (req.query.min && req.query.max) {
-    query = { amount: { $gt: req.query.min, $lt: req.query.max } };
+    query.amount = { $gt: req.query.min, $lt: req.query.max };
   }
 
-  //filter by company and deal amount
-  if (req.query.companyID && req.query.min && req.query.max) {
-    query = {
-      company: req.query.companyID,
-      amount: { $gt: req.query.min, $lt: req.query.max },
-    };
+  // filter by date
+  if (req.query.filterDay || req.query.filterMonth || req.query.filterYear) {
+    if (req.query.filterDay && req.query.filterMonth && req.query.filterYear) {
+      let start = moment().startOf("day");
+      let end = moment().endOf("day");
+
+      query.lastActivityDate = { $gte: start, $lte: end };
+    }
+    if (!req.query.filterDay && req.query.filterMonth && req.query.filterYear) {
+      let start = moment().startOf("month");
+      let end = moment().endOf("month");
+
+      query.lastActivityDate = { $gte: start, $lte: end };
+    }
+    if (
+      !req.query.filterDay &&
+      !req.query.filterMonth &&
+      req.query.filterYear
+    ) {
+      let start = moment().startOf("year");
+      let end = moment().endOf("year");
+
+      query.lastActivityDate = { $gte: start, $lte: end };
+    }
   }
+
+  console.log(query);
 
   try {
     await Deal.find(query)
