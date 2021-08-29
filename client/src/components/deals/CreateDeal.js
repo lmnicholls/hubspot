@@ -9,7 +9,10 @@ export default function CreateDeal(props) {
   const dispatch = useDispatch();
   const companies = useSelector((state) => state.companies);
   const companyNamesAndIDs = companies?.map((company) => {
-    return { companyName: company.companyName, companyID: company._id };
+    return {
+      companyName: company.companyName,
+      companyID: company._id,
+    };
   });
 
   const [companyID, setCompanyID] = useState("");

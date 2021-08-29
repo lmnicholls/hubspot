@@ -4,6 +4,7 @@ const Deal = require("../models/Deal");
 const moment = require("moment");
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
+const axios = require("axios");
 
 router.get("/", async (req, res) => {
   //gets all deals for a given user
@@ -81,14 +82,12 @@ router.post("/", async (req, res) => {
     return res.status(400).send("Amount field is required.");
   }
 
-  if (!req.body.companyName) {
-    return res.status(400).send("Company name field is required.");
-  }
-
   try {
-    const company = await Company.findOne({
-      companyName: req.body.companyName,
-    });
+    const company = await Company.findById(req.body.companyID);
+
+    if (!company) {
+      return res.status(404).send("Company not found.");
+    }
 
     const newDeal = new Deal({
       user: req.body.user,
@@ -97,7 +96,7 @@ router.post("/", async (req, res) => {
         status: req.body.status || "Initiated",
       },
       amount: req.body.amount,
-      company: company._id,
+      company: req.body.companyID,
       expectedCloseDate: req.body.expectedCloseDate,
     });
 
@@ -107,13 +106,29 @@ router.post("/", async (req, res) => {
 
     //adds new deal to deals array for company
     await Company.findByIdAndUpdate(
-      company._id,
+      req.body.companyID,
       { $addToSet: { deals: newDeal } },
       (err, company) => {
         if (err) {
           return res.send(err);
         }
       }
+    );
+
+    const slackBody = {
+      mkdwn: true,
+      text: `A new deal was added to the board!`,
+      attachments: [
+        {
+          color: "#193753",
+          text: `${savedDeal.name} was *${savedDeal.stage.status}* for $${savedDeal.amount} to ${savedDeal.company.companyName} by ${savedDeal.user}.`,
+        },
+      ],
+    };
+
+    await axios.post(
+      `https://hooks.slack.com/services/${process.env.SLACK_SECRET}`,
+      slackBody
     );
 
     res.status(200).send(savedDeal);
@@ -150,6 +165,22 @@ router.put("/:dealID", async (req, res) => {
         }
       }
     ).populate("company");
+
+    const slackBody = {
+      mkdwn: true,
+      text: `A deal status change was added to the board!`,
+      attachments: [
+        {
+          color: "#193753",
+          text: `${dealStatusEdit.name} for ${dealStatusEdit.company.companyName} is now *${dealStatusEdit.stage.status}*`,
+        },
+      ],
+    };
+
+    await axios.post(
+      `https://hooks.slack.com/services/${process.env.SLACK_SECRET}`,
+      slackBody
+    );
 
     res.status(200).send(dealStatusEdit);
   } catch (err) {

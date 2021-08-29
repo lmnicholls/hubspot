@@ -94,7 +94,6 @@ router.put("/:companyID", async (req, res) => {
 });
 
 //DELETE company
-//delete count??
 router.delete("/:companyID", async (req, res) => {
   try {
     const company = await Company.findById(req.params.companyID);
