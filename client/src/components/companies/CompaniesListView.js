@@ -5,6 +5,7 @@ import { StyleSheet, css } from "aphrodite";
 import { useHistory } from "react-router-dom";
 import "./companies.css";
 import spinner from "../../images/Spinner.gif";
+import moment from "moment";
 
 export default function CompaniesListView() {
   const companies = useSelector((state) => state.companies);
@@ -69,8 +70,16 @@ export default function CompaniesListView() {
                   {company.companyName}
                 </td>
                 <td>{company.owner}</td>
-                <td>{new Date(company.dateCreated).toDateString()}</td>
-                <td>{new Date(company.lastActivityDate).toDateString()}</td>
+                <td>
+                  {moment(new Date(company.dateCreated)).format(
+                    "ddd, MMM Do, YYYY"
+                  )}
+                </td>
+                <td>
+                  {moment(new Date(company.lastActivityDate)).format(
+                    "ddd, MMM Do, YYYY"
+                  )}
+                </td>
                 <td>{company.phone}</td>
                 <td>{company.city}</td>
                 <td>{company.state_region}</td>

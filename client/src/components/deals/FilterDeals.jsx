@@ -11,31 +11,32 @@ export default function FilterDealsByCompany() {
 
   const [companyId, setCompanyId] = useState("");
   const [priceRange, setPriceRange] = useState(null);
+  const [filterDateBy, setFilterDateBy] = useState("");
 
   let companyKey = 0;
-  let PriceKey = 0;
+  let priceKey = 0;
+  let dateKey = 0;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDeals(companyId, priceRange));
-  }, [companyId, priceRange, dispatch]);
+    dispatch(getDeals(companyId, priceRange, filterDateBy));
+  }, [companyId, priceRange, filterDateBy, dispatch]);
 
   return (
     <>
-      <Col className={css(styles.colCtn)} md={{ span: 4, offset: 1 }}>
+      <Col className={css(styles.colCtn)} md={{ offset: 1 }}>
         <Form className={css(styles.formCtn)}>
           <Form.Group
             className={css(styles.filterByCompany)}
             controlId="formCompanyName"
           >
-            <Form.Label>Filter Deals By Company</Form.Label>
+            <Form.Label>Filter By Company</Form.Label>
             <Form.Select
               id="inlineFormCustomSelect"
               onChange={(e) => setCompanyId(e.target.value)}
-              required
             >
-              <option value="">Show All Deals</option>
+              <option value="">Show All Companies</option>
               {companyNames?.map((name, idx) => (
                 <option key={companyKey++} value={companyIds[idx]}>
                   {name}
@@ -47,21 +48,41 @@ export default function FilterDealsByCompany() {
             className={css(styles.filterByPrice)}
             controlId="formPriceRange"
           >
-            <Form.Label>Filter Deals By Price</Form.Label>
+            <Form.Label>Filter By Price</Form.Label>
             <Form.Select
               id="inlineFormCustomSelect"
               onChange={(e) => setPriceRange(e.target.value)}
-              required
             >
               <option value={""}>Show All Prices</option>
-              <option key={PriceKey++} value="0,100000">
+              <option key={priceKey++} value="0,100000">
                 $100,000 or less
               </option>
-              <option key={PriceKey++} value="100001,200000">
+              <option key={priceKey++} value="100001,200000">
                 $100,000 - $200,000
               </option>
-              <option key={PriceKey++} value="200001,2000000000">
+              <option key={priceKey++} value="200001,2000000000">
                 more than $200,000
+              </option>
+            </Form.Select>
+          </Form.Group>
+          <Form.Group
+            className={css(styles.filterByPrice)}
+            controlId="formPriceRange"
+          >
+            <Form.Label>Filter By Last Activity Date</Form.Label>
+            <Form.Select
+              id="inlineFormCustomSelect"
+              onChange={(e) => setFilterDateBy(e.target.value)}
+            >
+              <option value={""}>Show All Dates</option>
+              <option key={dateKey++} value="day">
+                Today
+              </option>
+              <option key={dateKey++} value="month">
+                This month
+              </option>
+              <option key={dateKey++} value="year">
+                This year
               </option>
             </Form.Select>
           </Form.Group>
@@ -75,12 +96,10 @@ const styles = StyleSheet.create({
   filterByCompany: {
     paddingRight: "30px",
   },
-  colCtn: {
-    paddingLeft: 0,
+  filterByPrice: {
+    paddingRight: "30px",
   },
   formCtn: {
     display: "flex",
-    flexFlow: "row",
-    width: "85vw",
   },
 });

@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import { Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
 import EditDeal from "./EditDeal";
+import moment from "moment";
 
 Modal.setAppElement("#root");
 
@@ -49,9 +50,9 @@ const Window = ({ show, onClose, item }) => {
           </p>
           <p className={css(styles.detail)}>
             <span className={css(styles.detailLabel)}>Close date: </span>
-            {new Date(
-              item.expectedCloseDate.split("T")[0] + ` 00:00`
-            ).toDateString()}
+            {moment(new Date(item.expectedCloseDate)).format(
+              "ddd, MMM Do, YYYY"
+            )}
           </p>
 
           <hr />
@@ -74,13 +75,17 @@ const Window = ({ show, onClose, item }) => {
           </p>
           <p className={css(styles.detail)}>
             <span className={css(styles.detailLabel)}>Date Created: </span>
-            {new Date(item.company.dateCreated).toDateString()}
+            {moment(new Date(item.company.dateCreated)).format(
+              "ddd, MMM Do, YYYY"
+            )}
           </p>
           <p className={css(styles.detail)}>
             <span className={css(styles.detailLabel)}>
               Last Activity Date:{" "}
             </span>
-            {new Date(item.company.lastActivityDate).toDateString()}
+            {moment(new Date(item.lastActivityDate)).format(
+              "ddd, MMM Do, YYYY"
+            )}
           </p>
           <hr />
           <div className={css(styles.btnCtn)}>

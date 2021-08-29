@@ -6,6 +6,7 @@ import { StyleSheet, css } from "aphrodite";
 import { Button, Container, Row, Col, Table } from "react-bootstrap";
 import spinner from "../../images/Spinner.gif";
 import EditCompany from "./EditCompany";
+import moment from "moment";
 
 export default function CompanyPage() {
   const [show, setShow] = useState(false);
@@ -184,10 +185,9 @@ export default function CompanyPage() {
                                         Close Date:
                                       </td>
                                       <td className={css(styles.info)}>
-                                        {new Date(
-                                          deal.expectedCloseDate.split("T")[0] +
-                                            ` 00:00`
-                                        ).toDateString()}
+                                        {moment(
+                                          new Date(deal.expectedCloseDate)
+                                        ).format("ddd, MMM Do, YYYY")}
                                       </td>
                                     </tr>
                                   </tbody>

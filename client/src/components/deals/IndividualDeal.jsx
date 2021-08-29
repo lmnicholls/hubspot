@@ -3,6 +3,7 @@ import { useDrag, useDrop } from "react-dnd";
 import Window from "./Window";
 import ITEM_TYPE from "../../data/types";
 import { StyleSheet, css } from "aphrodite";
+import moment from "moment";
 
 const Item = ({ item, index, moveItem, status }) => {
   const ref = useRef(null);
@@ -69,9 +70,7 @@ const Item = ({ item, index, moveItem, status }) => {
         </p>
         <p className={css(styles.itemComponent)}>
           <span className={css(styles.itemLabel)}>Close Date: </span>
-          {new Date(
-            item.expectedCloseDate.split("T")[0] + ` 00:00`
-          ).toDateString()}
+          {moment(new Date(item.expectedCloseDate)).format("MMM Do, YYYY")}
         </p>
         <p
           className={css(
