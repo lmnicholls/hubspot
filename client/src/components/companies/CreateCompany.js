@@ -68,7 +68,7 @@ export default function CreateCompany(props) {
           <Modal.Title style={{ flex: "1 90%" }} className={css(styles.title)}>
             Create Company
           </Modal.Title>
-          <button className={css(styles.closeBtn)} onClick={props.onClose}>
+          <button className={css(styles.closeBtn)} onClick={props.handleClose}>
             ✕
           </button>
         </Modal.Header>
