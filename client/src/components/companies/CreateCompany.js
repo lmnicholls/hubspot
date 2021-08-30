@@ -64,10 +64,13 @@ export default function CreateCompany(props) {
   return (
     <>
       <Modal show={props.show} onHide={props.handleClose} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title className={css(styles.title)}>
+        <Modal.Header className={css(styles.closeBtnCtn)}>
+          <Modal.Title style={{ flex: "1 90%" }} className={css(styles.title)}>
             Create Company
           </Modal.Title>
+          <button className={css(styles.closeBtn)} onClick={props.onClose}>
+            ✕
+          </button>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={(e) => getCompanyInfoFromURL(e)}>
@@ -86,7 +89,7 @@ export default function CreateCompany(props) {
 
             <Button
               variant="primary"
-              className={css(styles.buttons)}
+              className={css(styles.prefill)}
               type="submit"
             >
               Prefill Company Info
@@ -94,93 +97,106 @@ export default function CreateCompany(props) {
           </Form>
 
           <Form onSubmit={(e) => handleAddCompany(e)}>
-            <Form.Group className="mb-3" controlId="formCompanyName">
-              <Form.Label className={css(styles.label)}>
-                Company Name
-              </Form.Label>
-              <Form.Control
-                type="text"
-                value={companyName}
-                placeholder="Enter company name"
-                className={css(styles.input)}
-                required
-                onChange={(e) => {
-                  setCompanyName(e.target.value);
-                }}
-              />
-            </Form.Group>
+            <div className={css(styles.formRow)}>
+              <Form.Group
+                className={css(styles.formRowItm)}
+                controlId="formCompanyName"
+              >
+                <Form.Label className={css(styles.label)}>
+                  Company Name
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  value={companyName}
+                  placeholder="Enter company name"
+                  className={css(styles.input)}
+                  required
+                  onChange={(e) => {
+                    setCompanyName(e.target.value);
+                  }}
+                />
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formCompanyOwner">
-              <Form.Label className={css(styles.label)}>
-                Company Owner
-              </Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter company owner"
-                className={css(styles.input)}
-                required
-                onChange={(e) => {
-                  setCompanyOwner(e.target.value);
-                }}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formPhoneNumber">
-              <Form.Label className={css(styles.label)}>
-                Phone Number
-              </Form.Label>
-              <Form.Control
-                type="text"
-                value={phoneNumber}
-                placeholder="Enter phone number"
-                className={css(styles.input)}
-                required
-                onChange={(e) => {
-                  setPhoneNumber(e.target.value);
-                }}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formCity">
-              <Form.Label className={css(styles.label)}>City</Form.Label>
-              <Form.Control
-                type="text"
-                value={city}
-                placeholder="Enter city"
-                className={css(styles.input)}
-                onChange={(e) => {
-                  setCity(e.target.value);
-                }}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formStateRegion">
-              <Form.Label className={css(styles.label)}>
-                State/Region
-              </Form.Label>
-              <Form.Control
-                type="text"
-                value={state}
-                placeholder="Enter state or region"
-                className={css(styles.input)}
-                onChange={(e) => {
-                  setState(e.target.value);
-                }}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formPostalCode">
-              <Form.Label className={css(styles.label)}>Postal Code</Form.Label>
-              <Form.Control
-                type="text"
-                value={postalCode}
-                placeholder="Enter postal code"
-                className={css(styles.input)}
-                onChange={(e) => {
-                  setPostalCode(e.target.value);
-                }}
-              />
-            </Form.Group>
+              <Form.Group className="mb-3" controlId="formCompanyOwner">
+                <Form.Label className={css(styles.label)}>
+                  Company Owner
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter company owner"
+                  className={css(styles.input)}
+                  required
+                  onChange={(e) => {
+                    setCompanyOwner(e.target.value);
+                  }}
+                />
+              </Form.Group>
+            </div>
+            <div className={css(styles.formRow)}>
+              <Form.Group
+                className={css(styles.formRowItm)}
+                controlId="formPhoneNumber"
+              >
+                <Form.Label className={css(styles.label)}>
+                  Phone Number
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  value={phoneNumber}
+                  placeholder="Enter phone number"
+                  className={css(styles.input)}
+                  required
+                  onChange={(e) => {
+                    setPhoneNumber(e.target.value);
+                  }}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formCity">
+                <Form.Label className={css(styles.label)}>City</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={city}
+                  placeholder="Enter city"
+                  className={css(styles.input)}
+                  onChange={(e) => {
+                    setCity(e.target.value);
+                  }}
+                />
+              </Form.Group>
+            </div>
+            <div className={css(styles.formRow)}>
+              <Form.Group
+                className={css(styles.formRowItm)}
+                controlId="formStateRegion"
+              >
+                <Form.Label className={css(styles.label)}>
+                  State/Region
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  value={state}
+                  placeholder="Enter state"
+                  className={css(styles.input)}
+                  onChange={(e) => {
+                    setState(e.target.value);
+                  }}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formPostalCode">
+                <Form.Label className={css(styles.label)}>
+                  Postal Code
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  value={postalCode}
+                  placeholder="Enter postal code"
+                  className={css(styles.input)}
+                  onChange={(e) => {
+                    setPostalCode(e.target.value);
+                  }}
+                />
+              </Form.Group>
+            </div>
 
             <Form.Group className="mb-3" controlId="formIndustry">
               <Form.Label className={css(styles.label)}>Industry</Form.Label>
@@ -207,24 +223,24 @@ export default function CreateCompany(props) {
                 }}
               />
             </Form.Group>
-
-            <Button
-              variant="secondary"
-              className={css(styles.buttons)}
-              onClick={props.handleClose}
-            >
-              Close
-            </Button>
-            <Button
-              variant="primary"
-              className={css(styles.buttons)}
-              type="submit"
-            >
-              Save
-            </Button>
+            <div className={css(styles.buttonCtn)}>
+              <Button
+                variant="primary"
+                className={css(styles.save)}
+                type="submit"
+              >
+                Save
+              </Button>
+              <Button
+                variant="secondary"
+                className={css(styles.cancel)}
+                onClick={props.handleClose}
+              >
+                Cancel
+              </Button>
+            </div>
           </Form>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );
@@ -241,13 +257,61 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: "18px",
   },
+  formRow: {
+    display: "flex",
+    flexFlow: "row",
+    justifyContent: "space-between",
+  },
+  formRowItm: {
+    marginRight: "10px",
+    width: "50%",
+  },
   input: {
     fontFamily: "Quicksand",
   },
-  buttons: {
+  buttonCtn: {
+    display: "flex",
+    justifyContent: "flex-end",
     fontFamily: "Quicksand",
+  },
+  prefill: {
     fontWeight: "bold",
+    backgroundColor: "rgb(37, 83, 125)",
+    border: "none",
+    marginBottom: "10px",
+    ":hover": {
+      backgroundColor: "#193753",
+    },
+    fontFamily: "Quicksand",
+  },
+  save: {
     marginRight: "5px",
-    marginBottom: "15px",
+    fontWeight: "bold",
+    backgroundColor: "rgb(37, 83, 125)",
+    border: "none",
+    ":hover": {
+      backgroundColor: "#193753",
+    },
+  },
+  cancel: {
+    fontWeight: "bold",
+    border: "none",
+  },
+  closeBtnCtn: {
+    display: "flex",
+    backgroundColor: "#193753",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    color: "white",
+    fontFamily: "Quicksand",
+  },
+  closeBtn: {
+    fontSize: "20px",
+    color: "white",
+    border: "none",
+    backgroundColor: "#193753",
+    ":hover": {
+      color: "red",
+    },
   },
 });

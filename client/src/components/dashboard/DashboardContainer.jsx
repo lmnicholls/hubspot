@@ -43,7 +43,7 @@ export default function DashboardContainer() {
       <Container className={css(styles.container)}>
         <Row>
           <Col xs={5} className={css(styles.graphContainer)}>
-            <DealsClosedVsLost />
+            <DealsClosedVsLost className={css(styles.chart)} />
           </Col>
           <Col xs={7} className={css(styles.graphContainer)}>
             <RevenueByRegion />
@@ -74,8 +74,7 @@ export default function DashboardContainer() {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: "auto",
-    marginRight: "auto",
+    margin: "auto",
     maxWidth: "85vw",
   },
   graphContainer: {

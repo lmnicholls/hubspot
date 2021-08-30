@@ -44,7 +44,6 @@ export default function StatusGraph() {
     },
     plotOptions: {
       series: {
-        // depth: 20,
         colorByPoint: true,
       },
     },
