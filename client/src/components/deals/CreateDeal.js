@@ -33,8 +33,13 @@ export default function CreateDeal(props) {
   return (
     <>
       <Modal show={props.show} onHide={props.handleClose} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title className={css(styles.title)}>Add A Deal</Modal.Title>
+        <Modal.Header>
+          <Modal.Title style={{ flex: "1 90%" }} className={css(styles.title)}>
+            Add A Deal
+          </Modal.Title>
+          <button className={css(styles.closeBtn)} onClick={props.onClose}>
+            ✕
+          </button>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={(e) => handleAddDeal(e)}>
@@ -133,21 +138,22 @@ export default function CreateDeal(props) {
                 }}
               />
             </Form.Group>
-
-            <Button
-              variant="secondary"
-              className={css(styles.buttons)}
-              onClick={props.handleClose}
-            >
-              Close
-            </Button>
-            <Button
-              variant="primary"
-              className={css(styles.buttons)}
-              type="submit"
-            >
-              Save
-            </Button>
+            <div className={css(styles.buttonCtn)}>
+              <Button
+                variant="primary"
+                className={css(styles.save)}
+                type="submit"
+              >
+                Save
+              </Button>
+              <Button
+                variant="secondary"
+                className={css(styles.cancel)}
+                onClick={props.handleClose}
+              >
+                Cancel
+              </Button>
+            </div>
           </Form>
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
@@ -162,6 +168,25 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
   },
+  buttonCtn: {
+    display: "flex",
+    flexFlow: "row",
+    justifyContent: "flex-end",
+    fontFamily: "Quicksand",
+  },
+  save: {
+    marginRight: "5px",
+    fontWeight: "bold",
+    backgroundColor: "rgb(37, 83, 125)",
+    border: "none",
+    ":hover": {
+      backgroundColor: "#193753",
+    },
+  },
+  cancel: {
+    fontWeight: "bold",
+    border: "none",
+  },
   label: {
     fontFamily: "Quicksand",
     fontWeight: "bold",
@@ -170,9 +195,13 @@ const styles = StyleSheet.create({
   input: {
     fontFamily: "Quicksand",
   },
-  buttons: {
-    fontFamily: "Quicksand",
-    fontWeight: "bold",
-    marginRight: "5px",
+  closeBtn: {
+    fontSize: "20px",
+    color: "white",
+    border: "none",
+    backgroundColor: "#193753",
+    ":hover": {
+      color: "red",
+    },
   },
 });

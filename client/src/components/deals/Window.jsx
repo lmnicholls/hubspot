@@ -91,8 +91,12 @@ const Window = ({ show, onClose, item }) => {
             >
               Edit Deal
             </Button>
-            <Button className={css(styles.close)} onClick={onClose}>
-              Close
+            <Button
+              variant="secondary"
+              className={css(styles.close)}
+              onClick={onClose}
+            >
+              Cancel
             </Button>
           </div>
         </div>
@@ -178,17 +182,18 @@ const styles = StyleSheet.create({
   save: {
     marginRight: "5px",
     fontWeight: "bold",
+    border: "none",
     ":hover": {
       backgroundColor: "#193753",
     },
   },
   close: {
     fontWeight: "bold",
-    backgroundColor: "rgb(37, 83, 125)",
+    backgroundColor: "#6c757d",
     border: "none",
-    ":hover": {
-      backgroundColor: "#193753",
-    },
+    // ":hover": {
+    //   backgroundColor: "#193753",
+    // },
   },
   editDetailButton: {
     marginLeft: "20px",

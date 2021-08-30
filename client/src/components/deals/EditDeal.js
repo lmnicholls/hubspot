@@ -154,7 +154,7 @@ export default function EditDeal(props) {
               className={css(styles.buttons)}
               onClick={props.handleClose}
             >
-              Close
+              Cancel
             </Button>
             <Button
               variant="primary"
