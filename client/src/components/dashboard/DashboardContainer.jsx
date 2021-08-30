@@ -41,6 +41,72 @@ export default function DashboardContainer() {
       <NavigationTabs defaultActiveKey="/dashboard" />
 
       <Container className={css(styles.container)}>
+        <Row className={css(styles.statsCtn)}>
+          <Col className={css(styles.stats, styles.statsTitleCtn)}>
+            <h3 className={css(styles.statsTitle)}>Overall</h3>
+            <h3 className={css(styles.statsTitle)}>Stats</h3>
+          </Col>
+          <Col className={css(styles.stats)}>
+            <h5 className={css(styles.statsTitle)}>Deals Created</h5>
+            <h4 className={css(styles.statsData)}>{deals.length}</h4>
+          </Col>
+          <Col className={css(styles.stats)}>
+            <h5 className={css(styles.statsTitle)}>Deals Won</h5>
+            <h4 className={css(styles.statsData, styles.statsDealsWon)}>
+              {
+                deals.filter(
+                  (deal) => deal.stage.status.toLowerCase() === "closed won"
+                ).length
+              }
+            </h4>
+          </Col>
+          <Col className={css(styles.stats)}>
+            <h5 className={css(styles.statsTitle)}>Revenue Earned</h5>
+            <h4 className={css(styles.statsData, styles.statsDealsWon)}>
+              $
+              {deals
+                ?.filter(
+                  (deal) => deal.stage.status.toLowerCase() === "closed won"
+                )
+                .reduce((a, { amount }) => a + amount || 0, 0)}
+            </h4>
+          </Col>
+          <Col className={css(styles.stats)}>
+            <h5 className={css(styles.statsTitle)}>Potential Revenue</h5>
+            <h4 className={css(styles.statsData, styles.statsDealsPotential)}>
+              $
+              {deals
+                ?.filter(
+                  (deal) =>
+                    deal.stage.status.toLowerCase() === "initiated" ||
+                    deal.stage.status.toLowerCase() === "qualified" ||
+                    deal.stage.status.toLowerCase() === "contract sent"
+                )
+                .reduce((a, { amount }) => a + amount || 0, 0)}
+            </h4>
+          </Col>
+          <Col className={css(styles.stats)}>
+            <h5 className={css(styles.statsTitle)}>Deals Lost</h5>
+            <h4 className={css(styles.statsData, styles.statsDealsLost)}>
+              {
+                deals.filter(
+                  (deal) => deal.stage.status.toLowerCase() === "closed lost"
+                ).length
+              }
+            </h4>
+          </Col>
+          <Col className={css(styles.stats)}>
+            <h5 className={css(styles.statsTitle)}>Revenue Lost</h5>
+            <h4 className={css(styles.statsData, styles.statsDealsLost)}>
+              $
+              {deals
+                ?.filter(
+                  (deal) => deal.stage.status.toLowerCase() === "closed lost"
+                )
+                .reduce((a, { amount }) => a + amount || 0, 0)}
+            </h4>
+          </Col>
+        </Row>
         <Row>
           <Col xs={5} className={css(styles.graphContainer)}>
             <DealsClosedVsLost />
@@ -80,5 +146,35 @@ const styles = StyleSheet.create({
   },
   graphContainer: {
     border: "1px solid gray",
+  },
+  stats: {
+    backgroundColor: "gray",
+    color: "white",
+    fontFamily: "Quicksand",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  statsTitle: {
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  statsTitleCtn: {
+    backgroundColor: "black",
+  },
+  statsData: {
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  statsDealsLost: {
+    color: "#e8a9af",
+  },
+  statsDealsWon: {
+    color: "#abe8a9",
+  },
+  statsDealsPotential: {
+    color: "#f0f0a3",
   },
 });
