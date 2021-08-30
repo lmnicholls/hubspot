@@ -80,5 +80,6 @@ const styles = StyleSheet.create({
   },
   graphContainer: {
     border: "1px solid gray",
+    margin: "auto",
   },
 });
