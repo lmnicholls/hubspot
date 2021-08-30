@@ -85,14 +85,17 @@ const Window = ({ show, onClose, item }) => {
           <hr />
           <div className={css(styles.btnCtn)}>
             <Button
-              variant="info"
               className={css(styles.editDetailButton)}
               onClick={handleShow}
             >
               Edit Deal
             </Button>
-            <Button className={css(styles.close)} onClick={onClose}>
-              Close
+            <Button
+              variant="secondary"
+              className={css(styles.cancel)}
+              onClick={onClose}
+            >
+              Cancel
             </Button>
           </div>
         </div>
@@ -174,20 +177,22 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "flex-end",
     paddingRight: "10px",
+    fontWeight: "bold",
   },
   save: {
     marginRight: "5px",
     fontWeight: "bold",
+    border: "none",
     ":hover": {
       backgroundColor: "#193753",
     },
   },
-  close: {
+  cancel: {
     fontWeight: "bold",
-    backgroundColor: "rgb(37, 83, 125)",
+    backgroundColor: "#6c757d",
     border: "none",
     ":hover": {
-      backgroundColor: "#193753",
+      backgroundColor: "#64686b",
     },
   },
   editDetailButton: {

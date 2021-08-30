@@ -83,7 +83,7 @@ export default function CompanyPage() {
                   </div>
                   <hr />
                   <div className={css(styles.companyDetails)}>
-                    <h6 className={css(styles.heading)}>About this company</h6>
+                    <h6 className={css(styles.heading)}>About this company:</h6>
                     <div className={css(styles.detail)}>
                       <h6 className={css(styles.title)}>Industry</h6>
                       <h6 className={css(styles.info)}>
@@ -197,7 +197,6 @@ export default function CompanyPage() {
                           );
                         })}
                     </Container>
-                    <hr />
                   </div>
                 </div>
               </div>
@@ -232,7 +231,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontWeight: "bold",
-    fontSize: "22px",
+    fontSize: "24px",
     color: "#193753",
   },
   companyDetails: {
@@ -246,14 +245,18 @@ const styles = StyleSheet.create({
   },
   detail: {
     paddingTop: "15px",
+    display: "flex",
+    flexFlow: "row",
   },
   title: {
-    color: "white",
+    color: "rgb(37,83,125)",
     fontWeight: "900",
-    fontSize: "18px",
+    fontSize: "22px",
+    width: "50%",
+    paddingLeft: "20px",
   },
   dealTitle: {
-    color: "white",
+    color: "rgb(37,83,125)",
     fontWeight: "900",
     fontSize: "22px",
   },

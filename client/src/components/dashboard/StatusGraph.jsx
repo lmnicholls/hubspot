@@ -35,8 +35,8 @@ export default function StatusGraph() {
         enabled: true,
         alpha: 15,
         beta: 15,
-        depth: 50,
-        viewDistance: 25,
+        depth: 30,
+        viewDistance: 100,
       },
     },
     title: {
@@ -44,7 +44,6 @@ export default function StatusGraph() {
     },
     plotOptions: {
       series: {
-        depth: 25,
         colorByPoint: true,
       },
     },
