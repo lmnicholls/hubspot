@@ -37,7 +37,7 @@ export default function CreateDeal(props) {
           <Modal.Title style={{ flex: "1 90%" }} className={css(styles.title)}>
             Add A Deal
           </Modal.Title>
-          <button className={css(styles.closeBtn)} onClick={props.onClose}>
+          <button className={css(styles.closeBtn)} onClick={props.handleClose}>
             ✕
           </button>
         </Modal.Header>
