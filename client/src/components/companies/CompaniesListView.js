@@ -87,6 +87,7 @@ export default function CompaniesListView() {
 const styles = StyleSheet.create({
   companyTable: {
     fontFamily: "Quicksand !important",
+    marginBottom: "50px",
   },
   companyRow: {
     ":hover": {

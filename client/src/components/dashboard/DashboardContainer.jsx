@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
   container: {
     margin: "auto",
     maxWidth: "85vw",
+    marginBottom: "50px",
   },
   graphContainer: {
     border: "1px solid gray",
