@@ -168,7 +168,7 @@ export default function CompanyPage() {
                                         Deal State:
                                       </td>
                                       <td className={css(styles.info)}>
-                                        {deal.stage.status}
+                                        {deal.stage.status.toUpperCase()}
                                       </td>
                                     </tr>
                                     <tr>
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontWeight: "bold",
-    fontSize: "24px",
+    fontSize: "20px",
     color: "#193753",
   },
   companyDetails: {
@@ -239,33 +239,37 @@ const styles = StyleSheet.create({
   },
   companyTitle: {
     fontFamily: "Quicksand",
-    fontSize: "36px",
+    fontSize: "32px",
     fontWeight: "bold",
     textAlign: "center",
   },
   detail: {
-    paddingTop: "15px",
+    paddingTop: "8px",
     display: "flex",
     flexFlow: "row",
   },
   title: {
     color: "rgb(37,83,125)",
     fontWeight: "900",
-    fontSize: "22px",
+    fontSize: "18px",
     width: "50%",
     paddingLeft: "20px",
+    marginBottom: "0px",
   },
   dealTitle: {
     color: "rgb(37,83,125)",
     fontWeight: "900",
-    fontSize: "22px",
+    fontSize: "18px",
+    paddingTop: "8px",
+    paddingBottom: "0px",
   },
   info: {
-    fontSize: "22px",
+    fontSize: "18px",
+    paddingBottom: "0px",
   },
   img: {
     width: "40px",
-    paddingRight: "5px",
+    marginRight: "5px",
   },
   editButtonDiv: {
     display: "flex",

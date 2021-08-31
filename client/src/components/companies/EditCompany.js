@@ -38,10 +38,13 @@ export default function EditCompany(props) {
   return (
     <>
       <Modal show={props.show} onHide={props.handleClose} animation={false}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title className={css(styles.title)}>
             Edit Company Details
           </Modal.Title>
+          <button className={css(styles.closeBtn)} onClick={props.handleClose}>
+            ✕
+          </button>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={(e) => handleEditCompany(e)}>
@@ -92,63 +95,82 @@ export default function EditCompany(props) {
                 }}
               />
             </Form.Group>
+            <div className={css(styles.formRow)}>
+              <Form.Group
+                className={css(styles.formRowItm)}
+                controlId="formCity"
+              >
+                <Form.Label className={css(styles.label)}>City</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={city}
+                  placeholder="Enter city"
+                  className={css(styles.input)}
+                  onChange={(e) => {
+                    setCity(e.target.value);
+                  }}
+                />
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formCity">
-              <Form.Label className={css(styles.label)}>City</Form.Label>
-              <Form.Control
-                type="text"
-                value={city}
-                placeholder="Enter city"
-                className={css(styles.input)}
-                onChange={(e) => {
-                  setCity(e.target.value);
-                }}
-              />
-            </Form.Group>
+              <Form.Group
+                className={css(styles.formRowItm)}
+                controlId="formStateRegion"
+              >
+                <Form.Label className={css(styles.label)}>
+                  State/Region
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  value={state}
+                  placeholder="Enter state or region"
+                  className={css(styles.input)}
+                  onChange={(e) => {
+                    setState(e.target.value);
+                  }}
+                />
+              </Form.Group>
+            </div>
+            <div className={css(styles.formRow)}>
+              <Form.Group
+                className={css(styles.formRowItm)}
+                controlId="formPostalCode"
+              >
+                <Form.Label className={css(styles.label, styles.bottomForm)}>
+                  Postal Code
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  value={postalCode}
+                  placeholder="Enter postal code"
+                  className={css(styles.input)}
+                  onChange={(e) => {
+                    setPostalCode(e.target.value);
+                  }}
+                />
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formStateRegion">
-              <Form.Label className={css(styles.label)}>
-                State/Region
-              </Form.Label>
-              <Form.Control
-                type="text"
-                value={state}
-                placeholder="Enter state or region"
-                className={css(styles.input)}
-                onChange={(e) => {
-                  setState(e.target.value);
-                }}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formPostalCode">
-              <Form.Label className={css(styles.label)}>Postal Code</Form.Label>
-              <Form.Control
-                type="text"
-                value={postalCode}
-                placeholder="Enter postal code"
-                className={css(styles.input)}
-                onChange={(e) => {
-                  setPostalCode(e.target.value);
-                }}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formIndustry">
-              <Form.Label className={css(styles.label)}>Industry</Form.Label>
-              <Form.Control
-                type="text"
-                value={industry}
-                placeholder="Enter industry"
-                className={css(styles.input)}
-                onChange={(e) => {
-                  setIndustry(e.target.value);
-                }}
-              />
-            </Form.Group>
-
+              <Form.Group
+                className={css(styles.formRowItm)}
+                controlId="formIndustry"
+              >
+                <Form.Label className={css(styles.label, styles.bottomForm)}>
+                  Industry
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  value={industry}
+                  placeholder="Enter industry"
+                  className={css(styles.input)}
+                  onChange={(e) => {
+                    setIndustry(e.target.value);
+                  }}
+                />
+              </Form.Group>
+            </div>
             <Form.Group className="mb-3" controlId="formLogo">
-              <Form.Label className={css(styles.label)}>Logo</Form.Label>
+              <Form.Label className={css(styles.label, styles.bottomForm)}>
+                Logo
+              </Form.Label>
               <Form.Control
                 type="text"
                 value={logo}
@@ -159,24 +181,24 @@ export default function EditCompany(props) {
                 }}
               />
             </Form.Group>
-
-            <Button
-              variant="secondary"
-              className={css(styles.buttons)}
-              onClick={props.handleClose}
-            >
-              Close
-            </Button>
-            <Button
-              variant="primary"
-              className={css(styles.buttons)}
-              type="submit"
-            >
-              Save Changes
-            </Button>
+            <div className={css(styles.buttonCtn)}>
+              <Button
+                variant="primary"
+                className={css(styles.save)}
+                type="submit"
+              >
+                Save
+              </Button>
+              <Button
+                variant="secondary"
+                className={css(styles.cancel)}
+                onClick={props.handleClose}
+              >
+                Cancel
+              </Button>
+            </div>
           </Form>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );
@@ -188,6 +210,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
   },
+  formRow: {
+    display: "flex",
+    flexFlow: "row",
+    justifyContent: "space-between",
+  },
+  formRowItm: {
+    marginRight: "10px",
+    width: "50%",
+  },
   label: {
     fontFamily: "Quicksand",
     fontWeight: "bold",
@@ -196,9 +227,39 @@ const styles = StyleSheet.create({
   input: {
     fontFamily: "Quicksand",
   },
+  bottomForm: {
+    paddingTop: "12px",
+  },
   buttons: {
     fontFamily: "Quicksand",
     fontWeight: "bold",
     marginRight: "5px",
+  },
+  closeBtn: {
+    fontSize: "20px",
+    color: "white",
+    border: "none",
+    backgroundColor: "#193753",
+    ":hover": {
+      color: "red",
+    },
+  },
+  buttonCtn: {
+    display: "flex",
+    justifyContent: "flex-end",
+    fontFamily: "Quicksand",
+  },
+  save: {
+    marginRight: "5px",
+    fontWeight: "bold",
+    backgroundColor: "rgb(37, 83, 125)",
+    border: "none",
+    ":hover": {
+      backgroundColor: "#193753",
+    },
+  },
+  cancel: {
+    fontWeight: "bold",
+    border: "none",
   },
 });

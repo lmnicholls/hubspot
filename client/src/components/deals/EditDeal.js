@@ -103,40 +103,47 @@ export default function EditDeal(props) {
                 }}
               />
             </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formStatus">
-              <Form.Label className={css(styles.label)}>Status</Form.Label>
-              <Form.Select
-                id="formStatusSelect"
-                value={status.toLowerCase()}
-                required
-                className={css(styles.input)}
-                onChange={(e) => {
-                  setStatus(e.target.value);
-                }}
+            <div className={css(styles.formRow)}>
+              <Form.Group
+                className={css(styles.formRowItm)}
+                controlId="formStatus"
               >
-                <option value="">Choose...</option>
-                <option value="initiated">Initiated</option>
-                <option value="qualified">Qualified</option>
-                <option value="contract sent">Contract Sent</option>
-                <option value="closed won">Closed Won</option>
-                <option value="closed lost">Closed Lost</option>
-              </Form.Select>
-            </Form.Group>
+                <Form.Label className={css(styles.label)}>Status</Form.Label>
+                <Form.Select
+                  id="formStatusSelect"
+                  value={status.toLowerCase()}
+                  required
+                  className={css(styles.input)}
+                  onChange={(e) => {
+                    setStatus(e.target.value);
+                  }}
+                >
+                  <option value="">Choose...</option>
+                  <option value="initiated">Initiated</option>
+                  <option value="qualified">Qualified</option>
+                  <option value="contract sent">Contract Sent</option>
+                  <option value="closed won">Closed Won</option>
+                  <option value="closed lost">Closed Lost</option>
+                </Form.Select>
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formAmount">
-              <Form.Label className={css(styles.label)}>Amount</Form.Label>
-              <Form.Control
-                type="number"
-                required
-                value={amount}
-                placeholder="Deal Amount"
-                className={css(styles.input)}
-                onChange={(e) => {
-                  setAmount(e.target.value);
-                }}
-              />
-            </Form.Group>
+              <Form.Group
+                className={css(styles.formRowItm)}
+                controlId="formAmount"
+              >
+                <Form.Label className={css(styles.label)}>Amount</Form.Label>
+                <Form.Control
+                  type="number"
+                  required
+                  value={amount}
+                  placeholder="Deal Amount"
+                  className={css(styles.input)}
+                  onChange={(e) => {
+                    setAmount(e.target.value);
+                  }}
+                />
+              </Form.Group>
+            </div>
 
             <Form.Group className="mb-3" controlId="formCloseDate">
               <Form.Label className={css(styles.label)}>
@@ -185,6 +192,15 @@ const styles = StyleSheet.create({
   },
   input: {
     fontFamily: "Quicksand",
+  },
+  formRow: {
+    display: "flex",
+    flexFlow: "row",
+    justifyContent: "space-between",
+  },
+  formRowItm: {
+    marginRight: "10px",
+    width: "50%",
   },
   buttonCtn: {
     display: "flex",

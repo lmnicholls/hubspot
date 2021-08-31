@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: "Quicksand",
     fontWeight: "bold",
-    fontSize: "18px",
+    fontSize: "16px",
   },
   formRow: {
     display: "flex",

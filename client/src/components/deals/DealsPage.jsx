@@ -99,7 +99,11 @@ const styles = StyleSheet.create({
   dealRow: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
+    // justifyContent: "center",
+    marginLeft: "10%",
+    marginRight: "10%",
+    overflow: "scroll",
+    marginBottom: "50px",
   },
   columnWrapper: {
     display: "flex",
