@@ -176,7 +176,6 @@ export default function EditCompany(props) {
             </Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );

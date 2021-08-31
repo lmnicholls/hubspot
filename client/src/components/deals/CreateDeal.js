@@ -156,7 +156,6 @@ export default function CreateDeal(props) {
             </div>
           </Form>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );
