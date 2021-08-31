@@ -3,8 +3,15 @@ const Company = require("../models/Company");
 const Deal = require("../models/Deal");
 
 router.get("/", async (req, res) => {
+  const perPage = 10;
+  const page = req.query.page || 1;
+  const query = {};
+
   try {
-    const companies = await Company.find({}).populate("deals");
+    const companies = await Company.find(query)
+      .skip(perPage * page - perPage)
+      .limit(perPage)
+      .populate("deals");
 
     if (companies.length === 0) {
       return res.status(404).send("No companies in database.");
@@ -40,9 +47,9 @@ router.post("/", async (req, res) => {
   });
 
   try {
-    await newCompany.save();
+    const savedNewCompany = await newCompany.save();
 
-    res.status(200).send(newCompany);
+    res.status(200).send(savedNewCompany);
   } catch (err) {
     res.status(400).send(err);
   }
