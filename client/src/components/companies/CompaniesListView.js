@@ -132,7 +132,7 @@ export default function CompaniesListView() {
               <tr
                 key={company._id}
                 className={css(styles.companyRow)}
-                onChange={() => handleCompanyClick(company)}
+                onClick={() => handleCompanyClick(company)}
               >
                 <td>
                   {company.logo === "" ? (
