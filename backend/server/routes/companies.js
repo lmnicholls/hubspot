@@ -3,13 +3,32 @@ const Company = require("../models/Company");
 const Deal = require("../models/Deal");
 
 router.get("/", async (req, res) => {
-  try {
-    const companies = await Company.find({}).populate("deals");
+  const perPage = 2;
+  const page = req.query.page || 1;
+  const query = {};
+  let data = {};
 
-    if (companies.length === 0) {
-      return res.status(404).send("No companies in database.");
-    }
-    res.status(200).send(companies);
+  try {
+    await Company.find(query)
+      .skip(perPage * page - perPage)
+      .limit(perPage)
+      .populate("deals")
+      .exec((err, companies) => {
+        Company.countDocuments(query, (err, count) => {
+          if (err) return err;
+
+          data = {
+            companies: companies,
+            count: count,
+          };
+
+          if (data.count === 0) {
+            return res.status(404).send("No companies in database");
+          } else {
+            res.status(200).send(data);
+          }
+        });
+      });
   } catch (err) {
     res.status(400).send(err);
   }
@@ -40,9 +59,9 @@ router.post("/", async (req, res) => {
   });
 
   try {
-    await newCompany.save();
+    const savedNewCompany = await newCompany.save();
 
-    res.status(200).send(newCompany);
+    res.status(200).send(savedNewCompany);
   } catch (err) {
     res.status(400).send(err);
   }
