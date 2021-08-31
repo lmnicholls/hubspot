@@ -3,7 +3,7 @@ const Company = require("../models/Company");
 const Deal = require("../models/Deal");
 
 router.get("/", async (req, res) => {
-  const perPage = 2;
+  const perPage = 5;
   const page = req.query.page || 1;
   const query = {};
   let data = {};
