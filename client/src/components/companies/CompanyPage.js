@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontWeight: "bold",
-    fontSize: "24px",
+    fontSize: "20px",
     color: "#193753",
   },
   companyDetails: {
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
   },
   companyTitle: {
     fontFamily: "Quicksand",
-    fontSize: "36px",
+    fontSize: "32px",
     fontWeight: "bold",
     textAlign: "center",
   },
@@ -251,17 +251,17 @@ const styles = StyleSheet.create({
   title: {
     color: "rgb(37,83,125)",
     fontWeight: "900",
-    fontSize: "22px",
+    fontSize: "18px",
     width: "50%",
     paddingLeft: "20px",
   },
   dealTitle: {
     color: "rgb(37,83,125)",
     fontWeight: "900",
-    fontSize: "22px",
+    fontSize: "18px",
   },
   info: {
-    fontSize: "22px",
+    fontSize: "18px",
   },
   img: {
     width: "40px",
