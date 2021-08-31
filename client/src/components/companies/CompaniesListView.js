@@ -8,7 +8,7 @@ import spinner from "../../images/Spinner.gif";
 import _ from "underscore";
 
 export default function CompaniesListView() {
-  const companies = useSelector((state) => state.companies);
+  const companies = useSelector((state) => state.companies.companies);
   const history = useHistory();
 
   const [data, setData] = useState(companies);
