@@ -11,8 +11,10 @@ import {
   EDIT_DEAL_DETAILS,
 } from "./names";
 
-export const getCompanies = async () => {
-  const request = await axios.get("/api/companies");
+export const getCompanies = async (queryString) => {
+  const request = queryString
+    ? await axios.get(`/api/companies/${queryString}`)
+    : await axios.get("/api/companies");
 
   return {
     type: GET_COMPANIES,
