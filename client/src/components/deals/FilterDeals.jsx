@@ -74,6 +74,10 @@ export default function FilterDealsByCompany() {
 const styles = StyleSheet.create({
   filterByCompany: {
     paddingRight: "30px",
+    minWidth: "220px",
+  },
+  filterByPrice: {
+    minWidth: "200px",
   },
   colCtn: {
     paddingLeft: 0,
@@ -81,6 +85,5 @@ const styles = StyleSheet.create({
   formCtn: {
     display: "flex",
     flexFlow: "row",
-    width: "85vw",
   },
 });
