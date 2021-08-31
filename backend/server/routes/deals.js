@@ -102,7 +102,7 @@ router.post("/", async (req, res) => {
           color: "#193753",
           author_name: `${savedDeal.name}`,
           text: ` *${savedDeal.stage.status}* for $${savedDeal.amount} to ${savedDeal.company.companyName} by ${savedDeal.user}`,
-          author_link: `https://closing-time.herokuapp.com/`,
+          author_link: `https://closing-time.herokuapp.com/deals`,
         },
       ],
     };
@@ -155,7 +155,7 @@ router.put("/:dealID", async (req, res) => {
           color: "#193753",
           author_name: `${dealStatusEdit.name}`,
           text: ` For ${dealStatusEdit.company.companyName} is now *${dealStatusEdit.stage.status}*`,
-          author_link: "https://closing-time.herokuapp.com/",
+          author_link: "https://closing-time.herokuapp.com/deals",
         },
       ],
     };
