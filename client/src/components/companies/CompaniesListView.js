@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import "./companies.css";
 import spinner from "../../images/Spinner.gif";
 import _ from "underscore";
+import Pagination from "./Pagination";
 
 export default function CompaniesListView() {
   const companies = useSelector((state) => state.companies.companies);
@@ -158,6 +159,7 @@ export default function CompaniesListView() {
           })}
         </tbody>
       </Table>
+      <Pagination />
     </>
   );
 }
