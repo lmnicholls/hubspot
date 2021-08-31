@@ -1,18 +1,36 @@
-import React from "react";
-import { Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Table, Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
 import { useHistory } from "react-router-dom";
 import "./companies.css";
 import spinner from "../../images/Spinner.gif";
+import _ from "underscore";
 
 export default function CompaniesListView() {
   const companies = useSelector((state) => state.companies);
   const history = useHistory();
 
+  const [data, setData] = useState(companies);
+  const [sortType, setSortType] = useState("companyName");
+
   const handleCompanyClick = (company) => {
     history.push(`/companies/${company._id}`);
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setData(companies);
+  }, [dispatch, companies]);
+
+  useEffect(() => {
+    const handleSortArray = (type) => {
+      const sorted = _.sortBy(companies, type);
+      setData(sorted);
+    };
+    handleSortArray(sortType);
+  }, [sortType, companies]);
 
   if (!companies) {
     return (
@@ -29,33 +47,93 @@ export default function CompaniesListView() {
         <thead className={css(styles.thead)}>
           <tr>
             <th>
-              <span>
-                <input type="checkbox" name="" value="" />
-              </span>
+              NAME{" "}
+              <Button
+                type="button"
+                value="companyName"
+                onClick={(e) => setSortType(e.target.value)}
+                className={css(styles.sortButton)}
+              >
+                ⇅
+              </Button>
             </th>
-            <th>NAME</th>
-            <th>COMPANY OWNER</th>
-            <th>CREATE DATE</th>
-            <th>LAST ACTIVITY DATE</th>
+            <th>
+              COMPANY OWNER{" "}
+              <Button
+                type="button"
+                value="owner"
+                onClick={(e) => setSortType(e.target.value)}
+                className={css(styles.sortButton)}
+              >
+                ⇅
+              </Button>
+            </th>
+            <th>
+              CREATE DATE{" "}
+              <Button
+                type="button"
+                value="dateCreated"
+                onClick={(e) => setSortType(e.target.value)}
+                className={css(styles.sortButton)}
+              >
+                ⇅
+              </Button>
+            </th>
+            <th>
+              LAST ACTIVITY DATE{" "}
+              <Button
+                type="button"
+                value="lastActivityDate"
+                onClick={(e) => setSortType(e.target.value)}
+                className={css(styles.sortButton)}
+              >
+                ⇅
+              </Button>
+            </th>
             <th>PHONE NUMBER</th>
-            <th>CITY</th>
-            <th>COUNTRY/REGION</th>
-            <th>INDUSTRY</th>
+            <th>
+              CITY{" "}
+              <Button
+                type="button"
+                value="city"
+                onClick={(e) => setSortType(e.target.value)}
+                className={css(styles.sortButton)}
+              >
+                ⇅
+              </Button>
+            </th>
+            <th>
+              COUNTRY/REGION{" "}
+              <Button
+                type="button"
+                value="state_region"
+                onClick={(e) => setSortType(e.target.value)}
+                className={css(styles.sortButton)}
+              >
+                ⇅
+              </Button>
+            </th>
+            <th>
+              INDUSTRY{" "}
+              <Button
+                type="button"
+                value="industry"
+                onClick={(e) => setSortType(e.target.value)}
+                className={css(styles.sortButton)}
+              >
+                ⇅
+              </Button>
+            </th>
           </tr>
         </thead>
         <tbody>
-          {companies.map((company) => {
+          {data?.map((company) => {
             return (
               <tr
                 key={company._id}
                 className={css(styles.companyRow)}
-                onClick={() => handleCompanyClick(company)}
+                onChange={() => handleCompanyClick(company)}
               >
-                <td>
-                  <span>
-                    <input type="checkbox" name="something" value="" />
-                  </span>
-                </td>
                 <td>
                   {company.logo === "" ? (
                     <span></span>
@@ -113,5 +191,12 @@ const styles = StyleSheet.create({
   },
   spinner: {
     height: "40px",
+  },
+  sortButton: {
+    padding: "0px",
+    border: "none",
+    backgroundColor: "rgb(220, 220, 224)",
+    color: "black",
+    pointer: "cursor",
   },
 });
