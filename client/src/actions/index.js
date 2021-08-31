@@ -12,7 +12,7 @@ import {
 } from "./names";
 
 export const getCompanies = async () => {
-  const request = await axios.get("/companies");
+  const request = await axios.get("/api/companies");
 
   return {
     type: GET_COMPANIES,
@@ -21,7 +21,7 @@ export const getCompanies = async () => {
 };
 
 export const getOneCompany = async (id) => {
-  const request = await axios.get(`/companies/${id}`);
+  const request = await axios.get(`/api/companies/${id}`);
 
   return {
     type: GET_ONE_COMPANY,
@@ -39,7 +39,7 @@ export const addCompany = async (
   logo,
   industry
 ) => {
-  const request = await axios.post(`/companies`, {
+  const request = await axios.post(`/api/companies`, {
     companyName,
     owner,
     phone,
@@ -67,7 +67,7 @@ export const editCompany = async (
   logo,
   industry
 ) => {
-  const request = await axios.put(`/companies/${id}`, {
+  const request = await axios.put(`/api/companies/${id}`, {
     companyName,
     owner,
     phone,
@@ -86,7 +86,7 @@ export const editCompany = async (
 
 export const getDeals = async (companyID, priceRange) => {
   if (!companyID && !priceRange) {
-    let request = await axios.get(`/deals`);
+    let request = await axios.get(`/api/deals`);
     return {
       type: GET_DEALS,
       payload: request,
@@ -96,7 +96,7 @@ export const getDeals = async (companyID, priceRange) => {
   if (companyID && priceRange) {
     let priceRangeArr = priceRange?.split(",");
     let request = axios.get(
-      `/deals?companyID=${companyID}&min=${parseInt(
+      `/api/deals?companyID=${companyID}&min=${parseInt(
         priceRangeArr[0]
       )}&max=${parseInt(priceRangeArr[1])}`
     );
@@ -106,7 +106,7 @@ export const getDeals = async (companyID, priceRange) => {
     };
   }
   if (companyID && !priceRange) {
-    let request = await axios.get(`/deals?companyID=${companyID}`);
+    let request = await axios.get(`/api/deals?companyID=${companyID}`);
     return {
       type: GET_DEALS,
       payload: request,
@@ -115,7 +115,7 @@ export const getDeals = async (companyID, priceRange) => {
   if (!companyID && priceRange) {
     let priceRangeArr = priceRange?.split(",");
     let request = await axios.get(
-      `/deals?min=${parseInt(priceRangeArr[0])}&max=${parseInt(
+      `/api/deals?min=${parseInt(priceRangeArr[0])}&max=${parseInt(
         priceRangeArr[1]
       )}`
     );
@@ -134,7 +134,7 @@ export const addDeal = async (
   amount,
   expectedCloseDate
 ) => {
-  const request = await axios.post(`/deals`, {
+  const request = await axios.post(`/api/deals`, {
     companyID,
     user,
     name,
@@ -150,7 +150,7 @@ export const addDeal = async (
 };
 
 export const editDealStatus = async (id, newStatus) => {
-  const request = await axios.put(`/deals/${id}`, {
+  const request = await axios.put(`/api/deals/${id}`, {
     status: newStatus,
   });
 
@@ -169,7 +169,7 @@ export const editDealDetails = async (
   user,
   expectedCloseDate
 ) => {
-  const request = await axios.put(`/deals/${id}/edit`, {
+  const request = await axios.put(`/api/deals/${id}/edit`, {
     name,
     stage: { status: status },
     amount,
