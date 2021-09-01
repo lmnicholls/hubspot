@@ -53,6 +53,15 @@ const Item = ({ item, index, moveItem, status }) => {
 
   drag(drop(ref));
 
+  const formatter = (value) => {
+    return value
+      .split(" ")
+      .map((word) => {
+        return word[0].toUpperCase() + word.substring(1);
+      })
+      .join(" ");
+  };
+
   return (
     <Fragment>
       <div
@@ -62,7 +71,7 @@ const Item = ({ item, index, moveItem, status }) => {
         onClick={onOpenItem}
       >
         <p className={css(styles.itemTitle, styles.itemComponent)}>
-          {item.name}
+          {formatter(item.name)}
         </p>
         <p className={css(styles.itemComponent)}>
           <span className={css(styles.itemLabel)}> Amount:</span> ${item.amount}

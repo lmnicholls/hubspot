@@ -7,10 +7,15 @@ import "./deals.css";
 
 export default function CreateDeal(props) {
   const dispatch = useDispatch();
-  const companies = useSelector((state) => state.companies.companies);
-  const companyNamesAndIDs = companies?.map((company) => {
+  const companiesList = useSelector((state) => state.companies.companyList);
+  const companyNamesAndIDs = companiesList?.map((company) => {
     return {
-      companyName: company.companyName,
+      companyName: company.companyName
+        .split(" ")
+        .map((word) => {
+          return word[0].toUpperCase() + word.substring(1);
+        })
+        .join(" "),
       companyID: company._id,
     };
   });

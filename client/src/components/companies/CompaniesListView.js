@@ -21,6 +21,15 @@ export default function CompaniesListView() {
 
   const dispatch = useDispatch();
 
+  const formatter = (value) => {
+    return value
+      .split(" ")
+      .map((word) => {
+        return word[0].toUpperCase() + word.substring(1);
+      })
+      .join(" ");
+  };
+
   useEffect(() => {
     dispatch(getCompanies(page, sortType));
   }, [dispatch, page, sortType]);
@@ -137,15 +146,15 @@ export default function CompaniesListView() {
                       alt="logo"
                     ></img>
                   )}
-                  {company.companyName}
+                  {formatter(company.companyName)}
                 </td>
-                <td>{company.owner}</td>
+                <td>{formatter(company.owner)}</td>
                 <td>{new Date(company.dateCreated).toDateString()}</td>
                 <td>{new Date(company.lastActivityDate).toDateString()}</td>
                 <td>{company.phone}</td>
-                <td>{company.city}</td>
-                <td>{company.state_region}</td>
-                <td>{company.industry}</td>
+                <td>{formatter(company.city)}</td>
+                <td>{formatter(company.state_region)}</td>
+                <td>{formatter(company.industry)}</td>
               </tr>
             );
           })}
