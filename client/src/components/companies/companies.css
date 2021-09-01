@@ -39,3 +39,14 @@
 .modal-content {
   border: none !important;
 }
+
+.page-link {
+  color: #25537d !important;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff !important;
+  background-color: #25537d !important;
+  border-color: #25537d !important;
+}

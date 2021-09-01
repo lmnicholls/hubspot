@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Pagination } from "react-bootstrap";
+import { StyleSheet, css } from "aphrodite";
+import "./companies.css";
 
 export default function PageNavigation({ page, setPage }) {
   const numOfCompanies = useSelector((state) => state.companies.count);
@@ -15,6 +17,7 @@ export default function PageNavigation({ page, setPage }) {
         onClick={() => handleClick(number)}
         key={number}
         active={number === page}
+        className={css(styles.pageNumber)}
       >
         {number}
       </Pagination.Item>
@@ -27,8 +30,18 @@ export default function PageNavigation({ page, setPage }) {
   };
 
   return (
-    <Pagination className={"justify-content-center"} size="sm">
+    <Pagination className={css(styles.paginationCtn)} size="sm">
       {items}
     </Pagination>
   );
 }
+
+const styles = StyleSheet.create({
+  pageNumber: {
+    fontFamily: "Quicksand",
+    fontWeight: "bold",
+  },
+  paginationCtn: {
+    justifyContent: "center",
+  },
+});

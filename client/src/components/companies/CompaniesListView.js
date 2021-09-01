@@ -5,7 +5,6 @@ import { StyleSheet, css } from "aphrodite";
 import { useHistory } from "react-router-dom";
 import "./companies.css";
 import spinner from "../../images/Spinner.gif";
-import _ from "underscore";
 import Pagination from "./Pagination";
 import { getCompanies } from "../../actions";
 
