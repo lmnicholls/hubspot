@@ -1,16 +1,12 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getCompanies } from "../../actions";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Pagination } from "react-bootstrap";
 
-export default function PageNavigation() {
+export default function PageNavigation({ page, setPage }) {
   const numOfCompanies = useSelector((state) => state.companies.count);
   const numOfPages = Math.ceil(numOfCompanies / 5);
-  const dispatch = useDispatch();
-  let queryString = `?page=1`;
 
   //Pagination
-  let [activePage, setActivePage] = useState(1);
   let items = [];
 
   for (let number = 1; number <= numOfPages; number++) {
@@ -18,7 +14,7 @@ export default function PageNavigation() {
       <Pagination.Item
         onClick={() => handleClick(number)}
         key={number}
-        active={number === activePage}
+        active={number === page}
       >
         {number}
       </Pagination.Item>
@@ -26,9 +22,8 @@ export default function PageNavigation() {
   }
 
   const handleClick = (pageNumber) => {
-    queryString = `?page=${pageNumber}`;
-    setActivePage(pageNumber);
-    dispatch(getCompanies(queryString));
+    page = pageNumber;
+    setPage(pageNumber);
   };
 
   return (

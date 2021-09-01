@@ -7,9 +7,11 @@ router.get("/", async (req, res) => {
   const page = req.query.page || 1;
   const query = {};
   let data = {};
+  const sortType = req.query.sortType;
 
   try {
     await Company.find(query)
+      .sort({ [sortType]: 1 })
       .skip(perPage * page - perPage)
       .limit(perPage)
       .populate("deals")
