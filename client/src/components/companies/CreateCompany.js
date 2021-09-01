@@ -162,10 +162,7 @@ export default function CreateCompany(props) {
                 />
               </Form.Group>
 
-              <Form.Group
-                className={css(styles.formRowItm)}
-                controlId="formCompanyOwner"
-              >
+              <Form.Group className={"mb-3 w-50"} controlId="formCompanyOwner">
                 <Form.Label className={css(styles.label)}>
                   Company Owner
                 </Form.Label>
