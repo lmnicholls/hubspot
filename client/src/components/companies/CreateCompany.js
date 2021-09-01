@@ -100,7 +100,20 @@ export default function CreateCompany(props) {
           <Modal.Title style={{ flex: "1 90%" }} className={css(styles.title)}>
             Create Company
           </Modal.Title>
-          <button className={css(styles.closeBtn)} onClick={props.handleClose}>
+          <button
+            className={css(styles.closeBtn)}
+            onClick={() => {
+              setCompanyName("");
+              setCompanyOwner("");
+              setPhoneNumber("");
+              setCity("");
+              setState("");
+              setPostalCode("");
+              setLogo("");
+              setIndustry("");
+              props.handleClose();
+            }}
+          >
             ✕
           </button>
         </Modal.Header>
@@ -270,7 +283,17 @@ export default function CreateCompany(props) {
                     <Button
                       variant="secondary"
                       className={css(styles.cancel)}
-                      onClick={props.handleClose}
+                      onClick={() => {
+                        setCompanyName("");
+                        setCompanyOwner("");
+                        setPhoneNumber("");
+                        setCity("");
+                        setState("");
+                        setPostalCode("");
+                        setLogo("");
+                        setIndustry("");
+                        props.handleClose();
+                      }}
                     >
                       Cancel
                     </Button>
