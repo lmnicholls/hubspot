@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
   const page = req.query.page || 1;
   const query = {};
   let data = {};
-  const sortType = req.query.sortType;
+  const sortType = req.query.sortType || "companyName";
 
   try {
     await Company.find(query)
