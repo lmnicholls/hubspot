@@ -66,12 +66,36 @@ export default function CreateCompany(props) {
         industry
       )
     );
+    //clear form after form is submitted
+    setCompanyName("");
+    setCompanyOwner("");
+    setPhoneNumber("");
+    setCity("");
+    setState("");
+    setPostalCode("");
+    setLogo("");
+    setIndustry("");
     props.handleClose();
   };
 
   return (
     <>
-      <Modal show={props.show} onHide={props.handleClose} animation={false}>
+      <Modal
+        show={props.show}
+        onHide={() => {
+          //clear form fields when modal closes
+          setCompanyName("");
+          setCompanyOwner("");
+          setPhoneNumber("");
+          setCity("");
+          setState("");
+          setPostalCode("");
+          setLogo("");
+          setIndustry("");
+          props.handleClose();
+        }}
+        animation={false}
+      >
         <Modal.Header className={css(styles.closeBtnCtn)}>
           <Modal.Title style={{ flex: "1 90%" }} className={css(styles.title)}>
             Create Company
