@@ -5,7 +5,7 @@ import { getDeals } from "../../actions";
 import { StyleSheet, css } from "aphrodite";
 
 export default function FilterDealsByCompany() {
-  const companies = useSelector((state) => state.companies);
+  const companies = useSelector((state) => state.companies.companies);
   const companyNames = companies?.map((company) => company.companyName);
   const companyIds = companies?.map((company) => company._id);
 

@@ -157,7 +157,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
   statsTitle: {
     textAlign: "center",
     fontWeight: "bold",

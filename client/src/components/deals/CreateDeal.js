@@ -7,7 +7,7 @@ import "./deals.css";
 
 export default function CreateDeal(props) {
   const dispatch = useDispatch();
-  const companies = useSelector((state) => state.companies);
+  const companies = useSelector((state) => state.companies.companies);
   const companyNamesAndIDs = companies?.map((company) => {
     return {
       companyName: company.companyName,

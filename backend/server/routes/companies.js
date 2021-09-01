@@ -3,13 +3,15 @@ const Company = require("../models/Company");
 const Deal = require("../models/Deal");
 
 router.get("/", async (req, res) => {
-  const perPage = 2;
+  const perPage = 5;
   const page = req.query.page || 1;
   const query = {};
   let data = {};
+  const sortType = req.query.sortType || "companyName";
 
   try {
     await Company.find(query)
+      .sort({ [sortType]: 1 })
       .skip(perPage * page - perPage)
       .limit(perPage)
       .populate("deals")

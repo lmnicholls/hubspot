@@ -11,8 +11,11 @@ import {
   EDIT_DEAL_DETAILS,
 } from "./names";
 
-export const getCompanies = async () => {
-  const request = await axios.get("/api/companies");
+export const getCompanies = async (page, sortType) => {
+  const request =
+    page || sortType
+      ? await axios.get(`/api/companies?page=${page}&sortType=${sortType}`)
+      : await axios.get("/api/companies");
 
   return {
     type: GET_COMPANIES,

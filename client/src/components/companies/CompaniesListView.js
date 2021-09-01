@@ -5,14 +5,15 @@ import { StyleSheet, css } from "aphrodite";
 import { useHistory } from "react-router-dom";
 import "./companies.css";
 import spinner from "../../images/Spinner.gif";
-import _ from "underscore";
+import Pagination from "./Pagination";
+import { getCompanies } from "../../actions";
 
 export default function CompaniesListView() {
   const companies = useSelector((state) => state.companies.companies);
-  const history = useHistory();
-
-  const [data, setData] = useState(companies);
   const [sortType, setSortType] = useState("companyName");
+  const [page, setPage] = useState(1);
+
+  const history = useHistory();
 
   const handleCompanyClick = (company) => {
     history.push(`/companies/${company._id}`);
@@ -21,16 +22,8 @@ export default function CompaniesListView() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setData(companies);
-  }, [dispatch, companies]);
-
-  useEffect(() => {
-    const handleSortArray = (type) => {
-      const sorted = _.sortBy(companies, type);
-      setData(sorted);
-    };
-    handleSortArray(sortType);
-  }, [sortType, companies]);
+    dispatch(getCompanies(page, sortType));
+  }, [dispatch, page, sortType]);
 
   if (!companies) {
     return (
@@ -127,7 +120,7 @@ export default function CompaniesListView() {
           </tr>
         </thead>
         <tbody>
-          {data?.map((company) => {
+          {companies?.map((company) => {
             return (
               <tr
                 key={company._id}
@@ -158,6 +151,7 @@ export default function CompaniesListView() {
           })}
         </tbody>
       </Table>
+      <Pagination page={page} setPage={setPage} />
     </>
   );
 }

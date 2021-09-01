@@ -15,7 +15,7 @@ export default function CompanyPage() {
 
   const { id } = useParams();
   const currentCompany = useSelector((state) =>
-    state.companies?.find((company) => {
+    state.companies.companies?.find((company) => {
       return company._id === id;
     })
   );
