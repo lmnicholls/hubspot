@@ -83,7 +83,7 @@ export default function CreateCompany(props) {
       <Modal
         show={props.show}
         onHide={() => {
-          //clear form fields when modal closes
+          //clear form fields when modal hides
           setCompanyName("");
           setCompanyOwner("");
           setPhoneNumber("");
