@@ -42,7 +42,7 @@ export default function CreateCompany(props) {
       )
       .then((res) => {
         setCompanyName(res.data.name);
-        setPhoneNumber(res.data.site.phoneNumbers[0]);
+        setPhoneNumber(res.data.phone);
         setCity(res.data.geo.city);
         setState(res.data.geo.state);
         setPostalCode(res.data.geo.postalCode);
@@ -162,19 +162,23 @@ export default function CreateCompany(props) {
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formCompanyOwner">
+              <Form.Group className={"mb-3 w-50"} controlId="formCompanyOwner">
                 <Form.Label className={css(styles.label)}>
                   Company Owner
                 </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter company owner"
-                  className={css(styles.input)}
+                <Form.Select
+                  id="formStatusSelect"
                   required
+                  className={css(styles.input)}
                   onChange={(e) => {
                     setCompanyOwner(e.target.value);
                   }}
-                />
+                >
+                  <option value="">Choose...</option>
+                  <option value="Danna">Danna</option>
+                  <option value="Jeremy">Jeremy</option>
+                  <option value="Lauren">Lauren</option>
+                </Form.Select>
               </Form.Group>
             </div>
             <div className={css(styles.formRow)}>
