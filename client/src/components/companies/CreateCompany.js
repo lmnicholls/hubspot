@@ -41,8 +41,9 @@ export default function CreateCompany(props) {
         }
       )
       .then((res) => {
+        console.log(res.data);
         setCompanyName(res.data.name);
-        setPhoneNumber(res.data.site.phoneNumbers[0]);
+        setPhoneNumber(res.data.phone);
         setCity(res.data.geo.city);
         setState(res.data.geo.state);
         setPostalCode(res.data.geo.postalCode);
