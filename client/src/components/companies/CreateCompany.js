@@ -1,4 +1,12 @@
-import { Button, Modal, Form } from "react-bootstrap";
+import {
+  Button,
+  Modal,
+  Form,
+  Container,
+  Row,
+  Col,
+  Image,
+} from "react-bootstrap";
 import React, { useState } from "react";
 import { StyleSheet, css } from "aphrodite";
 import { useDispatch } from "react-redux";
@@ -58,17 +66,54 @@ export default function CreateCompany(props) {
         industry
       )
     );
+    //clear form after form is submitted
+    setCompanyName("");
+    setCompanyOwner("");
+    setPhoneNumber("");
+    setCity("");
+    setState("");
+    setPostalCode("");
+    setLogo("");
+    setIndustry("");
     props.handleClose();
   };
 
   return (
     <>
-      <Modal show={props.show} onHide={props.handleClose} animation={false}>
+      <Modal
+        show={props.show}
+        onHide={() => {
+          //clear form fields when modal hides
+          setCompanyName("");
+          setCompanyOwner("");
+          setPhoneNumber("");
+          setCity("");
+          setState("");
+          setPostalCode("");
+          setLogo("");
+          setIndustry("");
+          props.handleClose();
+        }}
+        animation={false}
+      >
         <Modal.Header className={css(styles.closeBtnCtn)}>
           <Modal.Title style={{ flex: "1 90%" }} className={css(styles.title)}>
             Create Company
           </Modal.Title>
-          <button className={css(styles.closeBtn)} onClick={props.handleClose}>
+          <button
+            className={css(styles.closeBtn)}
+            onClick={() => {
+              setCompanyName("");
+              setCompanyOwner("");
+              setPhoneNumber("");
+              setCity("");
+              setState("");
+              setPostalCode("");
+              setLogo("");
+              setIndustry("");
+              props.handleClose();
+            }}
+          >
             ✕
           </button>
         </Modal.Header>
@@ -197,7 +242,6 @@ export default function CreateCompany(props) {
                 />
               </Form.Group>
             </div>
-
             <Form.Group className="mb-3" controlId="formIndustry">
               <Form.Label className={css(styles.label)}>Industry</Form.Label>
               <Form.Control
@@ -210,7 +254,6 @@ export default function CreateCompany(props) {
                 }}
               />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formLogo">
               <Form.Label className={css(styles.label)}>Logo</Form.Label>
               <Form.Control
@@ -223,22 +266,41 @@ export default function CreateCompany(props) {
                 }}
               />
             </Form.Group>
-            <div className={css(styles.buttonCtn)}>
-              <Button
-                variant="primary"
-                className={css(styles.save)}
-                type="submit"
-              >
-                Save
-              </Button>
-              <Button
-                variant="secondary"
-                className={css(styles.cancel)}
-                onClick={props.handleClose}
-              >
-                Cancel
-              </Button>
-            </div>
+            <Container>
+              <Row>
+                <Col xs={6} md={6}>
+                  {logo && <Image src={logo} thumbnail />}
+                </Col>
+                <Col xs={6} md={6}>
+                  <div className={css(styles.buttonCtn)}>
+                    <Button
+                      variant="primary"
+                      className={css(styles.save)}
+                      type="submit"
+                    >
+                      Save
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      className={css(styles.cancel)}
+                      onClick={() => {
+                        setCompanyName("");
+                        setCompanyOwner("");
+                        setPhoneNumber("");
+                        setCity("");
+                        setState("");
+                        setPostalCode("");
+                        setLogo("");
+                        setIndustry("");
+                        props.handleClose();
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
           </Form>
         </Modal.Body>
       </Modal>
