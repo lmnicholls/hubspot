@@ -20,6 +20,8 @@ export default function DashboardContainer() {
     dispatch(getDeals());
   }, [dispatch]);
 
+  window.dispatchEvent(new Event("resize"));
+
   const dealsFromState = useSelector((state) => state.deals);
   const [deals, setDeals] = useState(dealsFromState);
 
