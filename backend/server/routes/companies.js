@@ -8,6 +8,7 @@ router.get("/", async (req, res) => {
   const query = {};
   let data = {};
   const sortType = req.query.sortType || "companyName";
+  const companyList = await Company.find({}, { companyName: 1 });
 
   try {
     await Company.find(query)
@@ -21,6 +22,7 @@ router.get("/", async (req, res) => {
 
           data = {
             companies: companies,
+            companyList: companyList,
             count: count,
           };
 
