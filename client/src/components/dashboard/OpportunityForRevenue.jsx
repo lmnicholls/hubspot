@@ -59,6 +59,11 @@ export default function DealsClosedVsLost() {
         alpha: 45,
         beta: 0,
       },
+      events: {
+        load() {
+          setTimeout(this.reflow.bind(this), 0);
+        },
+      },
     },
     title: {
       verticalAlign: "top",

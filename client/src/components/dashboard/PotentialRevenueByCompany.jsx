@@ -53,6 +53,11 @@ export default function PotentialForRevenueByCompany() {
         fontFamily: "Quicksand",
         fontWeight: "bold",
       },
+      events: {
+        load() {
+          setTimeout(this.reflow.bind(this), 0);
+        },
+      },
     },
     title: {
       text: "Potential Revenue by Company",

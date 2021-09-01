@@ -27,6 +27,11 @@ export default function RevenueByRegion() {
         fontFamily: "Quicksand",
         fontWeight: "bold",
       },
+      events: {
+        load() {
+          setTimeout(this.reflow.bind(this), 0);
+        },
+      },
     },
     title: {
       text: "Gross Revenue by Region",
