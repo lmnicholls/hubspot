@@ -45,6 +45,11 @@ export default function DealsClosedVsLost() {
         fontFamily: "Quicksand",
         fontWeight: "bold",
       },
+      events: {
+        load() {
+          setTimeout(this.reflow.bind(this), 0);
+        },
+      },
     },
     title: {
       verticalAlign: "top",

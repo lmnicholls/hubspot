@@ -31,6 +31,11 @@ export default function StatusGraph() {
         fontFamily: "Quicksand",
         fontWeight: "bold",
       },
+      events: {
+        load() {
+          setTimeout(this.reflow.bind(this), 0);
+        },
+      },
       options3d: {
         enabled: true,
         alpha: 15,
