@@ -7,11 +7,10 @@ import "./deals.css";
 
 export default function EditDeal(props) {
   const dispatch = useDispatch();
-  const companies = useSelector((state) => state.companies.companies);
+  const companies = useSelector((state) => state.companies.companyList);
   const companyNames = companies?.map((company) => company.companyName);
 
   const dealID = props.dealID;
-
   const [companyName, setCompanyName] = useState(props.companyName);
   const [user, setUser] = useState(props.user);
   const [name, setName] = useState(props.name);
@@ -59,7 +58,7 @@ export default function EditDeal(props) {
               <Form.Select
                 id="inlineFormCustomSelect"
                 required
-                value={companyName}
+                defaultValue={companyName}
                 className={css(styles.input)}
                 onChange={(e) => {
                   setCompanyName(e.target.value);
@@ -75,12 +74,10 @@ export default function EditDeal(props) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formCompanyOwner">
-              <Form.Label className={css(styles.label)}>
-                Company Owner
-              </Form.Label>
+              <Form.Label className={css(styles.label)}>Deal Owner</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter company owner"
+                placeholder="Enter deal owner"
                 value={user}
                 className={css(styles.input)}
                 required
