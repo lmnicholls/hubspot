@@ -6,6 +6,7 @@ import { StyleSheet, css } from "aphrodite";
 import EditDeal from "./EditDeal";
 import {useDispatch} from 'react-redux'
 import {deleteDeal} from '../../actions/index'
+import { getDeals } from "../../actions";
 
 Modal.setAppElement("#root");
 
@@ -19,6 +20,8 @@ const Window = ({ show, onClose, item }) => {
 
   const handleDeleteButton = () => {
     dispatch(deleteDeal(item._id))
+    dispatch(getDeals()); 
+    onClose(); 
   }
 
   return (
