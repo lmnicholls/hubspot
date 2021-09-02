@@ -58,7 +58,7 @@ export default function FilterDealsByCompany() {
                 $100,000 or less
               </option>
               <option key={PriceKey++} value="100001,200000">
-                $100,000 - $200,000
+                $100,001 - $200,000
               </option>
               <option key={PriceKey++} value="200001,2000000000">
                 more than $200,000
