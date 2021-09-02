@@ -4,6 +4,8 @@ import Modal from "react-modal";
 import { Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
 import EditDeal from "./EditDeal";
+import {useDispatch} from 'react-redux'
+import {deleteDeal} from '../../actions/index'
 
 Modal.setAppElement("#root");
 
@@ -12,6 +14,12 @@ const Window = ({ show, onClose, item }) => {
 
   const handleClose = () => setShowEdit(false);
   const handleShow = () => setShowEdit(true);
+
+  const dispatch = useDispatch(); 
+
+  const handleDeleteButton = () => {
+    dispatch(deleteDeal(item._id))
+  }
 
   return (
     <Modal
@@ -84,6 +92,7 @@ const Window = ({ show, onClose, item }) => {
           </p>
           <hr />
           <div className={css(styles.btnCtn)}>
+            <Button className={css(styles.deleteButton)} onClick={handleDeleteButton}>Delete</Button>
             <Button
               className={css(styles.editDetailButton)}
               onClick={handleShow}
@@ -196,12 +205,23 @@ const styles = StyleSheet.create({
     },
   },
   editDetailButton: {
-    marginLeft: "20px",
+    marginLeft: "10px",
     fontWeight: "bold",
     backgroundColor: "rgb(37, 83, 125)",
     border: "none",
     color: "white",
     marginRight: "10px",
+    ":hover": {
+      backgroundColor: "#193753",
+    },
+  },
+  deleteButton: {
+    marginLeft: "20px",
+    fontWeight: "bold",
+    backgroundColor: "rgb(37, 83, 125)",
+    border: "none",
+    color: "white",
+    marginRight: "0px",
     ":hover": {
       backgroundColor: "#193753",
     },

@@ -6,3 +6,4 @@ export const GET_DEALS = "GET_DEALS";
 export const ADD_DEAL = "ADD_DEAL";
 export const EDIT_DEAL_STATUS = "EDIT_DEAL_STATUS";
 export const EDIT_DEAL_DETAILS = "EDIT_DEAL_DETAILS";
+export const DELETE_DEAL = "DELETE_DEAL";

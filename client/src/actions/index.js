@@ -186,3 +186,7 @@ export const editDealDetails = async (
     payload: request,
   };
 };
+
+export const deleteDeal = async (id) => {
+  axios.delete(`/api/deals/${id}`);
+};
