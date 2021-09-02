@@ -9,6 +9,7 @@ import {
   ADD_DEAL,
   EDIT_DEAL_STATUS,
   EDIT_DEAL_DETAILS,
+  DELETE_DEAL,
 } from "./names";
 
 export const getCompanies = async (page, sortType) => {
@@ -188,5 +189,10 @@ export const editDealDetails = async (
 };
 
 export const deleteDeal = async (id) => {
-  axios.delete(`/api/deals/${id}`);
+  const response = await axios.delete(`/api/deals/${id}`);
+
+  return {
+    type: DELETE_DEAL,
+    payload: response,
+  };
 };
