@@ -3,6 +3,7 @@ import {
   ADD_DEAL,
   EDIT_DEAL_STATUS,
   EDIT_DEAL_DETAILS,
+  DELETE_DEAL,
 } from "../actions/names";
 
 export const dealsReducer = function (state = null, action) {
@@ -11,6 +12,11 @@ export const dealsReducer = function (state = null, action) {
       return action.payload.data;
     case ADD_DEAL:
       return [action.payload.data, ...state];
+    case DELETE_DEAL:
+      const deletedID = action.payload.data.deletedDeal._id;
+      const newDealsState = state.filter((deal) => deal._id !== deletedID);
+
+      return newDealsState;
     case EDIT_DEAL_STATUS:
       const updatedDeal = action.payload.data;
 
