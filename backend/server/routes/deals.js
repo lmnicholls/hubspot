@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
   if (req.query.companyID && req.query.min && req.query.max) {
     query = {
       company: req.query.companyID,
-      amount: { $gt: req.query.min, $lt: req.query.max },
+      amount: { $gte: req.query.min, $lte: req.query.max },
     };
   }
 
