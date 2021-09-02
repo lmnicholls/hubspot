@@ -26,9 +26,9 @@ Closing-time is an online customer relationship management tool. This project wa
 -[Heroku](https://heroku.com/)
 
 #### Functionality:
--The companies tab shows all companies. The user is able to click on a company to view company details, including it's associated deal.
+-The companies tab shows all companies. The user is able to click on a company to view company details, including it's associated deals.
 
--The deals tab is a drag&drop tool that enables the user to move deals from one stage to another. The user is also able to click and view the deal's details and edit the deal.
+-The deals tab is a drag and drop tool that enables the user to move deals from one stage to another. The user is also able to click and view the deal's details and edit the deal.
 
 -The dashboard displays sales and deals data in a variety of charts, based on all deals.  
 
