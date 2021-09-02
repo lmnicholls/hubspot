@@ -3,7 +3,7 @@
 https://closing-time.herokuapp.com/
 
 
-Closing-time is an online customer relationship management tool. This project was created by Parsity's the Spring 2021 part-time cohort. The work in this repository is the student's body of work based on a provided project prompt.
+Closing-time is an online customer relationship management tool. This project was created by members of [Parsity](https://parsity.io/)'s the Spring 2021 part-time cohort. The work in this repository is the student's body of work based on a project prompt.
 
 
 ## About
