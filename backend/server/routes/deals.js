@@ -16,14 +16,14 @@ router.get("/", async (req, res) => {
 
   //filter by deal amount
   if (req.query.min && req.query.max) {
-    query = { amount: { $gt: req.query.min, $lte: req.query.max } };
+    query = { amount: { $gte: req.query.min, $lte: req.query.max } };
   }
 
   //filter by company and deal amount
   if (req.query.companyID && req.query.min && req.query.max) {
     query = {
       company: req.query.companyID,
-      amount: { $gt: req.query.min, $lt: req.query.max },
+      amount: { $gte: req.query.min, $lte: req.query.max },
     };
   }
 
