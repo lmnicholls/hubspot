@@ -221,13 +221,17 @@ router.delete("/:dealID", async (req, res) => {
     await Deal.deleteOne({ _id: deal._id });
 
     //deletes deal from company deals array in companies collection
-    await Company.findByIdAndUpdate(company._id, update, (err, company) => {
-      if (err) {
-        return err;
+    const updatedCompany = await Company.findByIdAndUpdate(
+      company._id,
+      update,
+      (err, company) => {
+        if (err) {
+          return err;
+        }
       }
-    });
+    ).populate("deals");
 
-    res.status(200).send(`${deal.name} has been deleted.`);
+    res.json({ deletedDeal: deal, updatedCompany });
   } catch (err) {
     res.status(400).send(err);
   }

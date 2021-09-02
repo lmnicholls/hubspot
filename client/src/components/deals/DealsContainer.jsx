@@ -10,11 +10,13 @@ import "./deals.css";
 import CreateDeal from "./CreateDeal";
 import FilterDealsContainer from "./FilterDealsContainer";
 
+
 export default function DealsContainer() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
 
   return (
     <>
