@@ -10,7 +10,7 @@ import {
 import React, { useState } from "react";
 import { StyleSheet, css } from "aphrodite";
 import { useDispatch } from "react-redux";
-import { addCompany } from "../../actions";
+import { addCompany, getCompanies } from "../../actions";
 import "./companies.css";
 import axios from "axios";
 
@@ -75,6 +75,8 @@ export default function CreateCompany(props) {
     setPostalCode("");
     setLogo("");
     setIndustry("");
+
+    dispatch(getCompanies());
     props.handleClose();
   };
 
