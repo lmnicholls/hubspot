@@ -22,12 +22,13 @@ export default function CompaniesListView() {
   const dispatch = useDispatch();
 
   const formatter = (value) => {
-    return value
-      .split(" ")
-      .map((word) => {
-        return word[0].toUpperCase() + word.substring(1);
-      })
-      .join(" ");
+    if (value)
+      return value
+        .split(" ")
+        .map((word) => {
+          return word[0].toUpperCase() + word.substring(1);
+        })
+        .join(" ");
   };
 
   useEffect(() => {
