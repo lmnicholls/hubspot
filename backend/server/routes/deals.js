@@ -194,16 +194,7 @@ router.put("/:dealID/edit", async (req, res) => {
       companyName: req.body.companyName,
     });
 
-    const update = {
-      name: req.body.name,
-      user: req.body.user,
-      stage: {
-        status: req.body.stage.status,
-      },
-      amount: req.body.amount,
-      company: company._id,
-      expectedCloseDate: req.body.expectedCloseDate,
-    };
+    const update = { ...req.body, company: company._id };
 
     const dealEdit = await Deal.findOneAndReplace(
       { _id: req.params.dealID },
