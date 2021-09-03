@@ -6,7 +6,8 @@ import { StyleSheet, css } from "aphrodite";
 
 export default function FilterDealsByCompany() {
   const companies = useSelector((state) => state.companies.companies);
-  const companyNames = companies?.map((company) => company.companyName);
+  const companyList = useSelector((state) => state.companies.companyList)
+  const companyListNames = companyList?.map((company) => company.companyName); 
   const companyIds = companies?.map((company) => company._id);
 
   const [companyId, setCompanyId] = useState("");
@@ -36,7 +37,7 @@ export default function FilterDealsByCompany() {
               required
             >
               <option value="">Show All Deals</option>
-              {companyNames?.map((name, idx) => (
+              {companyListNames?.map((name, idx) => (
                 <option key={companyKey++} value={companyIds[idx]}>
                   {name}
                 </option>
