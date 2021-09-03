@@ -5,10 +5,9 @@ import { getDeals } from "../../actions";
 import { StyleSheet, css } from "aphrodite";
 
 export default function FilterDealsByCompany() {
-  const companies = useSelector((state) => state.companies.companies);
-  const companyList = useSelector((state) => state.companies.companyList)
-  const companyListNames = companyList?.map((company) => company.companyName); 
-  const companyIds = companies?.map((company) => company._id);
+  const companyList = useSelector((state) => state.companies?.companyList);
+  const companyListNames = companyList?.map((company) => company.companyName);
+  const companyIds = companyList?.map((company) => company._id);
 
   const [companyId, setCompanyId] = useState("");
   const [priceRange, setPriceRange] = useState(null);
