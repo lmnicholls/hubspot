@@ -190,9 +190,11 @@ router.put("/:dealID/edit", async (req, res) => {
   }
 
   try {
-    const deal = await Deal.findById(req.params.dealID);
-    const companyID = deal.company;
-    const update = { ...req.body, company: companyID };
+    const company = await Company.findOne({
+      companyName: req.body.companyName,
+    });
+
+    const update = { ...req.body, company: company._id };
 
     const dealEdit = await Deal.findOneAndReplace(
       { _id: req.params.dealID },

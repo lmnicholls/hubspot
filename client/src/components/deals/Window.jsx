@@ -4,8 +4,8 @@ import Modal from "react-modal";
 import { Button } from "react-bootstrap";
 import { StyleSheet, css } from "aphrodite";
 import EditDeal from "./EditDeal";
-import {useDispatch} from 'react-redux'
-import {deleteDeal} from '../../actions/index'
+import { useDispatch } from "react-redux";
+import { deleteDeal } from "../../actions/index";
 import { getDeals } from "../../actions";
 
 Modal.setAppElement("#root");
@@ -16,13 +16,13 @@ const Window = ({ show, onClose, item }) => {
   const handleClose = () => setShowEdit(false);
   const handleShow = () => setShowEdit(true);
 
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
 
   const handleDeleteButton = () => {
-    dispatch(deleteDeal(item._id))
-    dispatch(getDeals()); 
-    onClose(); 
-  }
+    dispatch(deleteDeal(item._id));
+    dispatch(getDeals());
+    onClose();
+  };
 
   return (
     <Modal
@@ -95,7 +95,12 @@ const Window = ({ show, onClose, item }) => {
           </p>
           <hr />
           <div className={css(styles.btnCtn)}>
-            <Button className={css(styles.deleteButton)} onClick={handleDeleteButton}>Delete</Button>
+            <Button
+              className={css(styles.deleteButton)}
+              onClick={handleDeleteButton}
+            >
+              Delete
+            </Button>
             <Button
               className={css(styles.editDetailButton)}
               onClick={handleShow}
@@ -107,7 +112,7 @@ const Window = ({ show, onClose, item }) => {
               className={css(styles.cancel)}
               onClick={onClose}
             >
-              Cancel
+              Close
             </Button>
           </div>
         </div>

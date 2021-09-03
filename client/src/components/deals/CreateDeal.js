@@ -70,18 +70,20 @@ export default function CreateDeal(props) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formCompanyOwner">
-              <Form.Label className={css(styles.label)}>
-                Company Owner
-              </Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter company owner"
-                className={css(styles.input)}
+              <Form.Label className={css(styles.label)}>Deal Owner</Form.Label>
+              <Form.Select
+                id="formStatusSelect"
                 required
+                className={css(styles.input)}
                 onChange={(e) => {
                   setUser(e.target.value);
                 }}
-              />
+              >
+                <option value="">Choose...</option>
+                <option value="Danna">Danna</option>
+                <option value="Jeremy">Jeremy</option>
+                <option value="Lauren">Lauren</option>
+              </Form.Select>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formname">
