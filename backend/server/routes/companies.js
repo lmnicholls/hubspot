@@ -8,9 +8,9 @@ router.get("/", async (req, res) => {
   const query = {};
   let data = {};
   const sortType = req.query.sortType || "companyName";
-  const companyList = await Company.find({}, { companyName: 1 });
 
   try {
+    const companyList = await Company.find({}, { companyName: 1 });
     await Company.find(query)
       .sort({ [sortType]: 1 })
       .skip(perPage * page - perPage)
